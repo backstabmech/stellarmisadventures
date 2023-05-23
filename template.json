@@ -77,7 +77,7 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": ["item", "feature", "gadget"],
     "templates": {
       "base": {
         "description": ""
@@ -92,9 +92,9 @@
     "feature": {
       "templates": ["base"]
     },
-    "spell": {
+    "gadget": {
       "templates": ["base"],
-      "spellLevel": 1
+      "gadgetTier": 1
     }
   }
 }

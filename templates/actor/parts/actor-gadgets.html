@@ -1,12 +1,12 @@
 <ol class="items-list">
-  {{#each spells as |spells spellLevel|}}
+  {{#each gadgets as |gadgets gadgetTier|}}
     <li class="item flexrow items-header">
-      <div class="item-name">Level {{spellLevel}} Spells</div>
+      <div class="item-name">Tier {{gadgetTier}} gadgets</div>
       <div class="item-controls">
-        <a class="item-control item-create" title="Create item" data-type="spell" data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> Add LVL {{spellLevel}}</a>
+        <a class="item-control item-create" title="Create item" data-type="gadget" data-gadget-tier="{{gadgetTier}}"><i class="fas fa-plus"></i> Add Tier {{gadgetTier}}</a>
       </div>
     </li>
-    {{#each spells as |item id|}}
+    {{#each gadgets as |item id|}}
       <li class="item flexrow" data-item-id="{{item._id}}">
         <div class="item-name flexrow">
           <div class="item-image">

@@ -91,17 +91,13 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const features = [];
-    const spells = {
+    const gadgets = {
       0: [],
       1: [],
       2: [],
       3: [],
       4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
+      5: []
     };
 
     // Iterate through items, allocating to containers
@@ -115,10 +111,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       else if (i.type === 'feature') {
         features.push(i);
       }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.system.spellLevel != undefined) {
-          spells[i.system.spellLevel].push(i);
+      // Append to gadgets.
+      else if (i.type === 'gadget') {
+        if (i.system.gadgetTier != undefined) {
+          gadgets[i.system.gadgetTier].push(i);
         }
       }
     }
@@ -126,7 +122,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Assign and return
     context.gear = gear;
     context.features = features;
-    context.spells = spells;
+    context.gadgets = gadgets;
   }
 
   /* -------------------------------------------- */

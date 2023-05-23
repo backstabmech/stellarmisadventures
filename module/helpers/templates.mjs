@@ -9,7 +9,7 @@
     // Actor partials.
     "systems/stellarmisadventures/templates/actor/parts/actor-features.html",
     "systems/stellarmisadventures/templates/actor/parts/actor-items.html",
-    "systems/stellarmisadventures/templates/actor/parts/actor-spells.html",
+    "systems/stellarmisadventures/templates/actor/parts/actor-gadgets.html",
     "systems/stellarmisadventures/templates/actor/parts/actor-effects.html",
   ]);
 };
