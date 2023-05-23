@@ -2,19 +2,19 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="125" width="125"/>
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
       from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-3col">
+      <div class="resources grid grid-5col">
 
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          <label for="system.stamina.value" class="resource-label">stamina</label>
+          <label for="system.stamina.value" class="resource-label">Stamina</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.stamina.value" value="{{system.stamina.value}}" data-dtype="Number"/>
           <span> / </span>
@@ -23,18 +23,76 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.shield.value" class="resource-label">shield</label>
+          <label for="system.shield.value" class="resource-label">Shield</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.shield.value" value="{{system.shield.value}}" data-dtype="Number"/>
           <span> / </span>
           <input type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
           </div>
         </div>
-
+        {{!-- 
         <div class="resource flex-group-center">
           <label for="system.attributes.level.value" class="resource-label">Level</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+        --}}
+        <div class="resource flex-group-center">
+          <label for="system.dr.value" class="resource-label">DR</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.dr.value" value="{{system.dr.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.regen.value" class="resource-label">Regen</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.speed.value" class="resource-label">Speed</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.speed.value" value="{{system.speed.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+        
+        {{!-- Second row --}}
+        
+        <div class="resource flex-group-center">
+          <label for="system.ac.value" class="resource-label">AC</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+        
+        <div class="resource flex-group-center">
+          <label for="system.reflex.value" class="resource-label">Reflex</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.reflex.value" value="{{system.reflex.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.fortitude.value" class="resource-label">Fortitude</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.fortitude.value" value="{{system.fortitude.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.will.value" class="resource-label">Will</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.will.value" value="{{system.will.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+
+        <div class="resource flex-group-center">
+          <label for="system.init.value" class="resource-label">Initiative</label>
+          <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.init.value" value="{{system.init.value}}" data-dtype="Number"/>
           </div>
         </div>
 

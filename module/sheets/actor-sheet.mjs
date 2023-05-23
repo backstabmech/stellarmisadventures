@@ -39,6 +39,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     context.system = actorData.system;
     context.flags = actorData.flags;
 
+    this._prepareBasicData(context);
     // Prepare character data and items.
     if (actorData.type == 'character') {
       this._prepareItems(context);
@@ -60,17 +61,23 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
   }
 
   /**
-   * Organize and classify Items for Character sheets.
+   * Organize base data for character sheets
+   */
+  _prepareBasicData(context) {
+    // Handle ability scores.
+    for (let [k, v] of Object.entries(context.system.abilities)) {
+      v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.abilities[k]) ?? k;
+    }
+  }
+  /**
+   * Organize and classify character data for Character sheets.
    *
    * @param {Object} actorData The actor to prepare.
    *
    * @return {undefined}
    */
   _prepareCharacterData(context) {
-    // Handle ability scores.
-    for (let [k, v] of Object.entries(context.system.abilities)) {
-      v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.abilities[k]) ?? k;
-    }
+    
   }
 
   /**

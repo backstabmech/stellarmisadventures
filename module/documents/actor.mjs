@@ -33,15 +33,24 @@ export class StellarMisadventuresActor extends Actor {
     const systemData = actorData.system;
     const flags = actorData.flags.stellarmisadventures || {};
 
+    
+    // Make separate methods for each Actor type (character, npc, etc.) to keep
+    // things organized.
+    this._prepareBaseData(actorData);
+    this._prepareCharacterData(actorData);
+    this._prepareNpcData(actorData);
+  }
+
+  /**
+   * Prepare type agnostic data
+   */
+  _prepareBaseData(actorData) {
+    const systemData = actorData.system;
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
       // Calculate the modifier using d20 rules.
       ability.mod = Math.floor((ability.value - 10) / 2);
     }
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
-    // things organized.
-    this._prepareCharacterData(actorData);
-    this._prepareNpcData(actorData);
   }
 
   /**
@@ -52,8 +61,7 @@ export class StellarMisadventuresActor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-
-    
+    systemData.attributes.proficiency = Math.ceil((attributes.level + 2) / 2);
   }
 
   /**
@@ -74,6 +82,7 @@ export class StellarMisadventuresActor extends Actor {
     const data = super.getRollData();
 
     // Prepare character roll data.
+    this._getBaseRollData(data);
     this._getCharacterRollData(data);
     this._getNpcRollData(data);
 
@@ -81,11 +90,9 @@ export class StellarMisadventuresActor extends Actor {
   }
 
   /**
-   * Prepare character roll data.
+   * Prepare actor roll data.
    */
-  _getCharacterRollData(data) {
-    if (this.type !== 'character') return;
-
+  _getBaseRollData(data) {
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
     if (data.abilities) {
@@ -93,11 +100,19 @@ export class StellarMisadventuresActor extends Actor {
         data[k] = foundry.utils.deepClone(v);
       }
     }
+  } 
+  /**
+   * Prepare character roll data.
+   */
+  _getCharacterRollData(data) {
+    if (this.type !== 'character') return;
 
     // Add level for easier access, or fall back to 0.
     if (data.attributes.level) {
       data.lvl = data.attributes.level.value ?? 0;
     }
+    // Copy proficiency bonus
+    data.prof = data.attributes.proficiency ?? 0;
   }
 
   /**
