@@ -1,16 +1,16 @@
 {
   "STELLARMISADVENTURES.AbilityStr": "Strength",
-  "STELLARMISADVENTURES.AbilityCon": "Constitution",
+  "STELLARMISADVENTURES.AbilityEnd": "Endurance",
   "STELLARMISADVENTURES.AbilityDex": "Dexterity",
   "STELLARMISADVENTURES.AbilityInt": "Intelligence",
-  "STELLARMISADVENTURES.AbilityWis": "Wisdom",
+  "STELLARMISADVENTURES.AbilityPer": "Perception",
   "STELLARMISADVENTURES.AbilityCha": "Charisma",
 
   "STELLARMISADVENTURES.AbilityStrAbbr": "str",
-  "STELLARMISADVENTURES.AbilityConAbbr": "con",
+  "STELLARMISADVENTURES.AbilityEndAbbr": "end",
   "STELLARMISADVENTURES.AbilityDexAbbr": "dex",
   "STELLARMISADVENTURES.AbilityIntAbbr": "int",
-  "STELLARMISADVENTURES.AbilityWisAbbr": "wis",
+  "STELLARMISADVENTURES.AbilityPerAbbr": "per",
   "STELLARMISADVENTURES.AbilityChaAbbr": "cha",
 
   "STELLARMISADVENTURES.EffectCreate": "Create Effect",

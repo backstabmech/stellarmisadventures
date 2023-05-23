@@ -7,17 +7,17 @@ export const STELLARMISADVENTURES = {};
  STELLARMISADVENTURES.abilities = {
   "str": "STELLARMISADVENTURES.AbilityStr",
   "dex": "STELLARMISADVENTURES.AbilityDex",
-  "con": "STELLARMISADVENTURES.AbilityCon",
+  "end": "STELLARMISADVENTURES.AbilityEnd",
   "int": "STELLARMISADVENTURES.AbilityInt",
-  "wis": "STELLARMISADVENTURES.AbilityWis",
+  "per": "STELLARMISADVENTURES.AbilityPer",
   "cha": "STELLARMISADVENTURES.AbilityCha"
 };
 
 STELLARMISADVENTURES.abilityAbbreviations = {
   "str": "STELLARMISADVENTURES.AbilityStrAbbr",
   "dex": "STELLARMISADVENTURES.AbilityDexAbbr",
-  "con": "STELLARMISADVENTURES.AbilityConAbbr",
+  "end": "STELLARMISADVENTURES.AbilityEndAbbr",
   "int": "STELLARMISADVENTURES.AbilityIntAbbr",
-  "wis": "STELLARMISADVENTURES.AbilityWisAbbr",
+  "per": "STELLARMISADVENTURES.AbilityPerAbbr",
   "cha": "STELLARMISADVENTURES.AbilityChaAbbr"
 };
