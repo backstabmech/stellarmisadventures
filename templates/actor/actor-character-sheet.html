@@ -72,23 +72,23 @@
         </div>
         
         <div class="resource flex-group-center">
-          <label for="system.reflex.value" class="resource-label">Reflex</label>
+          <label for="system.saves.reflex.value" class="resource-label rollable" data-roll="d20+@saves.reflex.mod" data-label="Reflex Save">Reflex</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.reflex.value" value="{{system.reflex.value}}" data-dtype="Number"/>
+          <input type="text" name="system.saves.reflex.value" value="{{system.saves.reflex.value}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.fortitude.value" class="resource-label">Fortitude</label>
+          <label for="system.saves.fortitude.value" class="resource-label rollable" data-roll="d20+@saves.fortitude.mod" data-label="Fortitude Save">Fortitude</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.fortitude.value" value="{{system.fortitude.value}}" data-dtype="Number"/>
+          <input type="text" name="system.saves.fortitude.value" value="{{system.saves.fortitude.value}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.will.value" class="resource-label">Will</label>
+          <label for="system.saves.will.value" class="resource-label rollable" data-roll="d20+@saves.will.mod" data-label="Will Save">Will</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.will.value" value="{{system.will.value}}" data-dtype="Number"/>
+          <input type="text" name="system.saves.will.value" value="{{system.saves.will.value}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Initiative --}}

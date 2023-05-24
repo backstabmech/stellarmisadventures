@@ -61,6 +61,10 @@ export class StellarMisadventuresActor extends Actor {
         skill.mod += Math.ceil(skill.points / 2 ) + 1;
       }
     }
+    // Calculate saving throw modifiers
+    systemData.saves.reflex.mod = systemData.saves.reflex.value + Math.max(systemData.abilities.dex.mod, systemData.abilities.int.mod);
+    systemData.saves.fortitude.mod = systemData.saves.fortitude.value + Math.max(systemData.abilities.str.mod, systemData.abilities.end.mod);
+    systemData.saves.will.mod = systemData.saves.will.value + Math.max(systemData.abilities.per.mod, systemData.abilities.cha.mod);
   }
 
   /**
@@ -71,7 +75,7 @@ export class StellarMisadventuresActor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-    systemData.proficiency = Math.ceil((attributes.level + 2) / 2);
+    systemData.proficiency = Math.ceil((systemData.attributes.level + 2) / 2);
   }
 
   /**
@@ -109,6 +113,16 @@ export class StellarMisadventuresActor extends Actor {
       for (let [k, v] of Object.entries(data.abilities)) {
         data[k] = foundry.utils.deepClone(v);
       }
+    }
+    // Quick reference for saves
+    if (data.saves.reflex.mod) {
+      data.ref = data.saves.reflex.mod;
+    }
+    if (data.saves.fortitude.mod) {
+      data.for = data.saves.fortitude.mod;
+    }
+    if (data.saves.will.mod) {
+      data.will = data.saves.will.mod;
     }
   } 
   /**
