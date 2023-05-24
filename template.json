@@ -84,7 +84,17 @@
             "ability": "int",
             "expertise": false
           },
-          "per": {
+          "med": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "perf": {
+            "points": 0,
+            "ability": "cha",
+            "expertise": false
+          },
+          "pers": {
             "points": 0,
             "ability": "cha",
             "expertise": false

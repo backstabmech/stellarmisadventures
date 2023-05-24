@@ -51,6 +51,16 @@ export class StellarMisadventuresActor extends Actor {
       // Calculate the modifier using d20 rules.
       ability.mod = Math.floor((ability.value - 10) / 2);
     }
+    // Calculate skill modifiers
+    for (let [key, skill] of Object.entries(systemData.skills)) {
+      skill.mod = systemData.abilities[skill.ability].mod;
+      // Calculate the modifier.
+      if (skill.points < 4) {
+        skill.mod += skill.points;
+      } else {
+        skill.mod += Math.ceil(skill.points / 2 ) + 1;
+      }
+    }
   }
 
   /**
@@ -61,7 +71,7 @@ export class StellarMisadventuresActor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-    systemData.attributes.proficiency = Math.ceil((attributes.level + 2) / 2);
+    systemData.proficiency = Math.ceil((attributes.level + 2) / 2);
   }
 
   /**

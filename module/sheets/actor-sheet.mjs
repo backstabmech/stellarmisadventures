@@ -11,8 +11,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["stellarmisadventures", "sheet", "actor"],
       template: "systems/stellarmisadventures/templates/actor/actor-sheet.html",
-      width: 600,
-      height: 600,
+      width: 700,
+      height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
   }
@@ -67,6 +67,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.abilities[k]) ?? k;
+    }
+    // Handle skills.
+    for (let [k, v] of Object.entries(context.system.skills)) {
+      v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.skills[k]) ?? k;
     }
   }
   /**
