@@ -33,6 +33,88 @@
             "value": 10
           }
         },
+        "skills": {
+          "acr": {
+            "points": 0,
+            "ability": "dex",
+            "expertise": false
+          },
+          "ani": {
+            "points": 0,
+            "ability": "per",
+            "expertise": false
+          },
+          "ath": {
+            "points": 0,
+            "ability": "str",
+            "expertise": false
+          },
+          "bio": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "com": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "dec": {
+            "points": 0,
+            "ability": "cha",
+            "expertise": false
+          },
+          "his": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "ins": {
+            "points": 0,
+            "ability": "per",
+            "expertise": false
+          },
+          "inv": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "mec": {
+            "points": 0,
+            "ability": "int",
+            "expertise": false
+          },
+          "per": {
+            "points": 0,
+            "ability": "cha",
+            "expertise": false
+          },
+          "pil": {
+            "points": 0,
+            "ability": "dex",
+            "expertise": false
+          },
+          "sea": {
+            "points": 0,
+            "ability": "per",
+            "expertise": false
+          },
+          "sle": {
+            "points": 0,
+            "ability": "dex",
+            "expertise": false
+          },
+          "ste": {
+            "points": 0,
+            "ability": "dex",
+            "expertise": false
+          },
+          "str": {
+            "points": 0,
+            "ability": "dex",
+            "expertise": false
+          }
+        },
         "ac": {
           "value": 10
         },
