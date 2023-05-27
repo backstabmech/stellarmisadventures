@@ -94,6 +94,9 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
   _prepareItems(context) {
     // Initialize containers.
     const gear = [];
+    const weapons = [];
+    const armor = [];
+    const shields = [];
     const features = [];
     const gadgets = {
       0: [],
@@ -107,15 +110,19 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item' || i.type == 'weapon') {
+      if (i.type === 'item' || i.type === 'shield') {
         gear.push(i);
       }
-      // Append to features.
+      else if (i.type === 'weapon') {
+        weapons.push(i);
+      }
+      else if (i.type === 'armor') {
+        armor.push(i);
+      }
       else if (i.type === 'feature') {
         features.push(i);
       }
-      // Append to gadgets.
+      // Append to gadgets by tier.
       else if (i.type === 'gadget') {
         if (i.system.gadgetTier != undefined) {
           gadgets[i.system.gadgetTier].push(i);
@@ -125,6 +132,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
 
     // Assign and return
     context.gear = gear;
+    context.weapons = weapons;
+    context.armor = armor;
     context.features = features;
     context.gadgets = gadgets;
   }

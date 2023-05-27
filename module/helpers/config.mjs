@@ -46,10 +46,7 @@ STELLARMISADVENTURES.skills = {
   "ste": "STELLARMISADVENTURES.SkillSte",
   "str": "STELLARMISADVENTURES.SkillStr"
 };
-/**
- * The set of weapon types used within the sytem.
- * @type {Object}
- */
+
 STELLARMISADVENTURES.weaponTypes = {
   "melee": "STELLARMISADVENTURES.WeaponTypeMelee",
   "pistol": "STELLARMISADVENTURES.WeaponTypePistol",
@@ -57,6 +54,11 @@ STELLARMISADVENTURES.weaponTypes = {
   "shotgun": "STELLARMISADVENTURES.WeaponTypeShotgun",
   "sniper": "STELLARMISADVENTURES.WeaponTypeSniper",
   "heavy": "STELLARMISADVENTURES.WeaponTypeHeavy",
+};
+STELLARMISADVENTURES.armorTypes = {
+  "light": "STELLARMISADVENTURES.ArmorTypeLight",
+  "medium": "STELLARMISADVENTURES.ArmorTypeMedium",
+  "heavy": "STELLARMISADVENTURES.ArmorTypeHeavy",
 };
 
 /**

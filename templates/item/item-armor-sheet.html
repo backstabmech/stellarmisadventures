@@ -33,46 +33,35 @@
 
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-      <div class="resource">
-        <label class="resource-label">Roll Formula</label>
-        <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
-      </div>
-      {{!-- Weapon Attributes --}}
       <table>
         <tr>
-          <th>{{localize "STELLARMISADVENTURES.ItemWeaponType"}}</th>
-          <th>Range</th>
-          <th>Ammo Max</th>
-          <th>Ammo</th>
-          <th>Usage</th>
-          <th>Properties</th>
+          <th>Type</th>
+          <th>AC</th>
+          <th>DR</th>
+          <th>Penalty</th>
+          <th>Resist Melee</th>
         </tr>
         <tr>
           <td>
             {{!-- Handlebars bits for generating options --}}
-            <select name="system.weaponType">
-              {{selectOptions config.weaponTypes selected=system.weaponType localize=true }}
+            <select name="system.armorType">
+              {{selectOptions config.armorTypes selected=system.armorType localize=true }}
             </select>
           </td>
           <td>
-            <input type="text" name="system.range" value="{{system.range}}" data-dtype="String"/>
+            <input type="text" name="system.armorClass" value="{{system.armorClass}}" data-dtype="Number"/>
           </td>
           <td>
-            <input type="text" name="system.ammoMax" value="{{system.ammoMax}}" data-dtype="Number"/>
+            <input type="text" name="system.dr" value="{{system.dr}}" data-dtype="Number"/>
           </td>
           <td>
-            <input type="text" name="system.ammoType" value="{{system.ammoType}}" data-dtype="String"/>
+            <input type="text" name="system.armorPenalty" value="{{system.armorPenalty}}" data-dtype="String"/>
           </td>
           <td>
-            <input type="text" name="system.ammoUsage" value="{{system.ammoUsage}}" data-dtype="Number"/>
-          </td>
-          <td>
-            <input type="text" name="system.properties" value="{{system.properties}}" data-dtype="String"/>
+            <input type="checkbox" name="system.resistMelee"  {{checked system.resistMelee}}/>
           </td>
         </tr>
-      </table>
-  
+      </table>  
     </div>
   </section>
 </form>

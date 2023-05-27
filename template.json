@@ -176,15 +176,17 @@
       "deathsaves": {
         "success": 0,
         "failures": 0
+      },
+      "credits": {
+        "value": 1
       }
-      
     },
     "npc": {
       "templates": ["base"]
     }
   },
   "Item": {
-    "types": ["item", "weapon", "feature", "gadget"],
+    "types": ["item", "weapon", "armor", "shield", "feature", "gadget"],
     "templates": {
       "base": {
         "description": ""
@@ -209,6 +211,19 @@
       "ammoType": "",
       "ammoUsage": 0,
       "properties": ""
+    },
+    "armor": {
+      "templates": ["base", "physicalItem"],
+      "armorType": "light",
+      "armorclass": 10,
+      "dr": 0,
+      "armorPenalty": 0,
+      "resistMelee": false
+    },
+    "shield": {
+      "templates": ["base", "physicalItem"],
+      "shieldMax": 8,
+      "shieldRegen": 0
     },
     "feature": {
       "templates": ["base"]

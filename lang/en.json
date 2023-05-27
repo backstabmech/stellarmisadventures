@@ -41,6 +41,10 @@
   "STELLARMISADVENTURES.WeaponTypeSniper": "Sniper Rifle",
   "STELLARMISADVENTURES.WeaponTypeHeavy": "Heavy Weapon",
 
+  "STELLARMISADVENTURES.ArmorTypeLight": "Light",
+  "STELLARMISADVENTURES.ArmorTypeMedium": "Medium",
+  "STELLARMISADVENTURES.ArmorTypeHeavy": "Heavy",
+
   "STELLARMISADVENTURES.DamageTypeChemical": "Chemical",
   "STELLARMISADVENTURES.DamageTypeElectric": "Electric",
   "STELLARMISADVENTURES.DamageTypeFire": "Fire",
