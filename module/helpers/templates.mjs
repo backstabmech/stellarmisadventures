@@ -7,9 +7,9 @@
   return loadTemplates([
 
     // Actor partials.
-    "systems/stellarmisadventures/templates/actor/parts/actor-features.html",
-    "systems/stellarmisadventures/templates/actor/parts/actor-items.html",
-    "systems/stellarmisadventures/templates/actor/parts/actor-gadgets.html",
-    "systems/stellarmisadventures/templates/actor/parts/actor-effects.html",
+    "systems/stellarmisadventures/templates/actor/parts/actor-features.hbs",
+    "systems/stellarmisadventures/templates/actor/parts/actor-items.hbs",
+    "systems/stellarmisadventures/templates/actor/parts/actor-gadgets.hbs",
+    "systems/stellarmisadventures/templates/actor/parts/actor-effects.hbs",
   ]);
 };

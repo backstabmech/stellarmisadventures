@@ -10,7 +10,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["stellarmisadventures", "sheet", "actor"],
-      template: "systems/stellarmisadventures/templates/actor/actor-sheet.html",
+      template: "systems/stellarmisadventures/templates/actor/actor-sheet.hbs",
       width: 700,
       height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
@@ -19,7 +19,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/stellarmisadventures/templates/actor/actor-${this.actor.type}-sheet.html`;
+    return `systems/stellarmisadventures/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */

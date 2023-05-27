@@ -18,8 +18,8 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
   get template() {
     const path = "systems/stellarmisadventures/templates/item";
 
-    // Return statement a unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/item-${this.item.type}-sheet.html`;
+    // Return statement a unique item sheet by type, like `weapon-sheet.hbs`.
+    return `${path}/item-${this.item.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
