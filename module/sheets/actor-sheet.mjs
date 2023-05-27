@@ -110,7 +110,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      if (i.type === 'item' || i.type === 'shield') {
+      if (i.type === 'item') {
         gear.push(i);
       }
       else if (i.type === 'weapon') {
@@ -118,6 +118,9 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       }
       else if (i.type === 'armor') {
         armor.push(i);
+      }
+      else if (i.type === 'shield') {
+        shields.push(i);
       }
       else if (i.type === 'feature') {
         features.push(i);
@@ -134,6 +137,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     context.gear = gear;
     context.weapons = weapons;
     context.armor = armor;
+    context.shields = shields;
     context.features = features;
     context.gadgets = gadgets;
   }
