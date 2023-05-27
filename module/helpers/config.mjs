@@ -59,5 +59,20 @@ STELLARMISADVENTURES.weaponTypes = {
   "heavy": "STELLARMISADVENTURES.WeaponTypeHeavy",
 };
 
+/**
+ * The set of weapon types used within the sytem.
+ * @type {Object}
+ */
+STELLARMISADVENTURES.damageTypes = {
+  "chemical": "STELLARMISADVENTURES.DamageTypeChemical",
+  "electric": "STELLARMISADVENTURES.DamageTypeElectric",
+  "fire": "STELLARMISADVENTURES.DamageTypeFire",
+  "ice": "STELLARMISADVENTURES.DamageTypeIce",
+  "kinentic": "STELLARMISADVENTURES.DamageTypeKinetic",
+  "melee": "STELLARMISADVENTURES.DamageTypeMelee",
+  "piercing": "STELLARMISADVENTURES.DamageTypePiercing",
+  "plasma": "STELLARMISADVENTURES.DamageTypePlasma",
+  "sonic": "STELLARMISADVENTURES.DamageTypeSonic",
+};
 
   

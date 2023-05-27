@@ -41,6 +41,16 @@
   "STELLARMISADVENTURES.WeaponTypeSniper": "Sniper Rifle",
   "STELLARMISADVENTURES.WeaponTypeHeavy": "Heavy Weapon",
 
+  "STELLARMISADVENTURES.DamageTypeChemical": "Chemical",
+  "STELLARMISADVENTURES.DamageTypeElectric": "Electric",
+  "STELLARMISADVENTURES.DamageTypeFire": "Fire",
+  "STELLARMISADVENTURES.DamageTypeIce": "Ice",
+  "STELLARMISADVENTURES.DamageTypeKinetic": "Kinetic",
+  "STELLARMISADVENTURES.DamageTypeMelee": "Melee",
+  "STELLARMISADVENTURES.DamageTypePiercing": "Piercing",
+  "STELLARMISADVENTURES.DamageTypePlasma": "plasma",
+  "STELLARMISADVENTURES.DamageTypeSonic": "sonic",
+
   "STELLARMISADVENTURES.EffectCreate": "Create Effect",
   "STELLARMISADVENTURES.EffectToggle": "Toggle Effect",
   "STELLARMISADVENTURES.EffectEdit": "Edit Effect",
