@@ -169,17 +169,31 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "gadget"],
+    "types": ["item", "weapon", "feature", "gadget"],
     "templates": {
       "base": {
         "description": ""
+      },
+      "physicalItem": {
+        "quantity": 1,
+        "value": 0
+      },
+      "activate": {
+        "formula": "d20 + @str.mod + @prof",
+        "damageFormula": "1 + @str.mod"
       }
     },
     "item": {
-      "templates": ["base"],
-      "quantity": 1,
-      "weight": 0,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+      "templates": ["base", "physicalItem", "activate"]
+    },
+    "weapon": {
+      "templates": ["base", "physicalItem", "activate"],
+      "weaponType": "melee",
+      "range": "melee",
+      "ammoMax": 0,
+      "ammoType": "",
+      "ammoUsage": 0,
+      "properties": ""
     },
     "feature": {
       "templates": ["base"]

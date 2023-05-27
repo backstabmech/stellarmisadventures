@@ -33,6 +33,14 @@
   "STELLARMISADVENTURES.SkillSte": "Stealth",
   "STELLARMISADVENTURES.SkillStr": "Streetwise",
 
+  "STELLARMISADVENTURES.ItemWeaponType": "Type",
+  "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
+  "STELLARMISADVENTURES.WeaponTypePistol": "Pistol",
+  "STELLARMISADVENTURES.WeaponTypeRifle": "Rifle",
+  "STELLARMISADVENTURES.WeaponTypeShotgun": "Shotgun",
+  "STELLARMISADVENTURES.WeaponTypeSniper": "Sniper Rifle",
+  "STELLARMISADVENTURES.WeaponTypeHeavy": "Heavy Weapon",
+
   "STELLARMISADVENTURES.EffectCreate": "Create Effect",
   "STELLARMISADVENTURES.EffectToggle": "Toggle Effect",
   "STELLARMISADVENTURES.EffectEdit": "Edit Effect",

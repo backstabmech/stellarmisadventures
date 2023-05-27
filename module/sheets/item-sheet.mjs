@@ -31,7 +31,8 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
 
     // Use a safe clone of the item data for further operations.
     const itemData = context.item;
-
+    // Include the config
+    context.config = CONFIG.STELLARMISADVENTURES;
     // Retrieve the roll data for TinyMCE editors.
     context.rollData = {};
     let actor = this.object?.parent ?? null;

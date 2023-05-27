@@ -4,7 +4,7 @@ export const STELLARMISADVENTURES = {};
  * The set of Ability Scores used within the sytem.
  * @type {Object}
  */
- STELLARMISADVENTURES.abilities = {
+STELLARMISADVENTURES.abilities = {
   "str": "STELLARMISADVENTURES.AbilityStr",
   "dex": "STELLARMISADVENTURES.AbilityDex",
   "end": "STELLARMISADVENTURES.AbilityEnd",
@@ -46,5 +46,18 @@ STELLARMISADVENTURES.skills = {
   "ste": "STELLARMISADVENTURES.SkillSte",
   "str": "STELLARMISADVENTURES.SkillStr"
 };
+/**
+ * The set of weapon types used within the sytem.
+ * @type {Object}
+ */
+STELLARMISADVENTURES.weaponTypes = {
+  "melee": "STELLARMISADVENTURES.WeaponTypeMelee",
+  "pistol": "STELLARMISADVENTURES.WeaponTypePistol",
+  "rifle": "STELLARMISADVENTURES.WeaponTypeRifle",
+  "shotgun": "STELLARMISADVENTURES.WeaponTypeShotgun",
+  "sniper": "STELLARMISADVENTURES.WeaponTypeSniper",
+  "heavy": "STELLARMISADVENTURES.WeaponTypeHeavy",
+};
+
 
   
