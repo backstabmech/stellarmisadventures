@@ -151,6 +151,18 @@
         "regen": {
           "value": 0
         },
+        "traits": {
+          "size": "med",
+          "resistance": {
+            "value": []
+          },
+          "vulnerability": {
+            "value": []
+          },
+          "immunity": {
+            "value": []
+          }
+        },
         "biography": ""
       }
     },
@@ -160,12 +172,15 @@
         "level": {
           "value": 1
         }
+      },
+      "deathsaves": {
+        "success": 0,
+        "failures": 0
       }
       
     },
     "npc": {
-      "templates": ["base"],
-      "cr": 0
+      "templates": ["base"]
     }
   },
   "Item": {
