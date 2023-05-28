@@ -72,6 +72,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.system.skills)) {
       v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.skills[k]) ?? k;
     }
+    // Handle saves.
+    for (let [k, v] of Object.entries(context.system.saves)) {
+      v.label = game.i18n.localize(CONFIG.STELLARMISADVENTURES.saves[k]) ?? k;
+    }
   }
   /**
    * Organize and classify character data for Character sheets.

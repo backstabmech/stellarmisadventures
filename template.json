@@ -130,13 +130,16 @@
         },
         "saves": {
           "reflex": {
-            "value": 0
+            "value": 0,
+            "proficient": false
           },
           "fortitude": {
-            "value": 0
+            "value": 0,
+            "proficient": false
           },
           "will": {
-            "value": 0
+            "value": 0,
+            "proficient": false
           }
         },
         "speed": {

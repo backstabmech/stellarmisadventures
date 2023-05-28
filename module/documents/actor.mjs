@@ -62,9 +62,13 @@ export class StellarMisadventuresActor extends Actor {
       }
     }
     // Calculate saving throw modifiers
-    systemData.saves.reflex.mod = systemData.saves.reflex.value + Math.max(systemData.abilities.dex.mod, systemData.abilities.int.mod);
-    systemData.saves.fortitude.mod = systemData.saves.fortitude.value + Math.max(systemData.abilities.str.mod, systemData.abilities.end.mod);
-    systemData.saves.will.mod = systemData.saves.will.value + Math.max(systemData.abilities.per.mod, systemData.abilities.cha.mod);
+    // Set ability bonuses
+    systemData.saves.reflex.abl = Math.max(systemData.abilities.dex.mod, systemData.abilities.int.mod);
+    systemData.saves.fortitude.abl = Math.max(systemData.abilities.str.mod, systemData.abilities.end.mod);
+    systemData.saves.will.abl = Math.max(systemData.abilities.per.mod, systemData.abilities.cha.mod);
+    for (let [key, save] of Object.entries(systemData.saves)) {
+      save.mod = save.value + save.abl;
+    }
   }
 
   /**
@@ -75,6 +79,12 @@ export class StellarMisadventuresActor extends Actor {
 
     const systemData = actorData.system;
     systemData.attributes.level.prof = Math.ceil((systemData.attributes.level.value + 2) / 2);
+    // Save proficiency
+    for (let [key, save] of Object.entries(systemData.saves)) {
+      if (save.proficient) {
+        save.mod += systemData.attributes.level.prof;
+      }
+    }
   }
 
   /**

@@ -33,6 +33,10 @@
   "STELLARMISADVENTURES.SkillSte": "Stealth",
   "STELLARMISADVENTURES.SkillStr": "Streetwise",
 
+  "STELLARMISADVENTURES.SavesReflex": "Reflex",
+  "STELLARMISADVENTURES.SavesFortitude": "Fortitude",
+  "STELLARMISADVENTURES.SavesWill": "Will",
+
   "STELLARMISADVENTURES.ItemWeaponType": "Type",
   "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
   "STELLARMISADVENTURES.WeaponTypePistol": "Pistol",

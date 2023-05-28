@@ -41,14 +41,6 @@
           <input type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
           </div>
         </div>
-        {{!-- 
-        <div class="resource flex-group-center">
-          <label for="system.attributes.level.value" class="resource-label">Level</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
-          </div>
-        </div>
-        --}}
         {{!-- Damage Reduction and Shield Regen --}}
         <div class="resource flex-group-center">
           <label for="system.dr.value" class="resource-label">DR</label>
@@ -73,34 +65,24 @@
         
         {{!-- Second row --}}
         
-        {{!-- Armor Class and Saving Throws --}}
+        {{!-- Armor Class --}}
         <div class="resource flex-group-center">
           <label for="system.ac.value" class="resource-label">AC</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
           </div>
         </div>
-        
-        <div class="resource flex-group-center">
-          <label for="system.saves.reflex.value" class="resource-label rollable" data-roll="d20+@saves.reflex.mod" data-label="Reflex Save">Reflex</label>
+        {{!-- Saving Throws --}}
+        {{#each system.saves as |save key|}}
+        <div class="resource felxcol flex-group-center">
+          <label for="system.saves.{{key}}.value" class="resource-label rollable" data-roll="d20+@saves.{{key}}.mod" data-label="{{save.label}} Save">{{save.label}} {{numberFormat save.mod decimals=0 sign=true}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.reflex.value" value="{{system.saves.reflex.value}}" data-dtype="Number"/>
+            <input class="prof" type="checkbox" name="system.saves.{{key}}.proficient"  {{checked save.proficient}}/>
+            <input type="text" name="system.saves.{{key}}.value" value="{{save.value}}" data-dtype="Number"/>
+            {{!--<span class="save-mod rollable" data-roll="d20+@saves.{{key}}.mod" data-label="{{save.label}}">{{numberFormat save.mod decimals=0 sign=true}}</span> --}}
           </div>
         </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.saves.fortitude.value" class="resource-label rollable" data-roll="d20+@saves.fortitude.mod" data-label="Fortitude Save">Fortitude</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.fortitude.value" value="{{system.saves.fortitude.value}}" data-dtype="Number"/>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.saves.will.value" class="resource-label rollable" data-roll="d20+@saves.will.mod" data-label="Will Save">Will</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.will.value" value="{{system.saves.will.value}}" data-dtype="Number"/>
-          </div>
-        </div>
+        {{/each}}
         {{!-- Initiative --}}
         <div class="resource flex-group-center">
           <label for="system.init.value" class="resource-label">Initiative</label>
