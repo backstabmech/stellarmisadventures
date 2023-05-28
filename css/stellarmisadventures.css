@@ -253,10 +253,8 @@
   margin-bottom: 10px;
 }
 .stellarmisadventures .sheet-header .profile-img {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
-  height: 100px;
+  flex: 0 0 160px;
+  height: 160px;
   margin-right: 10px;
 }
 .stellarmisadventures .sheet-header .header-fields {
@@ -265,10 +263,21 @@
   flex: 1;
 }
 .stellarmisadventures .sheet-header h1.charname {
+  flex: 1;
   height: 50px;
   padding: 0px;
   margin: 5px 0;
   border-bottom: 0;
+}
+.stellarmisadventures .sheet-header .header-exp {
+  flex: 0 0 20px;
+  height: 20px;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.stellarmisadventures .sheet-header .header-exp input {
+  width: 30px;
 }
 .stellarmisadventures .sheet-header h1.charname input {
   width: 100%;

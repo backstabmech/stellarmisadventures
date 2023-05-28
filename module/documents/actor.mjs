@@ -73,9 +73,8 @@ export class StellarMisadventuresActor extends Actor {
   _prepareCharacterData(actorData) {
     if (actorData.type !== 'character') return;
 
-    // Make modifications to data here. For example:
     const systemData = actorData.system;
-    systemData.proficiency = Math.ceil((systemData.attributes.level + 2) / 2);
+    systemData.attributes.level.prof = Math.ceil((systemData.attributes.level.value + 2) / 2);
   }
 
   /**
@@ -124,6 +123,7 @@ export class StellarMisadventuresActor extends Actor {
     if (data.saves.will.mod) {
       data.will = data.saves.will.mod;
     }
+
   } 
   /**
    * Prepare character roll data.
@@ -136,7 +136,9 @@ export class StellarMisadventuresActor extends Actor {
       data.lvl = data.attributes.level.value ?? 0;
     }
     // Copy proficiency bonus
-    data.prof = data.attributes.proficiency ?? 0;
+    if (data.attributes.level.prof) {
+      data.prof = data.attributes.level.prof ?? 0;
+    }
   }
 
   /**
