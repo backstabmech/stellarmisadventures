@@ -81,5 +81,3 @@ STELLARMISADVENTURES.damageTypes = {
   "plasma": "STELLARMISADVENTURES.DamageTypePlasma",
   "sonic": "STELLARMISADVENTURES.DamageTypeSonic",
 };
-
-  

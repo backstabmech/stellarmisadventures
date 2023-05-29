@@ -64,5 +64,12 @@
   "STELLARMISADVENTURES.EffectEdit": "Edit Effect",
   "STELLARMISADVENTURES.EffectDelete": "Delete Effect",
 
-  "STELLARMISADVENTURES.Add": "Add"
+  "STELLARMISADVENTURES.Add": "Add",
+
+  "STELLARMISADVENTURES.Attack": "Attack",
+  "STELLARMISADVENTURES.Damage": "Damage",
+  "STELLARMISADVENTURES.Healing": "Healing",
+  "STELLARMISADVENTURES.SavingThrow": "SavingThrow",
+  "STELLARMISADVENTURES.OtherFormula": "Other Formula"
+
 }
