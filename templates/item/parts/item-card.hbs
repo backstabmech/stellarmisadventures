@@ -7,15 +7,15 @@
     </header>
 
     <div class="card-content">
-        {{{item.description.value}}}
+        {{{item.system.description}}}
     </div>
 
     {{!-- All the buttons --}}
     <div class="card-buttons">
         {{#if hasAttack}}<button data-action="attack">{{ localize "STELLARMISADVENTURES.Attack" }}</button>{{/if}}
 
-        {{#if hasDamage}}
-        <button data-action="damage">
+        {{#if data.damageFormula}}
+        <button data-action="damageFormula">
             {{#if isHealing}}{{ localize "STELLARMISADVENTURES.Healing" }}
             {{else}}{{localize "STELLARMISADVENTURES.Damage" }}{{/if}}
         </button>
