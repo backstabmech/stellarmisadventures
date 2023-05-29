@@ -70,6 +70,6 @@
   "STELLARMISADVENTURES.Damage": "Damage",
   "STELLARMISADVENTURES.Healing": "Healing",
   "STELLARMISADVENTURES.SavingThrow": "SavingThrow",
-  "STELLARMISADVENTURES.OtherFormula": "Other Formula"
-
+  "STELLARMISADVENTURES.OtherFormula": "Other Formula",
+  "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}"
 }

@@ -79,7 +79,6 @@
           <div class="resource-content flexrow flex-center flex-between">
             <input class="prof" type="checkbox" name="system.saves.{{key}}.proficient"  {{checked save.proficient}}/>
             <input type="text" name="system.saves.{{key}}.value" value="{{save.value}}" data-dtype="Number"/>
-            {{!--<span class="save-mod rollable" data-roll="d20+@saves.{{key}}.mod" data-label="{{save.label}}">{{numberFormat save.mod decimals=0 sign=true}}</span> --}}
           </div>
         </div>
         {{/each}}

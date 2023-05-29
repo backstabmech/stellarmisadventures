@@ -34,7 +34,7 @@ export class StellarMisadventuresActor extends Actor {
     const flags = actorData.flags.stellarmisadventures || {};
 
     
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
+    // Separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     this._prepareBaseData(actorData);
     this._prepareCharacterData(actorData);
@@ -160,4 +160,29 @@ export class StellarMisadventuresActor extends Actor {
     // Process additional NPC data here.
   }
 
+   /**
+   * Roll a Saving Throw
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param {string} saveId    The save ID (e.g. "ref")
+   * @param {object} options      Options which configure how ability tests are rolled
+   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   */
+  async rollAbilitySave(saveId, options={}) {
+    console.log("Making a saving throw!");
+    const label = CONFIG.STELLARMISADVENTURES.saves[saveId]?.label ?? "";
+    const data = this.getRollData();
+    // TODO: Implement this
+    return null;
+    /*
+    // Invoke the roll and submit it to chat.
+    const roll = new Roll(`d20 +@${saveId} `, rollData);
+    // If you need to store the value first, uncomment the next line.
+    // let result = await roll.roll({async: true});
+    roll.toMessage({
+      speaker: speaker,
+      rollMode: rollMode,
+      flavor: label,
+    });
+    return roll;*/
+  }
 }

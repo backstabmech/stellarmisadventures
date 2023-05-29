@@ -25,13 +25,134 @@ export class StellarMisadventuresItem extends Item {
 
     return rollData;
   }
+  /* -------------------------------------------- */
+  /*  Chat Message Helpers                        */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply listeners to chat messages.
+   * @param {HTML} html  Rendered chat message.
+   */
+  static chatListeners(html) {
+    html.on("click", ".card-buttons button", this._onChatCardAction.bind(this));
+    html.on("click", ".item-name", this._onChatCardToggleContent.bind(this));
+  }
+  /**
+   * Handle execution of a chat card action via a click event on one of the card buttons
+   * @param {Event} event       The originating click event
+   * @returns {Promise}         A promise which resolves once the handler workflow is complete
+   * @private
+   */
+  static async _onChatCardAction(event) {
+    event.preventDefault();
+    // Extract card data
+    const button = event.currentTarget;
+    button.disabled = true;
+    const card = button.closest(".chat-card");
+    const messageId = card.closest(".message").dataset.messageId;
+    const message = game.messages.get(messageId);
+    const action = button.dataset.action;
+
+    // Recover the actor for the chat card
+    const actor = await this._getChatCardActor(card);
+    if ( !actor ) return;
+
+    // Validate permission to proceed with the roll
+    // (Stop immediately unless (targeted and a save action) or GM or Owner)
+    const isTargetted = action === "save";
+    if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
+    
+    // Get the Item from stored flag data or by the item ID on the Actor
+    const storedData = message.getFlag("stellarmisadventures", "itemData");
+    const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
+    if ( !item ) {
+      const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name});
+      return ui.notifications.error(err);
+    }
+    // TODO: get gadgetTier here?
+    console.log("Card button clicked!");
+
+    let targets;
+    switch ( action ) {
+      case "attack":
+        // TODO: implement and test
+        await item.rollAttack( {
+          event: event,
+          //gadgetTier: gadgetTier
+        });
+        break;
+      case "damageFormula":
+      case "versatile":
+        console.log("Rolled damage")  ;
+        await item.rollDamage( {
+          event: event,
+          //spellLevel: spellLevel,
+          //versatile: action === "versatile"
+        });
+        break;
+      case "formula":
+        console.log("Rolled Formula");
+        await item.rollFormula(event);
+        break;
+      case "save":
+        // TODO: implement and test
+        targets = this._getChatCardTargets(card);
+        for ( let token of targets ) {
+          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
+          await token.actor.rollSave(button.dataset.save, { event, speaker });
+        }
+
+    }
+
+    button.disabled = false;
+  }
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the visibility of chat card content when the name is clicked
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  static _onChatCardToggleContent(event) {
+    event.preventDefault();
+    const header = event.currentTarget;
+    const card = header.closest(".chat-card");
+    const content = card.querySelector(".card-content");
+    content.style.display = content.style.display === "none" ? "block" : "none";
+  }
+
+  /* -------------------------------------------- */
+  
+   /**
+   * Get the Actor which is the author of a chat card
+   * @param {HTMLElement} card    The chat card being used
+   * @returns {Actor|null}        The Actor document or null
+   * @private
+   */
+   static async _getChatCardActor(card) {
+
+    // Case 1 - a synthetic actor from a Token
+    if ( card.dataset.tokenId ) {
+      const token = await fromUuid(card.dataset.tokenId);
+      if ( !token ) return null;
+      return token.actor;
+    }
+
+    // Case 2 - use Actor ID directory
+    const actorId = card.dataset.actorId;
+    return game.actors.get(actorId) || null;
+  }
+
+  /* -------------------------------------------- */
+
 
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
    * @private
    */
-  async roll() {
+  async use() {
+    console.log(" Sanity Check");
 
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
@@ -79,6 +200,50 @@ export class StellarMisadventuresItem extends Item {
       const roll = new Roll(rollData.this.formula, rollData);
       // If you need to store the value first, uncomment the next line.
       // let result = await roll.roll({async: true});
+      roll.toMessage({
+        speaker: speaker,
+        rollMode: rollMode,
+        flavor: label,
+      });
+      return roll;
+    }
+  }
+  /**
+   * Roll the item's damage.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async rollDamage(event) {
+    if (this.system.damageFormula) {
+      // Initialize chat data.
+      const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+      const rollMode = game.settings.get('core', 'rollMode');
+      const label = `[${this.type}] ${this.name}`;
+      // Retrieve roll data.
+      const rollData = this.getRollData();
+
+      // Invoke the roll and submit it to chat.
+      const roll = new Roll(this.system.damageFormula, rollData);
+      roll.toMessage({
+        speaker: speaker,
+        rollMode: rollMode,
+        flavor: label,
+      });
+      return roll;
+    }
+    return null;
+  }
+
+  async rollFormula(event) {
+    if (this.system.formula) {
+      // Initialize chat data.
+      const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+      const rollMode = game.settings.get('core', 'rollMode');
+      const label = `[${this.type}] ${this.name}`;
+      // Retrieve roll data.
+      const rollData = this.getRollData();     
+      // Create a roll and send a chat message from it.
+      const roll = new Roll(this.system.formula, rollData);
       roll.toMessage({
         speaker: speaker,
         rollMode: rollMode,

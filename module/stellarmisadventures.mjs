@@ -7,7 +7,7 @@ import { StellarMisadventuresItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { STELLARMISADVENTURES } from "./helpers/config.mjs";
-
+import * as chat from "./documents/chat-message.mjs"
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -78,6 +78,16 @@ Hooks.once("ready", async function() {
 });
 
 /* -------------------------------------------- */
+/*  Chat button hooks                           */
+/* -------------------------------------------- */
+
+Hooks.on("renderChatMessage", chat.onRenderChatMessage);
+Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
+
+Hooks.on("renderChatLog", (app, html, data) => StellarMisadventuresItem.chatListeners(html));
+Hooks.on("renderChatPopout", (app, html, data) => StellarMisadventuresItem.chatListeners(html));
+
+/* -------------------------------------------- */
 /*  Hotbar Macros                               */
 /* -------------------------------------------- */
 
@@ -133,6 +143,6 @@ function rollItemMacro(itemUuid) {
     }
 
     // Trigger the item roll
-    item.roll();
+    item.use();
   });
 }

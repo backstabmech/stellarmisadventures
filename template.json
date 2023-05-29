@@ -199,7 +199,19 @@
         "value": 0
       },
       "activate": {
+        "ability": null,
+        "attackBonus": null,
+        "chatflavor": null,
         "formula": "d20 + @str.mod + @prof",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
         "damageFormula": "1 + @str.mod"
       }
     },
@@ -213,7 +225,8 @@
       "ammoMax": 0,
       "ammoType": "",
       "ammoUsage": 0,
-      "properties": ""
+      "properties": "",
+      "proficient": "false"
     },
     "armor": {
       "templates": ["base", "physicalItem"],

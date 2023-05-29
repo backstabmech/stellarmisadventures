@@ -1,5 +1,5 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
-
+import * as Dice from "../dice.mjs"
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -233,7 +233,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       if (dataset.rollType == 'item') {
         const itemId = element.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
+        if (item) return item.use();
       }
     }
 

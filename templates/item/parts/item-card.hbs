@@ -22,13 +22,13 @@
         {{/if}}
 
         {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
+        <button data-action="save" data-save="{{data.save}}">
             {{ localize "STELLARMISADVENTURES.SavingThrow" }} {{labels.save}}
         </button>
         {{/if}}
 
         {{#if data.formula}}
-        <button data-action="data.formula">{{localize "STELLARMISADVENTURES.OtherFormula"}}</button>
+        <button data-action="formula">{{localize "STELLARMISADVENTURES.OtherFormula"}}</button>
         {{/if}}
     
     </div>
