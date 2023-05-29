@@ -185,4 +185,29 @@ export class StellarMisadventuresActor extends Actor {
     });
     return roll;*/
   }
+
+
+
+  /* -------------------------------------------- */
+  /*  Gameplay Mechanics                          */
+  /* -------------------------------------------- */
+
+  async applyDamage(amount=0, multiplier=0) {
+    // Apply modifier and round up
+    amount = Math.ceil(parseInt(amount) * multiplier);
+    const stamina = this.system.stamina;
+    const shield = this.system.shield;
+    if ( !stamina || !shield ) return this;
+    
+    if (shield.value > 0 && amount > 0) {
+      // Apply to shield first
+      const newVal = Math.max(shield.value - amount, 0);
+      this.update({"system.shield.value": newVal});
+    } else {
+      const newVal = Math.clamped(stamina.value - amount, 0, stamina.max);
+      this.update({"system.stamina.value": newVal});
+    }
+
+  }
+
 }

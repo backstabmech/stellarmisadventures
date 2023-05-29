@@ -65,6 +65,11 @@
   "STELLARMISADVENTURES.EffectDelete": "Delete Effect",
 
   "STELLARMISADVENTURES.Add": "Add",
+  
+  "STELLARMISADVENTURES.ChatContextDamage": "Apply damage",
+  "STELLARMISADVENTURES.ChatContextHealing": "Apply healing",
+  "STELLARMISADVENTURES.ChatContextDoubleDamage": "Apply double damage",
+  "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
 
   "STELLARMISADVENTURES.Attack": "Attack",
   "STELLARMISADVENTURES.Damage": "Damage",
@@ -72,4 +77,5 @@
   "STELLARMISADVENTURES.SavingThrow": "SavingThrow",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",
   "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}"
+
 }

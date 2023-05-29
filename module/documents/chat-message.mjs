@@ -75,31 +75,31 @@ export function highlightCriticalSuccessFailure(message, html, data) {
     };
     options.push(
       {
-        name: game.i18n.localize("DND5E.ChatContextDamage"),
+        name: game.i18n.localize("STELLARMISADVENTURES.ChatContextDamage"),
         icon: '<i class="fas fa-user-minus"></i>',
         condition: canApply,
         callback: li => applyChatCardDamage(li, 1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHealing"),
+        name: game.i18n.localize("STELLARMISADVENTURES.ChatContextHealing"),
         icon: '<i class="fas fa-user-plus"></i>',
         condition: canApply,
         callback: li => applyChatCardDamage(li, -1)
       },
-      {
+      /*{
         name: game.i18n.localize("DND5E.ChatContextTempHP"),
         icon: '<i class="fas fa-user-clock"></i>',
         condition: canApply,
         callback: li => applyChatCardTemp(li)
-      },
+      },*/
       {
-        name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
+        name: game.i18n.localize("STELLARMISADVENTURES.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
         condition: canApply,
         callback: li => applyChatCardDamage(li, 2)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
+        name: game.i18n.localize("STELLARMISADVENTURES.ChatContextHalfDamage"),
         icon: '<i class="fas fa-user-shield"></i>',
         condition: canApply,
         callback: li => applyChatCardDamage(li, 0.5)
@@ -133,7 +133,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
    * Apply rolled dice as temporary hit points to the controlled token(s).
    * @param {HTMLElement} li  The chat entry which contains the roll data
    * @returns {Promise}
-   */
+   *
   function applyChatCardTemp(li) {
     const message = game.messages.get(li.data("messageId"));
     const roll = message.rolls[0];
