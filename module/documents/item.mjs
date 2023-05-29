@@ -1,3 +1,4 @@
+import * as Dice from "../dice.mjs"
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -152,8 +153,6 @@ export class StellarMisadventuresItem extends Item {
    * @private
    */
   async use() {
-    console.log(" Sanity Check");
-
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
@@ -177,6 +176,7 @@ export class StellarMisadventuresItem extends Item {
     }
 
     if (this.type == 'weapon') {
+      cardData.hasAttack = true
       ChatMessage.create({
         speaker: speaker,
         rollMode: rollMode,
@@ -192,21 +192,38 @@ export class StellarMisadventuresItem extends Item {
         content: this.system.description ?? ''
       });
     } else {
-      // Otherwise, create a roll and send a chat message from it.
-      // Retrieve roll data.
-      const rollData = this.getRollData();
-
-      // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollData.this.formula, rollData);
-      // If you need to store the value first, uncomment the next line.
-      // let result = await roll.roll({async: true});
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
-      return roll;
+      this.rollFormula();
     }
+  }
+  /**
+   * Roll the item's attack.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async rollAttack(event) {
+    // Initialize chat data.
+    const systemData = this.system;
+    const actorData = this.actor.system;
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+    const rollMode = game.settings.get('core', 'rollMode');
+    const label = `[${this.type}] ${this.name}`;
+    // Retrieve roll data.
+    const rollData = this.getRollData();
+
+    // Build roll formula
+    let rollFormula = `d20 + ${actorData[systemData.ability].mod}`;
+    if (systemData.proficient) {
+      rollFormula += " + @prof";
+    }
+
+    // Invoke the roll and submit it to chat.
+    const roll = new Roll(rollFormula, rollData);
+    roll.toMessage({
+      speaker: speaker,
+      rollMode: rollMode,
+      flavor: label,
+    });
+    return roll;
   }
   /**
    * Roll the item's damage.
@@ -215,6 +232,8 @@ export class StellarMisadventuresItem extends Item {
    */
   async rollDamage(event) {
     if (this.system.damageFormula) {
+      const systemData = this.system;
+      const actorData = this.actor.system;
       // Initialize chat data.
       const speaker = ChatMessage.getSpeaker({ actor: this.actor });
       const rollMode = game.settings.get('core', 'rollMode');
@@ -222,8 +241,11 @@ export class StellarMisadventuresItem extends Item {
       // Retrieve roll data.
       const rollData = this.getRollData();
 
+
+      let rollFormula = this.system.damageFormula;
+      rollFormula += ` + ${actorData[systemData.ability].mod}`
       // Invoke the roll and submit it to chat.
-      const roll = new Roll(this.system.damageFormula, rollData);
+      const roll = new Roll(rollFormula, rollData);
       roll.toMessage({
         speaker: speaker,
         rollMode: rollMode,

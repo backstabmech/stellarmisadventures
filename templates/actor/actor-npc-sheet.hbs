@@ -49,34 +49,22 @@
         
         {{!-- Second row --}}
         
-        {{!-- Armor Class and Saving Throws --}}
+        {{!-- Armor Class --}}
         <div class="resource flex-group-center">
           <label for="system.ac.value" class="resource-label">AC</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
           </div>
         </div>
-        
-        <div class="resource flex-group-center">
-          <label for="system.saves.reflex.value" class="resource-label rollable" data-roll="d20+@saves.reflex.mod" data-label="Reflex Save">Reflex</label>
+        {{!-- Saving Throws --}}
+        {{#each system.saves as |save key|}}
+        <div class="resource felxcol flex-group-center">
+          <label for="system.saves.{{key}}.value" class="resource-label rollable" data-roll="d20+@saves.{{key}}.mod" data-label="{{save.label}} Save">{{save.label}} {{numberFormat save.mod decimals=0 sign=true}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.reflex.value" value="{{system.saves.reflex.value}}" data-dtype="Number"/>
+            <input type="text" name="system.saves.{{key}}.value" value="{{save.value}}" data-dtype="Number"/>
           </div>
         </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.saves.fortitude.value" class="resource-label rollable" data-roll="d20+@saves.fortitude.mod" data-label="Fortitude Save">Fortitude</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.fortitude.value" value="{{system.saves.fortitude.value}}" data-dtype="Number"/>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.saves.will.value" class="resource-label rollable" data-roll="d20+@saves.will.mod" data-label="Will Save">Will</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.saves.will.value" value="{{system.saves.will.value}}" data-dtype="Number"/>
-          </div>
-        </div>
+        {{/each}}
         {{!-- Initiative --}}
         <div class="resource flex-group-center">
           <label for="system.init.value" class="resource-label">Initiative</label>

@@ -51,16 +51,6 @@ export class StellarMisadventuresActor extends Actor {
       // Calculate the modifier using d20 rules.
       ability.mod = Math.floor((ability.value - 10) / 2);
     }
-    // Calculate skill modifiers
-    for (let [key, skill] of Object.entries(systemData.skills)) {
-      skill.mod = systemData.abilities[skill.ability].mod;
-      // Calculate the modifier.
-      if (skill.points < 4) {
-        skill.mod += skill.points;
-      } else {
-        skill.mod += Math.ceil(skill.points / 2 ) + 1;
-      }
-    }
     // Calculate saving throw modifiers
     // Set ability bonuses
     systemData.saves.reflex.abl = Math.max(systemData.abilities.dex.mod, systemData.abilities.int.mod);
@@ -85,6 +75,16 @@ export class StellarMisadventuresActor extends Actor {
         save.mod += systemData.attributes.level.prof;
       }
     }
+    // Calculate skill modifiers
+    for (let [key, skill] of Object.entries(systemData.skills)) {
+      skill.mod = systemData.abilities[skill.ability].mod;
+      // Calculate the modifier.
+      if (skill.points < 4) {
+        skill.mod += skill.points;
+      } else {
+        skill.mod += Math.ceil(skill.points / 2 ) + 1;
+      }
+    }
   }
 
   /**
@@ -92,10 +92,15 @@ export class StellarMisadventuresActor extends Actor {
    */
   _prepareNpcData(actorData) {
     if (actorData.type !== 'npc') return;
-
-    // Make modifications to data here. For example:
+    
+    // Make modifications to data here.
     const systemData = actorData.system;
+    
     systemData.xp = (systemData.cr * systemData.cr) * 100;
+    // Calculate skill modifiers
+    for (let [key, skill] of Object.entries(systemData.skills)) {
+      skill.mod = systemData.abilities[skill.ability].mod + skill.points;
+    }
   }
 
   /**

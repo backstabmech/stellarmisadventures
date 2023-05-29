@@ -74,6 +74,11 @@
             "ability": "per",
             "expertise": false
           },
+          "int": {
+            "points": 0,
+            "ability": "per",
+            "expertise": false
+          },
           "inv": {
             "points": 0,
             "ability": "int",
@@ -202,7 +207,7 @@
         "ability": null,
         "attackBonus": null,
         "chatflavor": null,
-        "formula": "d20 + @str.mod + @prof",
+        "formula": "",
         "critical": {
           "threshold": null,
           "damage": ""

@@ -34,13 +34,19 @@
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- New fields in here! --}}
-      {{!-- 
+      {{!-- Choose ability --}}
       <div class="resource">
-        <label class="resource-label">Attack Roll Bonus</label>
-        <input type="text" name="system.attackBonus" value="{{system.damageFormula}}" data-dtype="String"/>
-      </div>--}}
+        <label class="resource-label">Ability</label>
+        <select name="system.ability">
+          {{selectOptions config.abilities selected=system.ability localize=true }}
+        </select>
+      </div>
       <div class="resource">
-        <label class="resource-label">Damage Roll Formula</label>
+        <label class="resource-label">Proficient</label>
+        <input type="checkbox" name="system.proficient"  {{checked system.proficient}}/>        
+      </div>
+      <div class="resource">
+        <label class="resource-label">Damage Die</label>
         <input type="text" name="system.damageFormula" value="{{system.damageFormula}}" data-dtype="String"/>
       </div>
       <div class="resource">
