@@ -23,10 +23,13 @@
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
-      <div class="resource">
-        <label class="resource-label">Gadget Level</label>
+      <div class="resource flexrow">
+        <label class="resource-label">Gadget Tier</label>
         <input type="text" name="system.gadgetTier" value="{{system.gadgetTier}}" data-dtype="Number"/>
       </div>
+      
+      {{> "systems/stellarmisadventures/templates/item/parts/activate-sheet.hbs"}}
     </div>
+
   </section>
 </form>

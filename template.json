@@ -213,9 +213,9 @@
           "damage": ""
         },
         "save": {
-          "ability": "",
+          "defence": "",
           "dc": null,
-          "scaling": "spell"
+          "scaling": "gadget"
         },
         "damageFormula": "",
         "damageAlternate": ""
@@ -248,10 +248,10 @@
       "shieldRegen": 0
     },
     "feature": {
-      "templates": ["base"]
+      "templates": ["base", "activate"]
     },
     "gadget": {
-      "templates": ["base"],
+      "templates": ["base", "activate"],
       "gadgetTier": 1
     }
   }
