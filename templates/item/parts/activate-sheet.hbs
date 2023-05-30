@@ -1,4 +1,4 @@
-<h3>Attack Roll</h3>
+<h3 class="resource-label">Attack Roll</h3>
 <section class="resource">
     {{!-- Choose ability --}}
     <div class="resource flexrow">
@@ -20,7 +20,7 @@
 
 </section>
 
-<h3>Damage</h3>
+<h3 class="resource-label">Damage</h3>
 <section class="resource">
 
     <div class="resource flexrow">
@@ -41,9 +41,26 @@
 
 </section>
 
-<h3>Msc</h3>
-<section class="re">
+{{#if system.save}}
+<h3 class="resource-label">Saving Throw</h3>
+<section class="resource">
+    {{!-- Choose ability --}}
     <div class="resource flexrow">
+        <label class="resource-label">Ability</label>
+        <select name="system.save.ability">
+            {{selectOptions config.abilities selected=system.save.ability blank="None" localize=true }}
+        </select>
+    </div>
+    <div class="resource flexrow">
+        <label class="resource-label">DC</label>
+        <input type="text" name="system.save.dc" value="{{system.save.dc}}" data-dtype="Number"/>
+    </div>
+</section>
+{{/if}}
+
+<h3 class="resource-label">Msc</h3>
+<section class="resource">
+    <div class="flexrow">
         <label class="resource-label">Other Roll Formula</label>
         <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
     </div>

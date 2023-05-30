@@ -73,6 +73,7 @@
 
   "STELLARMISADVENTURES.Attack": "Attack",
   "STELLARMISADVENTURES.Damage": "Damage",
+  "STELLARMISADVENTURES.AltDamage": "Alternate Damage",
   "STELLARMISADVENTURES.Healing": "Healing",
   "STELLARMISADVENTURES.SavingThrow": "SavingThrow",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",

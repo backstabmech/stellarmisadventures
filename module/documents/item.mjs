@@ -83,12 +83,11 @@ export class StellarMisadventuresItem extends Item {
         });
         break;
       case "damageFormula":
-      case "versatile":
-        console.log("Rolled damage")  ;
+      case "damageAlternate":
         await item.rollDamage( {
           event: event,
+          damageAlternate: action === "damageAlternate"
           //spellLevel: spellLevel,
-          //versatile: action === "versatile"
         });
         break;
       case "formula":
@@ -195,8 +194,8 @@ export class StellarMisadventuresItem extends Item {
       this.rollFormula();
     }
   }
-  /**
-   * Roll the item's attack.
+  /** Roll the item's attack.
+   * 
    * @param {Event} event   The originating click event
    * @private
    */
@@ -241,8 +240,7 @@ export class StellarMisadventuresItem extends Item {
       // Retrieve roll data.
       const rollData = this.getRollData();
 
-
-      let rollFormula = this.system.damageFormula;
+      let rollFormula = event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula;
       rollFormula += ` + ${actorData[systemData.ability].mod}`
       // Invoke the roll and submit it to chat.
       const roll = new Roll(rollFormula, rollData);
@@ -258,6 +256,7 @@ export class StellarMisadventuresItem extends Item {
 
   async rollFormula(event) {
     if (this.system.formula) {
+      const actorData = this.actor.system;
       // Initialize chat data.
       const speaker = ChatMessage.getSpeaker({ actor: this.actor });
       const rollMode = game.settings.get('core', 'rollMode');

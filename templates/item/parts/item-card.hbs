@@ -20,6 +20,13 @@
             {{else}}{{localize "STELLARMISADVENTURES.Damage" }}{{/if}}
         </button>
         {{/if}}
+        
+        {{#if data.damageAlternate}}
+        <button data-action="damageAlternate">
+            {{#if isHealing}}{{ localize "STELLARMISADVENTURES.Healing" }}
+            {{else}}{{localize "STELLARMISADVENTURES.AltDamage" }}{{/if}}
+        </button>
+        {{/if}}
 
         {{#if hasSave}}
         <button data-action="save" data-save="{{data.save}}">

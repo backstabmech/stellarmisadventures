@@ -95,7 +95,7 @@ export class StellarMisadventuresActor extends Actor {
     
     // Make modifications to data here.
     const systemData = actorData.system;
-    
+
     systemData.xp = (systemData.cr * systemData.cr) * 100;
     // Calculate skill modifiers
     for (let [key, skill] of Object.entries(systemData.skills)) {
