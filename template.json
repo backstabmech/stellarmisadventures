@@ -217,7 +217,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "damageFormula": "1 + @str.mod"
+        "damageFormula": "",
+        "damageAlternate": ""
       }
     },
     "item": {

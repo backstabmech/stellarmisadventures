@@ -11,5 +11,6 @@
     "systems/stellarmisadventures/templates/actor/parts/actor-items.hbs",
     "systems/stellarmisadventures/templates/actor/parts/actor-gadgets.hbs",
     "systems/stellarmisadventures/templates/actor/parts/actor-effects.hbs",
+    "systems/stellarmisadventures/templates/item/parts/activate-sheet.hbs"
   ]);
 };

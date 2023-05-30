@@ -1,0 +1,50 @@
+<h3>Attack Roll</h3>
+<section class="resource">
+    {{!-- Choose ability --}}
+    <div class="resource flexrow">
+        <label class="resource-label">Ability</label>
+        <select name="system.ability">
+            {{selectOptions config.abilities selected=system.ability blank="Default" localize=true }}
+        </select>
+    </div>
+
+    <div class="resource flexrow">
+        <label class="resource-label">Proficient</label>
+        <input type="checkbox" name="system.proficient"  {{checked system.proficient}}/>        
+    </div>
+
+    <div class="resource flexrow">
+        <label class="resource-label">Item Attack Bonus</label>
+        <input class="resource-small" type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-dtype="Number"/>
+    </div>
+
+</section>
+
+<h3>Damage</h3>
+<section class="resource">
+
+    <div class="resource flexrow">
+        <label class="resource-label">Damage Die</label>
+        <input type="text" name="system.damageFormula" value="{{system.damageFormula}}" data-dtype="String"/>
+    </div>
+
+    {{#if system.weaponType}}
+    <div class="resource flexrow">
+        <label class="resource-label">Alternate Damage Die</label>
+        <input type="text" name="system.damageAlternate" value="{{system.damageAlternate}}" data-dtype="String"/>
+    </div>
+    {{/if}}
+    <div class="resource flexrow">
+        <label class="resource-label">Bonus Critical Damage</label>
+        <input type="text" name="system.critical.damage" value="{{system.critical.damage}}" data-dtype="String"/>
+    </div>
+
+</section>
+
+<h3>Msc</h3>
+<section class="re">
+    <div class="resource flexrow">
+        <label class="resource-label">Other Roll Formula</label>
+        <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
+    </div>
+</section>

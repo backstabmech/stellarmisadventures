@@ -34,25 +34,6 @@
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- New fields in here! --}}
-      {{!-- Choose ability --}}
-      <div class="resource">
-        <label class="resource-label">Ability</label>
-        <select name="system.ability">
-          {{selectOptions config.abilities selected=system.ability localize=true }}
-        </select>
-      </div>
-      <div class="resource">
-        <label class="resource-label">Proficient</label>
-        <input type="checkbox" name="system.proficient"  {{checked system.proficient}}/>        
-      </div>
-      <div class="resource">
-        <label class="resource-label">Damage Die</label>
-        <input type="text" name="system.damageFormula" value="{{system.damageFormula}}" data-dtype="String"/>
-      </div>
-      <div class="resource">
-        <label class="resource-label">Other Roll Formula</label>
-        <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
-      </div>
       {{!-- Weapon Attributes --}}
       <table>
         <tr>
@@ -87,7 +68,11 @@
           </td>
         </tr>
       </table>
-  
+
+      {{!-- TODO: Weapon properties --}}
+
+      {{> "systems/stellarmisadventures/templates/item/parts/activate-sheet.hbs"}}
+
     </div>
   </section>
 </form>
