@@ -38,7 +38,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
    * @param {object} data          Configuration data passed to the message.
    */
   export function displayChatActionButtons(message, html, data) {
-    const chatCard = html.find(".dnd5e.chat-card");
+    const chatCard = html.find(".stellarmisadventures.chat-card");
     if ( chatCard.length > 0 ) {
       const flavor = html.find(".flavor-text");
       if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
@@ -86,12 +86,6 @@ export function highlightCriticalSuccessFailure(message, html, data) {
         condition: canApply,
         callback: li => applyChatCardDamage(li, -1)
       },
-      /*{
-        name: game.i18n.localize("DND5E.ChatContextTempHP"),
-        icon: '<i class="fas fa-user-clock"></i>',
-        condition: canApply,
-        callback: li => applyChatCardTemp(li)
-      },*/
       {
         name: game.i18n.localize("STELLARMISADVENTURES.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
