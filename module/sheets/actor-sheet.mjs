@@ -104,7 +104,6 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     const shields = [];
     const features = [];
     const gadgets = {
-      0: [],
       1: [],
       2: [],
       3: [],

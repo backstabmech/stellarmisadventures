@@ -1,4 +1,4 @@
-<div class="resource-label flexrow">
+<div class="resource-label flexrow flex-group-center">
   <label>Ability</label>
     <select name="system.gadgetry.ability">
       {{selectOptions config.abilities selected=system.gadgetry.ability localize=true}}
@@ -14,7 +14,7 @@
 <ol class="items-list">
   {{#each gadgets as |gadgets gadgetTier|}}
     <li class="item flexrow items-header">
-      <div class="item-name">Tier {{gadgetTier}} gadgets</div>
+      <div class="item-name">Tier {{gadgetTier}} Gadgets</div>
       <div class="item-controls">
         <a class="item-control item-create" title="Create item" data-type="gadget" data-gadget-tier="{{gadgetTier}}"><i class="fas fa-plus"></i> Add Tier {{gadgetTier}}</a>
       </div>
