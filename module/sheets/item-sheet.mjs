@@ -39,7 +39,11 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
     if (actor) {
       context.rollData = actor.getRollData();
     }
-
+    
+    // Action Details
+    context.isHealing = itemData.system.actionType === "heal";
+    context.isFlatDC = itemData.system.save?.scaling === "flat";
+    
     // Add the actor's data to context.data for easier access, as well as flags.
     context.system = itemData.system;
     context.flags = itemData.flags;

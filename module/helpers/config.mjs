@@ -12,7 +12,6 @@ STELLARMISADVENTURES.abilities = {
   "per": "STELLARMISADVENTURES.AbilityPer",
   "cha": "STELLARMISADVENTURES.AbilityCha"
 };
-
 STELLARMISADVENTURES.abilityAbbreviations = {
   "str": "STELLARMISADVENTURES.AbilityStrAbbr",
   "dex": "STELLARMISADVENTURES.AbilityDexAbbr",
@@ -47,11 +46,10 @@ STELLARMISADVENTURES.skills = {
   "str": "STELLARMISADVENTURES.SkillStr"
 };
 STELLARMISADVENTURES.saves = {
-  "reflex": "STELLARMISADVENTURES.SavesReflex",
-  "fortitude": "STELLARMISADVENTURES.SavesFortitude",
-  "will": "STELLARMISADVENTURES.SavesWill"
-}
-
+  "ref": "STELLARMISADVENTURES.SavesReflex",
+  "for": "STELLARMISADVENTURES.SavesFortitude",
+  "wil": "STELLARMISADVENTURES.SavesWill"
+};
 STELLARMISADVENTURES.weaponTypes = {
   "melee": "STELLARMISADVENTURES.WeaponTypeMelee",
   "pistol": "STELLARMISADVENTURES.WeaponTypePistol",
@@ -65,7 +63,6 @@ STELLARMISADVENTURES.armorTypes = {
   "medium": "STELLARMISADVENTURES.ArmorTypeMedium",
   "heavy": "STELLARMISADVENTURES.ArmorTypeHeavy",
 };
-
 /**
  * The set of weapon types used within the sytem.
  * @type {Object}

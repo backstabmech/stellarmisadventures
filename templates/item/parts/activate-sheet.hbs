@@ -3,6 +3,7 @@
     {{!-- Choose ability --}}
     <div class="resource flexrow">
         <label class="resource-label">Ability</label>
+        {{log system.ability}}
         <select name="system.ability">
             {{selectOptions config.abilities selected=system.ability blank="Default" localize=true }}
         </select>
@@ -41,22 +42,36 @@
 
 </section>
 
-{{#if system.save}}
+
 <h3 class="resource-label">Saving Throw</h3>
 <section class="resource">
-    {{!-- Choose ability --}}
+    {{!-- Gadgetry or flat? --}}
     <div class="resource flexrow">
-        <label class="resource-label">Ability</label>
-        <select name="system.save.ability">
-            {{selectOptions config.abilities selected=system.save.ability blank="None" localize=true }}
+        <label class="resource-label">Save Mode</label>
+        <select name="system.save.scaling" value="system.save.scaling">
+        {{#select system.save.scaling}}
+            <option value="gadget">{{localize "STELLARMISADVENTURES.Gadgetry"}}</option>
+            {{! 5e allows picking an abl to scale with.}}
+            <option value="flat">{{localize "STELLARMISADVENTURES.Flat"}}</option>
+        {{/select}}
+        </select>
+    </div>
+    {{!-- Choose save --}}
+    <div class="resource flexrow">
+        <label class="resource-label">Type</label>
+        <select name="system.save.defence">
+            {{selectOptions config.saves selected=system.save.defence blank="None" localize=true }}
         </select>
     </div>
     <div class="resource flexrow">
         <label class="resource-label">DC</label>
-        <input type="text" name="system.save.dc" value="{{system.save.dc}}" data-dtype="Number"/>
+        <input type="number" name="system.save.dc" 
+            value="{{#if system.save.dc}}{{system.save.dc}}{{/if}}"
+            placeholder="DC" {{#unless isFlatDC}}disabled{{/unless}} data-dtype="Number"/>
     </div>
+
 </section>
-{{/if}}
+
 
 <h3 class="resource-label">Msc</h3>
 <section class="resource">

@@ -1,4 +1,5 @@
 import * as Dice from "../dice.mjs"
+import { STELLARMISADVENTURES } from "../helpers/config.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -11,6 +12,20 @@ export class StellarMisadventuresItem extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
+  }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.labels = {};
+    // Final attribute prep for unowned items.
+    // (owned items wait for actor.prepareData)
+    if (!this.isOwned) this.prepareFinalAttributes();
+  }
+
+  prepareFinalAttributes() {
+    // Proficency
+    
+    this.getSaveDC();
   }
 
   /**
@@ -76,7 +91,6 @@ export class StellarMisadventuresItem extends Item {
     let targets;
     switch ( action ) {
       case "attack":
-        // TODO: implement and test
         await item.rollAttack( {
           event: event,
           //gadgetTier: gadgetTier
@@ -87,7 +101,7 @@ export class StellarMisadventuresItem extends Item {
         await item.rollDamage( {
           event: event,
           damageAlternate: action === "damageAlternate"
-          //spellLevel: spellLevel,
+          //gadgetTier: gadgetTier,
         });
         break;
       case "formula":
@@ -145,10 +159,18 @@ export class StellarMisadventuresItem extends Item {
 
   /* -------------------------------------------- */
 
+  static _getChatCardTargets(card) {
+    let targets = canvas.tokens.controlled.filter(t => !!t.actor);
+    if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
+    if ( !targets.length ) ui.notifications.warn(game.i18n.localize("STELLARMISADVENTURES.ActionWarningNoToken"));
+    return targets;
+  }
+
+  /* -------------------------------------------- */
+
 
   /**
-   * Handle clickable rolls.
-   * @param {Event} event   The originating click event
+   * Send chat card on click.
    * @private
    */
   async use() {
@@ -174,25 +196,15 @@ export class StellarMisadventuresItem extends Item {
       hasAbilityCheck: this.hasAbilityCheck
     }
 
-    if (this.type == 'weapon') {
-      cardData.hasAttack = true
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData)
-      });
-    } else if (!this.system.formula) {
-      // If there's no roll data, send a chat message.
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: this.system.description ?? ''
-      });
-    } else {
-      this.rollFormula();
+    if (this.ability) {
+      cardData.hasAttack = true;
     }
+    ChatMessage.create({
+      speaker: speaker,
+      rollMode: rollMode,
+      flavor: label,
+      content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData)
+    });
   }
   /** Roll the item's attack.
    * 
@@ -304,7 +316,7 @@ export class StellarMisadventuresItem extends Item {
   // Getters primarily used by chat cards
 
   get hasAttack() {
-    return this.system.hasAttack ?? false;
+    return (this.system.ability && this.system.ability != "Default");
   }
   get isHealing() {
     return this.system.isHealing ?? false;
@@ -313,9 +325,38 @@ export class StellarMisadventuresItem extends Item {
     return this.system.hasDamage ?? false;
   }
   get hasSave() {
-    return this.system.hasSave ?? false;
+    return !!(this.system.save && this.system.save.defence);
   }
   get hasAbiltiyCheck() {
     return this.system.hasAbiltiyCheck ?? false;
+  }
+  get isFlatDC() {
+    return (this.system.save?.scaling === "flat") ?? false;
+  }
+
+  /**
+   * Update the derived spell DC for an item that requires a saving throw.
+   * @returns {number|null}
+   */
+  getSaveDC() {
+    if ( !this.hasSave ) return null;
+    const save = this.system.save;
+
+    // Actor spell-DC based scaling
+    if ( save.scaling === "gadget" ) {
+      save.dc = this.isOwned ? this.actor.system.gadgetdc : null;
+    }
+
+    // Ability-score based scaling
+    else if ( save.scaling !== "flat" ) {
+      // UNIMPLEMENTED
+      //save.dc = this.isOwned ? this.actor.system.abilities[save.scaling].dc : null;
+    }
+
+    // Update labels
+    const def = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[save.defence]) ?? "";
+    this.labels.save = game.i18n.format("STELLARMISADVENTURES.SaveDC", {dc: save.dc || "", defence: def});
+    console.log(`Save Label: ${this.labels.save}`);
+    return save.dc;
   }
 }

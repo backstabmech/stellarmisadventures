@@ -36,6 +36,8 @@
   "STELLARMISADVENTURES.SavesReflex": "Reflex",
   "STELLARMISADVENTURES.SavesFortitude": "Fortitude",
   "STELLARMISADVENTURES.SavesWill": "Will",
+  "STELLARMISADVENTURES.Gadgetry": "Gadgetry",
+  "STELLARMISADVENTURES.Flat": "Flat",
 
   "STELLARMISADVENTURES.ItemWeaponType": "Type",
   "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
@@ -75,7 +77,8 @@
   "STELLARMISADVENTURES.Damage": "Damage",
   "STELLARMISADVENTURES.AltDamage": "Alternate Damage",
   "STELLARMISADVENTURES.Healing": "Healing",
-  "STELLARMISADVENTURES.SavingThrow": "SavingThrow",
+  "STELLARMISADVENTURES.SavingThrow": "Save",
+  "STELLARMISADVENTURES.SaveDC": "DC {dc} {defence}",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",
   "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}"
 

@@ -171,6 +171,10 @@
             "value": []
           }
         },
+        "gadgetry": {
+          "ability": null,
+          "dc": 8
+       },
         "biography": ""
       }
     },

@@ -11,6 +11,7 @@ export class StellarMisadventuresActor extends Actor {
     // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
     // prepareDerivedData().
     super.prepareData();
+    this.items.forEach(item => item.prepareFinalAttributes());
   }
 
   /** @override */
@@ -85,6 +86,15 @@ export class StellarMisadventuresActor extends Actor {
         skill.mod += Math.ceil(skill.points / 2 ) + 1;
       }
     }
+    // Calculate gadgetry info
+    console.log(`${systemData.gadgetry}`);
+    if (!systemData.gadgetry.ability) {
+      systemData.gadgetry.ability = "int";
+    }
+    systemData.gadgetry.mod = systemData.abilities[systemData.gadgetry.ability].mod;
+    systemData.gadgetry.dc = 8 + systemData.attributes.level.prof + systemData.gadgetry.mod;
+    systemData.gadgetry.attack = systemData.attributes.level.prof + systemData.gadgetry.mod;
+    
   }
 
   /**
@@ -100,7 +110,7 @@ export class StellarMisadventuresActor extends Actor {
     // Calculate skill modifiers
     for (let [key, skill] of Object.entries(systemData.skills)) {
       skill.mod = systemData.abilities[skill.ability].mod + skill.points;
-    }
+    }    
   }
 
   /**
@@ -138,6 +148,7 @@ export class StellarMisadventuresActor extends Actor {
     if (data.saves.will.mod) {
       data.will = data.saves.will.mod;
     }
+    //data.gadgetdc = data.gadgetry.dc ?? 8;
 
   } 
   /**
@@ -172,23 +183,24 @@ export class StellarMisadventuresActor extends Actor {
    * @param {object} options      Options which configure how ability tests are rolled
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
-  async rollAbilitySave(saveId, options={}) {
+  async rollSave(saveId, options={}) {
     console.log("Making a saving throw!");
-    const label = CONFIG.STELLARMISADVENTURES.saves[saveId]?.label ?? "";
+    const rollMode = game.settings.get('core', 'rollMode');
+    const label = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[saveId]) ?? "";
     const data = this.getRollData();
-    // TODO: Implement this
-    return null;
-    /*
     // Invoke the roll and submit it to chat.
-    const roll = new Roll(`d20 +@${saveId} `, rollData);
+    const roll = new Roll(`d20 +@${saveId} `, data);
     // If you need to store the value first, uncomment the next line.
     // let result = await roll.roll({async: true});
+    console.log(CONFIG.STELLARMISADVENTURES.saves);
+    console.log(saveId);
+    console.log(CONFIG.STELLARMISADVENTURES.saves[saveId]);
     roll.toMessage({
-      speaker: speaker,
+      speaker: options.speaker,
       rollMode: rollMode,
       flavor: label,
     });
-    return roll;*/
+    return roll;
   }
 
 
