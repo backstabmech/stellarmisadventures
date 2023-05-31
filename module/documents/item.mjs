@@ -23,8 +23,14 @@ export class StellarMisadventuresItem extends Item {
   }
 
   prepareFinalAttributes() {
-    // Proficency
-    
+    if (this.type == "gadget" && this.actor) {
+      // Auto-Proficency with gadgets
+      if (this.actor.system.attributes?.level.prof) {
+        this.system.proficient = true;
+      }
+      // Set ability to actor's gadgetry ability
+      this.system.ability = this.actor.system.gadgetry.ability;
+    }
     this.getSaveDC();
   }
 
