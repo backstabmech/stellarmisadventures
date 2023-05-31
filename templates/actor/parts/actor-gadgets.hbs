@@ -1,8 +1,8 @@
 <div class="resource-label flexrow">
-  {{log system.gadgetry}}
-  {{log system.gadgetry.ability}}
-
   <label>Ability</label>
+    <select name="system.gadgetry.ability">
+      {{selectOptions config.abilities selected=system.gadgetry.ability localize=true}}
+    </select>
   <label>Save DC</label>
   <input type="text" name="system.gadgetry.dc" value={{system.gadgetry.dc}} 
   {{#if system.attributes.level}}disabled{{/if}} data-dtype="Number"/>

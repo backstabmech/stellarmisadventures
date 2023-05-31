@@ -344,19 +344,30 @@ export class StellarMisadventuresItem extends Item {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "gadget" ) {
-      save.dc = this.isOwned ? this.actor.system.gadgetdc : null;
+      save.dc = this.isOwned ? this.actor.system.gadgetry.dc : null;
+    }
+    else if ( save.scaling === "attack" ) {
+      // Set save based on attack bonus
+      if (this.isOwned) {
+        const actorData = this.actor.system;
+        let bonus = this.system.attackBonus ?? 0;
+        if (actorData.abilities[this.system.ability].mod) {
+          bonus += actorData.abilities[this.system.ability].mod ?? 0;
+        }
+        if (this.system.proficient) {
+          bonus += actorData.attributes.level.prof ?? 0;
+        }
+        save.dc = 8 + bonus;
+      } else {
+        save.dc = null;
+      }
     }
 
-    // Ability-score based scaling
-    else if ( save.scaling !== "flat" ) {
-      // UNIMPLEMENTED
-      //save.dc = this.isOwned ? this.actor.system.abilities[save.scaling].dc : null;
-    }
 
-    // Update labels
+    // Update save DC label e.g. DC 12 
     const def = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[save.defence]) ?? "";
     this.labels.save = game.i18n.format("STELLARMISADVENTURES.SaveDC", {dc: save.dc || "", defence: def});
-    console.log(`Save Label: ${this.labels.save}`);
+    //console.log(`Save Label: ${this.labels.save}`);
     return save.dc;
   }
 }

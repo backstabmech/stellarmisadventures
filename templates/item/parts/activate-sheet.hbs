@@ -3,7 +3,6 @@
     {{!-- Choose ability --}}
     <div class="resource flexrow">
         <label class="resource-label">Ability</label>
-        {{log system.ability}}
         <select name="system.ability">
             {{selectOptions config.abilities selected=system.ability blank="Default" localize=true }}
         </select>
@@ -52,6 +51,7 @@
         {{#select system.save.scaling}}
             <option value="gadget">{{localize "STELLARMISADVENTURES.Gadgetry"}}</option>
             {{! 5e allows picking an abl to scale with.}}
+            <option value="attack">{{localize "STELLARMISADVENTURES.Attack"}}</option>
             <option value="flat">{{localize "STELLARMISADVENTURES.Flat"}}</option>
         {{/select}}
         </select>

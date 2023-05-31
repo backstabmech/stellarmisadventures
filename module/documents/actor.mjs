@@ -87,13 +87,12 @@ export class StellarMisadventuresActor extends Actor {
       }
     }
     // Calculate gadgetry info
-    console.log(`${systemData.gadgetry}`);
-    if (!systemData.gadgetry.ability) {
-      systemData.gadgetry.ability = "int";
+    if (systemData.gadgetry.ability) {
+      //systemData.gadgetry.ability = "int";
+      systemData.gadgetry.mod = systemData.abilities[systemData.gadgetry.ability].mod;
+      systemData.gadgetry.dc = 8 + systemData.attributes.level.prof + systemData.gadgetry.mod;
+      systemData.gadgetry.attack = systemData.attributes.level.prof + systemData.gadgetry.mod;
     }
-    systemData.gadgetry.mod = systemData.abilities[systemData.gadgetry.ability].mod;
-    systemData.gadgetry.dc = 8 + systemData.attributes.level.prof + systemData.gadgetry.mod;
-    systemData.gadgetry.attack = systemData.attributes.level.prof + systemData.gadgetry.mod;
     
   }
 
@@ -184,7 +183,6 @@ export class StellarMisadventuresActor extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollSave(saveId, options={}) {
-    console.log("Making a saving throw!");
     const rollMode = game.settings.get('core', 'rollMode');
     const label = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[saveId]) ?? "";
     const data = this.getRollData();
@@ -192,9 +190,6 @@ export class StellarMisadventuresActor extends Actor {
     const roll = new Roll(`d20 +@${saveId} `, data);
     // If you need to store the value first, uncomment the next line.
     // let result = await roll.roll({async: true});
-    console.log(CONFIG.STELLARMISADVENTURES.saves);
-    console.log(saveId);
-    console.log(CONFIG.STELLARMISADVENTURES.saves[saveId]);
     roll.toMessage({
       speaker: options.speaker,
       rollMode: rollMode,
@@ -202,8 +197,6 @@ export class StellarMisadventuresActor extends Actor {
     });
     return roll;
   }
-
-
 
   /* -------------------------------------------- */
   /*  Gameplay Mechanics                          */
