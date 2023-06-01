@@ -194,7 +194,6 @@ export class StellarMisadventuresItem extends Item {
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
       hasDamage: this.hasDamage,
-      //isVersatile: this.isVersatile,
       //isSpell: this.type === "spell",
       hasSave: this.hasSave,
       //hasAreaTarget: this.hasAreaTarget,
@@ -232,6 +231,10 @@ export class StellarMisadventuresItem extends Item {
     if (systemData.proficient) {
       rollFormula += " + @prof";
     }
+    if (systemData.properties["accu"] === true) {
+      rollFormula += " + 2"
+    }
+    // TODO: Precise crit threshold bonus here?
 
     // Invoke the roll and submit it to chat.
     const roll = new Roll(rollFormula, rollData);

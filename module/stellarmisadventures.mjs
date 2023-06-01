@@ -8,6 +8,7 @@ import { StellarMisadventuresItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { STELLARMISADVENTURES } from "./helpers/config.mjs";
 import * as chat from "./documents/chat-message.mjs"
+import * as utils from "./helpers/utils.mjs"
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */

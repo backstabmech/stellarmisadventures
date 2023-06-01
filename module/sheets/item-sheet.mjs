@@ -44,6 +44,7 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
     context.isHealing = itemData.system.actionType === "heal";
     context.isFlatDC = itemData.system.save?.scaling === "flat";
     
+    context.itemProperties = this._getItemProperties();
     // Add the actor's data to context.data for easier access, as well as flags.
     context.system = itemData.system;
     context.flags = itemData.flags;
@@ -61,5 +62,31 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
     if (!this.isEditable) return;
 
     // Roll handlers, click handlers, etc. would go here.
+  }
+  /**
+   * Get the Array of item properties which are used in the small sidebar of the description tab.
+   * @returns {string[]}   List of property labels to be shown.
+   * @private
+   */
+  _getItemProperties() {
+    const props = [];
+    const labels = this.item.labels;
+
+    switch (this.item.type) {
+      case "armor":
+        props.push(CONFIG.STELLARMISADVENTURES.armorType[this.item.system.armorType])
+        break;
+      case "gadget":
+        // TODO: Could include gadget tag labels here
+        break;
+      case "weapon":
+        for ( const [k, v] of Object.entries(this.item.system.properties) ) {
+          if ( v === true ) props.push(CONFIG.STELLARMISADVENTURES.weaponProperties[k]);
+        }
+        break;
+    }
+    // Range
+    
+    return props;
   }
 }

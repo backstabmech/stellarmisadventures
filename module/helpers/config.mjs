@@ -108,6 +108,5 @@ STELLARMISADVENTURES.weaponProperties = {
   "shoc": "STELLARMISADVENTURES.WeaponPropertiesShoc",
   "thro": "STELLARMISADVENTURES.WeaponPropertiesThro",
   "unst": "STELLARMISADVENTURES.WeaponPropertiesUnst",
-  "vers": "STELLARMISADVENTURES.WeaponPropertiesVers",
   "spec": "STELLARMISADVENTURES.WeaponPropertiesSpec"
 };

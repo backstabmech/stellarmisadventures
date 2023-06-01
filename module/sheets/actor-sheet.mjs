@@ -5,6 +5,12 @@ import * as Dice from "../dice.mjs"
  * @extends {ActorSheet}
  */
 export class StellarMisadventuresActorSheet extends ActorSheet {
+  /**
+   * IDs for items on the sheet that have been expanded. TODO: move this to new base-sheet.mjs
+   * @type {Set<string>}
+   * @protected
+   */
+  _expanded = new Set();
 
   /** @override */
   static get defaultOptions() {
@@ -40,6 +46,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     context.system = actorData.system;
     context.flags = actorData.flags;
 
+    context.itemContext = {};
     this._prepareBasicData(context);
     // Prepare character data and items.
     if (actorData.type == 'character') {
@@ -113,7 +120,12 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
+      // Item details
+      const ctx = context.itemContext[i.id] ??= {};
+
+      ctx.isExpanded = this._expanded.has(i.id);
       i.img = i.img || DEFAULT_TOKEN;
+      // Group items by type 
       if (i.type === 'item') {
         gear.push(i);
       }
