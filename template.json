@@ -235,7 +235,7 @@
       "ammoMax": 0,
       "ammoType": "",
       "ammoUsage": 0,
-      "properties": "",
+      "properties": {},
       "proficient": "false"
     },
     "armor": {

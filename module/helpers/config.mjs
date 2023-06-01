@@ -78,3 +78,31 @@ STELLARMISADVENTURES.damageTypes = {
   "plasma": "STELLARMISADVENTURES.DamageTypePlasma",
   "sonic": "STELLARMISADVENTURES.DamageTypeSonic",
 };
+/**
+ * The set of weapon properties used within the sytem.
+ * @type {Object}
+ */
+STELLARMISADVENTURES.weaponProperties = {
+  "accu": "STELLARMISADVENTURES.WeaponPropertiesAccu",
+  "area": "STELLARMISADVENTURES.WeaponPropertiesArea",
+  "anti": "STELLARMISADVENTURES.WeaponPropertiesAnti",
+  "auto": "STELLARMISADVENTURES.WeaponPropertiesAute",
+  "blas": "STELLARMISADVENTURES.WeaponPropertiesBlas",
+  "char": "STELLARMISADVENTURES.WeaponPropertiesChar",
+  "dama": "STELLARMISADVENTURES.WeaponPropertiesdama",
+  "erra": "STELLARMISADVENTURES.WeaponPropertiesErra",
+  "herr": "STELLARMISADVENTURES.WeaponPropertiesHerr",
+  "fine": "STELLARMISADVENTURES.WeaponPropertiesFine",
+  "free": "STELLARMISADVENTURES.WeaponPropertiesFree",
+  "nonl": "STELLARMISADVENTURES.WeaponPropertiesNonl",
+  "prec": "STELLARMISADVENTURES.WeaponPropertiesPrec",
+  "pris": "STELLARMISADVENTURES.WeaponPropertiesPris",
+  "reac": "STELLARMISADVENTURES.WeaponPropertiesReac",
+  "scor": "STELLARMISADVENTURES.WeaponPropertiesScor",
+  "byps": "STELLARMISADVENTURES.WeaponPropertiesByps",
+  "shoc": "STELLARMISADVENTURES.WeaponPropertiesShoc",
+  "thro": "STELLARMISADVENTURES.WeaponPropertiesThro",
+  "unst": "STELLARMISADVENTURES.WeaponPropertiesUnst",
+  "vers": "STELLARMISADVENTURES.WeaponPropertiesVers",
+  "spec": "STELLARMISADVENTURES.WeaponPropertiesSpec"
+};
