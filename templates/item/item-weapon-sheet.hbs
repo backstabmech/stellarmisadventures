@@ -70,6 +70,15 @@
       </table>
 
       {{!-- TODO: Weapon properties --}}
+      <h3 clsas="resource-label">Weapon Properties</h3>
+      <div class="flexgrid grid grid-4col">
+        {{#each config.weaponProperties as |name prop|}}
+        <label class="checkbox resource-label">
+          <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}/> {{localize name}}
+        </label>
+        {{/each}}
+      </div>
+
 
       {{> "systems/stellarmisadventures/templates/item/parts/activate-sheet.hbs"}}
 
