@@ -40,8 +40,9 @@
     
     </div>
     <footer class="card-footer">
+        {{log data.properties}}
         {{#each data.properties}}
-        <span>{{this}}</span>
+        <span>{{localize this}}</span>
         {{/each}}
     </footer>
 </div>

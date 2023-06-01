@@ -207,7 +207,6 @@ export class StellarMisadventuresItem extends Item {
     ChatMessage.create({
       speaker: speaker,
       rollMode: rollMode,
-      flavor: label,
       content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData)
     });
   }
@@ -222,7 +221,7 @@ export class StellarMisadventuresItem extends Item {
     const actorData = this.actor.system;
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${this.type}] ${this.name}`;
+    const label = `[Attack] ${this.name}`;
     // Retrieve roll data.
     const rollData = this.getRollData();
 
@@ -231,7 +230,7 @@ export class StellarMisadventuresItem extends Item {
     if (systemData.proficient) {
       rollFormula += " + @prof";
     }
-    if (systemData.properties["accu"] === true) {
+    if (systemData.properties && systemData.properties["accu"] === true) {
       rollFormula += " + 2"
     }
     // TODO: Precise crit threshold bonus here?
@@ -257,7 +256,7 @@ export class StellarMisadventuresItem extends Item {
       // Initialize chat data.
       const speaker = ChatMessage.getSpeaker({ actor: this.actor });
       const rollMode = game.settings.get('core', 'rollMode');
-      const label = `[${this.type}] ${this.name}`;
+      const label = `[Damage] ${this.name}`;
       // Retrieve roll data.
       const rollData = this.getRollData();
 
@@ -281,7 +280,7 @@ export class StellarMisadventuresItem extends Item {
       // Initialize chat data.
       const speaker = ChatMessage.getSpeaker({ actor: this.actor });
       const rollMode = game.settings.get('core', 'rollMode');
-      const label = `[${this.type}] ${this.name}`;
+      const label = `[Other] ${this.name}`;
       // Retrieve roll data.
       const rollData = this.getRollData();     
       // Create a roll and send a chat message from it.
@@ -313,12 +312,22 @@ export class StellarMisadventuresItem extends Item {
 
     // Type specific properties
     // TODO: investigate how this works
+    /*
     data.properties = [
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemChatProperties ?? [],
       ...this.system.activatedEffectChatProperties ?? []
-    ].filter(p => p);
-
+    ];*/
+    
+    let props = []; 
+    if (data.properties) {
+      console.log("here")
+      for ( const [k, v] of Object.entries(data.properties) ) {
+        if ( v === true ) props.push(CONFIG.STELLARMISADVENTURES.weaponProperties[k]);
+      }
+    }
+    data.properties = props;
+    console.log(data.properties)
     return data;
   }
 
