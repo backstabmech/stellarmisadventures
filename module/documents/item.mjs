@@ -371,7 +371,7 @@ export class StellarMisadventuresItem extends Item {
 
 
     // Update save DC label e.g. DC 12 
-    const def = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[save.defence]) ?? "";
+    const def = game.i18n.format(CONFIG.STELLARMISADVENTURES.savesAbbr[save.defence]) ?? "";
     this.labels.save = game.i18n.format("STELLARMISADVENTURES.SaveDC", {dc: save.dc || "", defence: def});
     //console.log(`Save Label: ${this.labels.save}`);
     return save.dc;

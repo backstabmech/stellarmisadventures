@@ -184,7 +184,7 @@ export class StellarMisadventuresActor extends Actor {
    */
   async rollSave(saveId, options={}) {
     const rollMode = game.settings.get('core', 'rollMode');
-    const label = game.i18n.format(CONFIG.STELLARMISADVENTURES.saves[saveId]) ?? "";
+    const label = game.i18n.format(CONFIG.STELLARMISADVENTURES.savesAbbr[saveId]) ?? "";
     const data = this.getRollData();
     // Invoke the roll and submit it to chat.
     const roll = new Roll(`d20 +@${saveId} `, data);

@@ -46,6 +46,11 @@ STELLARMISADVENTURES.skills = {
   "str": "STELLARMISADVENTURES.SkillStr"
 };
 STELLARMISADVENTURES.saves = {
+  "reflex": "STELLARMISADVENTURES.SavesReflex",
+  "fortitude": "STELLARMISADVENTURES.SavesFortitude",
+  "will": "STELLARMISADVENTURES.SavesWill"
+};
+STELLARMISADVENTURES.savesAbbr = {
   "ref": "STELLARMISADVENTURES.SavesReflex",
   "for": "STELLARMISADVENTURES.SavesFortitude",
   "wil": "STELLARMISADVENTURES.SavesWill"
