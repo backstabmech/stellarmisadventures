@@ -485,6 +485,12 @@
   flex: 0 0 200px;
   padding: 0 8px;
 }
+.stellarmisadventures .item-formula-small {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
+  padding: 0 8px;
+}
 .stellarmisadventures .effects .item .effect-source,
 .stellarmisadventures .effects .item .effect-duration,
 .stellarmisadventures .effects .item .effect-controls {
