@@ -1,4 +1,5 @@
 import * as Dice from "../dice.mjs"
+import simplifyRollFormula from "../helpers/simplify-roll-formula.mjs"
 import { STELLARMISADVENTURES } from "../helpers/config.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
@@ -31,7 +32,10 @@ export class StellarMisadventuresItem extends Item {
       // Set ability to actor's gadgetry ability
       this.system.ability = this.actor.system.gadgetry.ability;
     }
+    // Save
     this.getSaveDC();
+    // To Hit
+    this.getAttackToHit();
   }
 
   /**
@@ -321,13 +325,11 @@ export class StellarMisadventuresItem extends Item {
     
     let props = []; 
     if (data.properties) {
-      console.log("here")
       for ( const [k, v] of Object.entries(data.properties) ) {
         if ( v === true ) props.push(CONFIG.STELLARMISADVENTURES.weaponProperties[k]);
       }
     }
     data.properties = props;
-    console.log(data.properties)
     return data;
   }
 
@@ -352,6 +354,38 @@ export class StellarMisadventuresItem extends Item {
     return (this.system.save?.scaling === "flat") ?? false;
   }
 
+ /**
+   * Update a label to the Item detailing its total to hit bonus:
+   */
+  getAttackToHit() {
+    if ( !this.hasAttack) return null;
+    const rollData = this.getRollData();
+    const parts = [];
+
+    const ab = this.system.attackBonus;
+    if (ab) {
+      parts.push(ab);
+      this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
+    }
+    
+    // Take no further action for un-owned items
+    if ( !this.isOwned ) return {rollData, parts};
+
+    // Ability score modifier
+    parts.push("@mod");
+    // Add proficiency bonus if an explicit proficiency flag is present or for non-weapon features
+    if (!["weapon"].includes(this.type) || this.system.proficient) {
+      parts.push("@prof");
+    }
+
+    // Condense the resulting attack bonus formula into a simplified label
+    const roll = new Roll(parts.join("+"), rollData);
+    const formula = simplifyRollFormula(roll.formula) || "0";
+    // Update label
+    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+    console.log(`Attack bonus: ${this.labels.toHit}`)
+    return {rollData, parts};
+  }
   /**
    * Update the derived spell DC for an item that requires a saving throw.
    * @returns {number|null}
