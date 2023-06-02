@@ -119,7 +119,6 @@ export class StellarMisadventuresItem extends Item {
         await item.rollFormula(event);
         break;
       case "save":
-        // TODO: implement and test
         targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
@@ -265,7 +264,9 @@ export class StellarMisadventuresItem extends Item {
       const rollData = this.getRollData();
 
       let rollFormula = event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula;
-      rollFormula += ` + ${actorData[systemData.ability].mod}`
+      if (systemData.weaponType) {
+        rollFormula += ` + ${actorData[systemData.ability].mod}`
+      }
       // Invoke the roll and submit it to chat.
       const roll = new Roll(rollFormula, rollData);
       roll.toMessage({
