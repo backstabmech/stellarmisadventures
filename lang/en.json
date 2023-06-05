@@ -39,6 +39,11 @@
   "STELLARMISADVENTURES.Gadgetry": "Gadgetry",
   "STELLARMISADVENTURES.Flat": "Flat",
 
+  "STELLARMISADVENTURES.AttackMWATK": "Melee Weapon Attack",
+  "STELLARMISADVENTURES.AttackRWATK": "Ranged Weapon Attack",
+  "STELLARMISADVENTURES.AttackMGATK": "Melee Gadget Attack",
+  "STELLARMISADVENTURES.AttackRGATK": "Ranged Gadget Attack",
+
   "STELLARMISADVENTURES.ItemWeaponType": "Type",
   "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
   "STELLARMISADVENTURES.WeaponTypePistol": "Pistol",
@@ -94,7 +99,8 @@
   "STELLARMISADVENTURES.ChatContextHealing": "Apply healing",
   "STELLARMISADVENTURES.ChatContextDoubleDamage": "Apply double damage",
   "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
-
+  
+  "STELLARMISADVENTURES.AttackType": "Attack Type",
   "STELLARMISADVENTURES.Attack": "Attack",
   "STELLARMISADVENTURES.Damage": "Damage",
   "STELLARMISADVENTURES.AltDamage": "Alternate Damage",
@@ -103,5 +109,4 @@
   "STELLARMISADVENTURES.SaveDC": "DC {dc} {defence}",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",
   "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}"
-
 }

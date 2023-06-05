@@ -1,4 +1,11 @@
 <h3 class="resource-label">Attack Roll</h3>
+<div class="resource-label flexrow">
+    <label>{{ localize "STELLARMISADVENTURES.AttackType" }}</label>
+    <select name="system.attackType">
+        {{selectOptions config.attackTypes selected=system.attackType blank="" localize=true}}
+    </select>
+</div>
+{{#if system.attackType}}
 <section class="resource">
     {{!-- Choose ability --}}
     <div class="resource flexrow">
@@ -19,7 +26,7 @@
     </div>
 
 </section>
-
+{{/if}}
 <h3 class="resource-label">Damage</h3>
 <section class="resource">
 

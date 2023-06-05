@@ -122,7 +122,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     for (let i of context.items) {
       // Item details
       const ctx = context.itemContext[i.id] ??= {};
-
+      // Try https://github.com/foundryvtt/dnd5e/blob/master/module/applications/actor/character-sheet.mjs#L104
+      // to get item toHit
       ctx.isExpanded = this._expanded.has(i.id);
       i.img = i.img || DEFAULT_TOKEN;
       // Group items by type 

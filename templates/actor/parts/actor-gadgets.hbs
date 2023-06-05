@@ -10,6 +10,9 @@
   <label>Attack Bonus</label>
   <input type="text" name="system.gadgetry.attack" value={{system.gadgetry.attack}} 
   {{#if system.attributes.level}}disabled{{/if}} data-dtype="Number"/>
+
+  <label>Gadget Points</label>
+  <input type="text" name="system.gadgetry.points.value" value={{system.gadgetry.points.value}} data-dtype="Number"/>
 </div>
 <ol class="items-list">
   {{#each gadgets as |gadgets gadgetTier|}}

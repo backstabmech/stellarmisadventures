@@ -173,7 +173,11 @@
         },
         "gadgetry": {
           "ability": null,
-          "dc": 8
+          "dc": 8,
+          "points": {
+            "value": 0,
+            "max": 0
+          }
        },
         "biography": ""
       }
@@ -209,8 +213,10 @@
       },
       "activate": {
         "ability": null,
-        "attackBonus": null,
-        "chatflavor": null,
+        "attackType": "",
+        "useTime": "",
+        "attackBonus": 0,
+        "chatflavor": "",
         "formula": "",
         "critical": {
           "threshold": null,

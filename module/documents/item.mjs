@@ -18,6 +18,12 @@ export class StellarMisadventuresItem extends Item {
   prepareDerivedData() {
     super.prepareDerivedData();
     this.labels = {};
+    // Auto set attack type for weapon if blank
+    if (this.type == "weapon") {
+      if (this.system.attackType === "") {
+        this.system.attackType = this.system.weaponType == "melee" ? "mwatk": "rwatk";
+      }
+    }
     // Final attribute prep for unowned items.
     // (owned items wait for actor.prepareData)
     if (!this.isOwned) this.prepareFinalAttributes();
@@ -32,6 +38,16 @@ export class StellarMisadventuresItem extends Item {
       // Set ability to actor's gadgetry ability
       this.system.ability = this.actor.system.gadgetry.ability;
     }
+    // Prepare damage label
+    /*
+    if (!("actionType" in this.system)) {
+      let dmg = this.system.damage || {};
+      if ( dmg.parts ) {
+        const types = CONFIG.STELLARMISADVENTURES.damageTypes;
+        this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
+        this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
+      }
+    }*/
     // Save
     this.getSaveDC();
     // To Hit
@@ -337,7 +353,8 @@ export class StellarMisadventuresItem extends Item {
   // Getters primarily used by chat cards
 
   get hasAttack() {
-    return (this.system.ability && this.system.ability != "Default");
+    //return (this.system.ability && this.system.ability != "Default");
+    return ["mwatk","rwatk","mgatk","rgatk"].includes(this.system.attackType);
   }
   get isHealing() {
     return this.system.isHealing ?? false;

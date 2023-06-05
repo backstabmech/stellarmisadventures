@@ -55,6 +55,18 @@ STELLARMISADVENTURES.savesAbbr = {
   "for": "STELLARMISADVENTURES.SavesFortitude",
   "wil": "STELLARMISADVENTURES.SavesWill"
 };
+STELLARMISADVENTURES.attackTypes = {
+  "mwatk": "STELLARMISADVENTURES.AttackMWATK",
+  "rwatk": "STELLARMISADVENTURES.AttackRWATK",
+  "mgatk": "STELLARMISADVENTURES.AttackMGATK",
+  "rgatk": "STELLARMISADVENTURES.AttackRGATK"
+};
+/* Currently unused
+STELLARMISADVENTURES.actions = {
+  "stnd": "STELLARMISADVENTURES.ActionsStnd",
+  "minr": "STELLARMISADVENTURES.ActionsMinr",
+  "free": "STELLARMISADVENTURES.ActionsFree"
+};*/
 STELLARMISADVENTURES.weaponTypes = {
   "melee": "STELLARMISADVENTURES.WeaponTypeMelee",
   "pistol": "STELLARMISADVENTURES.WeaponTypePistol",
