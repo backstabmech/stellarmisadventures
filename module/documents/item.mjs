@@ -220,14 +220,20 @@ export class StellarMisadventuresItem extends Item {
       hasAbilityCheck: this.hasAbilityCheck
     }
 
-    if (this.ability) {
-      //cardData.hasAttack = true;
-    }
-    ChatMessage.create({
+    const chatData = {
+      user: game.user.id,
+      content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData),
+      flavor: this.system.chatFlavor || this.name,
       speaker: speaker,
-      rollMode: rollMode,
-      content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData)
-    });
+      flags: {"core.canPopOut": true}
+    };
+
+    // Merge in the flags from options argument
+    //chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
+    
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"))
+    
+    ChatMessage.create(chatData);
   }
   /** Roll the item's attack.
    * 
