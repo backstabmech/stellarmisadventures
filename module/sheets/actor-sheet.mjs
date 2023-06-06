@@ -247,19 +247,16 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
         const itemId = element.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
         if (item) return item.use();
-      }
+      } 
     }
-
-    // Handle rolls that supply the formula directly.
+    // Handle ability rolls.
     if (dataset.roll) {
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
-      let roll = new Roll(dataset.roll, this.actor.getRollData());
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label,
-        rollMode: game.settings.get('core', 'rollMode'),
+      Dice.D20Check({
+        modifiers: [dataset.roll],
+        rollData: this.actor.getRollData(),
+        flavor: label
       });
-      return roll;
     }
   }
 
