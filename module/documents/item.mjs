@@ -221,7 +221,7 @@ export class StellarMisadventuresItem extends Item {
     }
 
     if (this.ability) {
-      cardData.hasAttack = true;
+      //cardData.hasAttack = true;
     }
     ChatMessage.create({
       speaker: speaker,
@@ -353,20 +353,21 @@ export class StellarMisadventuresItem extends Item {
   // Getters primarily used by chat cards
 
   get hasAttack() {
-    //return (this.system.ability && this.system.ability != "Default");
     return ["mwatk","rwatk","mgatk","rgatk"].includes(this.system.attackType);
   }
   get isHealing() {
-    return this.system.isHealing ?? false;
+    return false;
   }
   get hasDamage() {
-    return this.system.hasDamage ?? false;
+    return false;
   }
   get hasSave() {
     return !!(this.system.save && this.system.save.defence);
   }
   get hasAbiltiyCheck() {
-    return this.system.hasAbiltiyCheck ?? false;
+    // Support for child(?) class overides
+    //return this.system.hasAbiltiyCheck ?? false;
+    return false;
   }
   get isFlatDC() {
     return (this.system.save?.scaling === "flat") ?? false;

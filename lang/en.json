@@ -44,6 +44,11 @@
   "STELLARMISADVENTURES.AttackMGATK": "Melee Gadget Attack",
   "STELLARMISADVENTURES.AttackRGATK": "Ranged Gadget Attack",
 
+  "STELLARMISADVENTURES.StandardAction": "Standard",
+  "STELLARMISADVENTURES.MinorAction": "Minor",
+  "STELLARMISADVENTURES.Reaction": "Reaction",
+  "STELLARMISADVENTURES.FreeAction": "Free",
+
   "STELLARMISADVENTURES.ItemWeaponType": "Type",
   "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
   "STELLARMISADVENTURES.WeaponTypePistol": "Pistol",
@@ -101,6 +106,7 @@
   "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
   
   "STELLARMISADVENTURES.AttackType": "Attack Type",
+  "STELLARMISADVENTURES.UseTime": "Use Time",
   "STELLARMISADVENTURES.Attack": "Attack",
   "STELLARMISADVENTURES.Damage": "Damage",
   "STELLARMISADVENTURES.AltDamage": "Alternate Damage",

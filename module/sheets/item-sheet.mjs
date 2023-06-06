@@ -73,7 +73,7 @@ export class StellarMisadventuresItemSheet extends ItemSheet {
 
     switch (this.item.type) {
       case "armor":
-        props.push(CONFIG.STELLARMISADVENTURES.armorType[this.item.system.armorType])
+        props.push(CONFIG.STELLARMISADVENTURES.armorTypes[this.item.system.armorType])
         break;
       case "gadget":
         // TODO: Could include gadget tag labels here

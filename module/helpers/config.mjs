@@ -61,12 +61,12 @@ STELLARMISADVENTURES.attackTypes = {
   "mgatk": "STELLARMISADVENTURES.AttackMGATK",
   "rgatk": "STELLARMISADVENTURES.AttackRGATK"
 };
-/* Currently unused
-STELLARMISADVENTURES.actions = {
-  "stnd": "STELLARMISADVENTURES.ActionsStnd",
-  "minr": "STELLARMISADVENTURES.ActionsMinr",
-  "free": "STELLARMISADVENTURES.ActionsFree"
-};*/
+STELLARMISADVENTURES.useTimes = {
+  "standard": "STELLARMISADVENTURES.StandardAction",
+  "minor": "STELLARMISADVENTURES.MinorAction",
+  "reaction": "STELLARMISADVENTURES.Reaction",
+  "free": "STELLARMISADVENTURES.FreeAction"
+};
 STELLARMISADVENTURES.weaponTypes = {
   "melee": "STELLARMISADVENTURES.WeaponTypeMelee",
   "pistol": "STELLARMISADVENTURES.WeaponTypePistol",
