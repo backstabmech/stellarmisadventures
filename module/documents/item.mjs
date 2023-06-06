@@ -246,33 +246,17 @@ export class StellarMisadventuresItem extends Item {
    * @private
    */
   async rollAttack(event) {
-    // Initialize chat data.
-    const systemData = this.system;
-    const actorData = this.actor.system;
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get('core', 'rollMode');
+    // Set chat label.
     const label = `[Attack] ${this.name}`;
-    // Retrieve roll data.
-    const rollData = this.getRollData();
-
-    // Build roll formula
-    let rollFormula = `d20 + ${actorData[systemData.ability].mod}`;
-    if (systemData.proficient) {
-      rollFormula += " + @prof";
+    
+    // Get attack bonus + rolldata
+    let attackBonus = this.getAttackToHit();
+    const attackRoll = {
+      modifiers: attackBonus.parts,
+      rollData: attackBonus.rollData,
+      flavor: label
     }
-    if (systemData.properties && systemData.properties["accu"] === true) {
-      rollFormula += " + 2"
-    }
-    // TODO: Precise crit threshold bonus here?
-
-    // Invoke the roll and submit it to chat.
-    const roll = new Roll(rollFormula, rollData);
-    roll.toMessage({
-      speaker: speaker,
-      rollMode: rollMode,
-      flavor: label,
-    });
-    return roll;
+    Dice.D20Check(attackRoll)
   }
   /**
    * Roll the item's damage.
@@ -402,7 +386,7 @@ export class StellarMisadventuresItem extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push("@mod");
+    parts.push(`@${[this.system.ability]}`);
     // Add proficiency bonus if an explicit proficiency flag is present or for non-weapon features
     if (!["weapon"].includes(this.type) || this.system.proficient) {
       parts.push("@prof");
@@ -413,7 +397,6 @@ export class StellarMisadventuresItem extends Item {
     const formula = simplifyRollFormula(roll.formula) || "0";
     // Update label
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
-    console.log(`Attack bonus: ${this.labels.toHit}`)
     return {rollData, parts};
   }
   /**

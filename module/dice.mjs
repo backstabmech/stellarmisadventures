@@ -1,6 +1,8 @@
 export function D20Check({
-    actionValue = null,
-    advantage = 0 } = {}) {
+    modifiers = null,
+    rollData = null,
+    advantage = 0, 
+    flavor = ""} = {}) {
 
     let baseDice = "1d20"
     if (advantage === 1) {
@@ -9,19 +11,18 @@ export function D20Check({
         baseDice = "2d20kl1";
     }
 
-    let rollFormula = `${baseDice} + @actionValue`;
-    let rollData = {
-        actionValue: actionValue
-    };
+    let rollFormula = `${baseDice}`;
+    for (let i = 0; i < modifiers.length; i++) {
+        rollFormula += ` + ${modifiers[i]}`;
+    }
+    console.log(`Trying formula: ${rollFormula}`)
     let messageData = {
-        speaker: ChatMessage.getSpeaker()
+        speaker: ChatMessage.getSpeaker(),
+        rollMode: game.settings.get('core','rollMode'),
+        flavor: flavor
     };
     const roll = new Roll(rollFormula, rollData);
-    /*
-    roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-    })*/
+    
+    roll.toMessage(messageData);
     return roll;
 }

@@ -183,18 +183,14 @@ export class StellarMisadventuresActor extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollSave(saveId, options={}) {
-    const rollMode = game.settings.get('core', 'rollMode');
     const label = game.i18n.format(CONFIG.STELLARMISADVENTURES.savesAbbr[saveId]) ?? "";
-    const data = this.getRollData();
     // Invoke the roll and submit it to chat.
-    const roll = new Roll(`d20 +@${saveId} `, data);
-    // If you need to store the value first, uncomment the next line.
-    // let result = await roll.roll({async: true});
-    roll.toMessage({
-      speaker: options.speaker,
-      rollMode: rollMode,
-      flavor: label,
-    });
+    const d20Data = {
+      modifiers: [`@${saveId}`],
+      rollData: this.getRollData(),
+      flavor: label
+    };
+    const roll = Dice.D20Check(d20Data);
     return roll;
   }
 
