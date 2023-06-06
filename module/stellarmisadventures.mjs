@@ -109,7 +109,8 @@ async function createItemMacro(data, slot) {
   const item = await Item.fromDropData(data);
 
   // Create the macro command using the uuid.
-  const command = `game.stellarmisadventures.rollItemMacro("${data.uuid}");`;
+  const command = `stellarmisadventures.rollItemMacro("${data.uuid}");`;
+  console.log(command);
   let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
@@ -130,6 +131,7 @@ async function createItemMacro(data, slot) {
  * @param {string} itemUuid
  */
 function rollItemMacro(itemUuid) {
+  console.log("ROLLING ITEM MACRO");
   // Reconstruct the drop data so that we can load the item.
   const dropData = {
     type: 'Item',

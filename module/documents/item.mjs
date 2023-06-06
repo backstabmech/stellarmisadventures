@@ -235,8 +235,13 @@ export class StellarMisadventuresItem extends Item {
     
     ChatMessage.create(chatData);
   }
-  /** Roll the item's attack.
-   * 
+
+  /* -------------------------------------------- */
+  /*  Item Rolls - Attack, Damage, Saves, Checks  */
+  /* -------------------------------------------- */
+  
+  /**
+   * Roll the item's attack.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -287,7 +292,7 @@ export class StellarMisadventuresItem extends Item {
 
       let rollFormula = event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula;
       if (systemData.weaponType) {
-        rollFormula += ` + ${actorData[systemData.ability].mod}`
+        rollFormula += ` + ${actorData[systemData.ability]}`
       }
       // Invoke the roll and submit it to chat.
       const roll = new Roll(rollFormula, rollData);

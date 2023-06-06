@@ -134,7 +134,7 @@ export class StellarMisadventuresActor extends Actor {
     // formulas like `@str.mod + 4`.
     if (data.abilities) {
       for (let [k, v] of Object.entries(data.abilities)) {
-        data[k] = foundry.utils.deepClone(v);
+        data[k] = foundry.utils.deepClone(v.mod);
       }
     }
     // Quick reference for saves
