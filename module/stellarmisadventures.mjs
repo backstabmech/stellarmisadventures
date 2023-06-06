@@ -21,6 +21,7 @@ Hooks.once('init', async function() {
     StellarMisadventuresActor,
     StellarMisadventuresItem,
     config: STELLARMISADVENTURES,
+    createItemMacro,
     rollItemMacro
   };
 
@@ -107,22 +108,23 @@ async function createItemMacro(data, slot) {
   }
   // If it is, retrieve it based on the uuid.
   const item = await Item.fromDropData(data);
-
-  // Create the macro command using the uuid.
-  const command = `game.stellarmisadventures.rollItemMacro("${data.uuid}");`;
-  console.log(command);
-  let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
-  if (!macro) {
-    macro = await Macro.create({
-      name: item.name,
+  // Seems like theres some race condition here, pulling itemdata for no reason makes this function work.
+  const itemData = await Item.implementation.fromDropData(data);
+  const macroData = {
       type: "script",
+      scope: "actor",
+      name: item.name,
       img: item.img,
-      command: command,
+      command: `game.stellarmisadventures.rollItemMacro("${data.uuid}")`,
       flags: { "stellarmisadventures.itemMacro": true }
-    });
-  }
+  };
+  
+  // Assign the macro to the hotbar
+  const macro = game.macros.find(m => (m.name === macroData.name) 
+  && (m.command === macroData.command) && m.author.isSelf) || await Macro.create(macroData);
+  // This log is also required
+  console.log(macro.command);
   game.user.assignHotbarMacro(macro, slot);
-  return false;
 }
 
 /**
