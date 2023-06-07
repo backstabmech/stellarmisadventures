@@ -224,12 +224,7 @@
 }
 
 /* Styles limited to stellarmisadventures sheets */
-.stellarmisadventures {
-  /* ----------------------------------------- */
-  /*  Items Lists                              */
-  /* ----------------------------------------- */
-  /* Example style for StellarMisadventures (can be removed if not needed) */
-}
+
 .stellarmisadventures .tag {
   display: inline-block;
   margin: 0 2px 0 0;
@@ -261,11 +256,13 @@
   -ms-flex-pack: start;
   justify-content: flex-start;
   margin-bottom: 10px;
+  font-size: 18px;
 }
 .stellarmisadventures .sheet-header .profile-img {
   flex: 0 0 130px;
   height: 130px;
   margin-right: 10px;
+  border: none;
 }
 .stellarmisadventures .sheet-header .header-fields {
   -webkit-box-flex: 1;
@@ -294,8 +291,9 @@
   height: 100%;
   margin: 0;
 }
-.stellarmisadventures .sheet-header .save-mod {
+.stellarmisadventures .sheet-header .header-label {
   font-size: 18px;
+  font-weight: bold;
 }
 .stellarmisadventures .sheet-header .prof {
   height: 23px;
@@ -372,7 +370,7 @@
   font-weight: bold;
 }
 .stellarmisadventures .items-header > * {
-  font-size: 14px;
+  font-size: 18px;
   text-align: center;
 }
 .stellarmisadventures .items-header .item-name {

@@ -7,6 +7,7 @@
   return loadTemplates([
 
     // Actor partials.
+    "systems/stellarmisadventures/templates/actor/parts/actor-header.hbs",
     "systems/stellarmisadventures/templates/actor/parts/actor-features.hbs",
     "systems/stellarmisadventures/templates/actor/parts/actor-items.hbs",
     "systems/stellarmisadventures/templates/actor/parts/actor-gadgets.hbs",
