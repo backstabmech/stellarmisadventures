@@ -244,17 +244,20 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     const dataset = element.dataset;
 
     // Handle item rolls.
-    if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
+    switch (dataset.rollType) {
+      case 'item': 
         const itemId = element.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
         if (item) return item.use();
-      } 
+      case 'initiative':
+        return this.actor.rollInitiative({event});
     }
+        
+    if (dataset.rollType) console.log("Rolling initiative?"); 
     // Handle ability rolls.
     if (dataset.roll) {
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
-      Dice.D20Check({
+      return Dice.D20Check({
         modifiers: [dataset.roll],
         rollData: this.actor.getRollData(),
         flavor: label

@@ -1,3 +1,4 @@
+import * as Dice from "../dice.mjs"
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -60,6 +61,7 @@ export class StellarMisadventuresActor extends Actor {
     for (let [key, save] of Object.entries(systemData.saves)) {
       save.mod = save.value + save.abl;
     }
+    systemData.init.mod = systemData.init.value + systemData.abilities.dex.mod;
   }
 
   /**
@@ -147,7 +149,7 @@ export class StellarMisadventuresActor extends Actor {
     if (data.saves.will.mod) {
       data.will = data.saves.will.mod;
     }
-    //data.gadgetdc = data.gadgetry.dc ?? 8;
+    data.initiative = data.init.mod;
 
   } 
   /**
@@ -174,8 +176,31 @@ export class StellarMisadventuresActor extends Actor {
 
     // Process additional NPC data here.
   }
-
-   /**
+  /* -------------------------------------------- */
+  /*  Actor Rolls                                 */
+  /* -------------------------------------------- */
+  async rollInitiative(rollOptions = {}) {
+    // Configure roll
+    const label = "[Initiative]"
+    const d20Data = {
+      modifiers: [`@initiative`],
+      rollData: this.getRollData(),
+      flavor: label
+    }
+    //const roll = Dice.D20Check(d20Data);
+    //this._cachedInitiativeRoll = roll;
+    // Add to combat tracker
+    const combat = await super.rollInitiative({createCombatants: true});
+    const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
+      const combatant = game.combat.getCombatantByToken(t.id);
+      if ( combatant ) arr.push(combatant);
+      return arr;
+    }, []) : [game.combat.getCombatantByActor(this.id)];
+    //delete this._cachedInitiativeRoll;
+    //return roll;
+    return;
+  }
+  /**
    * Roll a Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} saveId    The save ID (e.g. "ref")

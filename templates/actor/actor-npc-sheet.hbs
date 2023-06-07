@@ -67,7 +67,7 @@
         {{/each}}
         {{!-- Initiative --}}
         <div class="resource flex-group-center">
-          <label for="system.init.value" class="resource-label">Initiative</label>
+          <label for="system.init.value" class="resource-label rollable" data-roll-type="initiative">Initiative {{numberFormat system.initiative decimals=0 sign=true}}</label>
           <div class="resource-content flexrow flex-center flex-between">
           <input type="text" name="system.init.value" value="{{system.init.value}}" data-dtype="Number"/>
           </div>
