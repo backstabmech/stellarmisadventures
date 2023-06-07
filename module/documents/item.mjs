@@ -260,7 +260,6 @@ export class StellarMisadventuresItem extends Item {
   }
   /**
    * Roll the item's damage.
-   * @param {Event} event   The originating click event
    * @private
    */
   async rollDamage(event) {
@@ -268,24 +267,23 @@ export class StellarMisadventuresItem extends Item {
       const systemData = this.system;
       const actorData = this.actor.system;
       // Initialize chat data.
-      const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-      const rollMode = game.settings.get('core', 'rollMode');
       const label = `[Damage] ${this.name}`;
       // Retrieve roll data.
       const rollData = this.getRollData();
 
-      let rollFormula = event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula;
+      let mods = [];
       if (systemData.weaponType) {
-        rollFormula += ` + ${actorData[systemData.ability]}`
+        mods.push(`@${systemData.ability}`);
       }
-      // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollFormula, rollData);
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
-      return roll;
+      const damageRoll = {
+        dice: event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula,
+        modifiers: mods,
+        rollData,
+        critical: !!(event.event?.altKey),
+        criticalBonusDamage: systemData.critical.damage,
+        flavor: label
+      };
+      return Dice.damageRoll(damageRoll);
     }
     return null;
   }
