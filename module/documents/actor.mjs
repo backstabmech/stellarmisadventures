@@ -223,6 +223,15 @@ export class StellarMisadventuresActor extends Actor {
   /*  Gameplay Mechanics                          */
   /* -------------------------------------------- */
 
+  async regenShield() {
+    const systemData = this.system;
+    const shield = systemData.shield;
+    if (!shield) return this;
+    if (shield.value > 0) {
+      const newVal = Math.min(shield.value + systemData.regen.value, shield.max);
+      this.update({"system.shield.value": newVal});
+    }
+  }
   async applyDamage(amount=0, multiplier=0) {
     // Apply modifier and round up
     amount = Math.ceil(parseInt(amount) * multiplier);

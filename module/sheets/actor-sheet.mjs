@@ -251,9 +251,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
         if (item) return item.use();
       case 'initiative':
         return this.actor.rollInitiative({event});
+      case 'regen':
+        return this.actor.regenShield();
     }
         
-    if (dataset.rollType) console.log("Rolling initiative?"); 
     // Handle ability rolls.
     if (dataset.roll) {
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
