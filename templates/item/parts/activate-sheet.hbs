@@ -1,11 +1,13 @@
 <h3 class="resource-label">Action Settings</h3>
 <section class="resource">
+    {{#unless system.weaponType}}
     <div class="resource-label flexrow">
         <label>{{ localize "STELLARMISADVENTURES.UseTime" }}</label>
         <select name="system.useTime">
             {{selectOptions config.useTimes selected=system.useTime blank="" localize=true}}
         </select>
     </div>
+    {{/unless}}
     <div class="resource-label flexrow">
         <label>{{ localize "STELLARMISADVENTURES.AttackType" }}</label>
         <select name="system.attackType">
