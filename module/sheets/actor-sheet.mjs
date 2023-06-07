@@ -121,11 +121,13 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       // Item details
-      const ctx = context.itemContext[i.id] ??= {};
-      // Try https://github.com/foundryvtt/dnd5e/blob/master/module/applications/actor/character-sheet.mjs#L104
+      const ctx = context.itemContext[i._id] ??= {};
+      // TODO: Try https://github.com/foundryvtt/dnd5e/blob/master/module/applications/actor/character-sheet.mjs#L104
       // to get item toHit
-      ctx.isExpanded = this._expanded.has(i.id);
-      i.img = i.img || DEFAULT_TOKEN;
+      i.img = i.img || DEFAULT_TOKEN;     
+      ctx.isExpanded = this._expanded.has(i._id);
+      ctx.isStack = i.system.quantity !== 1;
+      //console.log(`${ctx.isStack}`)
       // Group items by type 
       if (i.type === 'item') {
         gear.push(i);

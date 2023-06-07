@@ -48,7 +48,8 @@ Hooks.once('init', async function() {
   Items.registerSheet("stellarmisadventures", StellarMisadventuresItemSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
-  return preloadHandlebarsTemplates();
+  utils.registerHandlebarsHelpers();
+  preloadHandlebarsTemplates();
 });
 
 /* -------------------------------------------- */

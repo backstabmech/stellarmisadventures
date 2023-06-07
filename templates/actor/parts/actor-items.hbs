@@ -15,12 +15,16 @@
     </div>
   </li>
   {{#each weapons as |item id|}}
+  {{#stellarmisadventures-itemContext item as |ctx|}}
     <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
       <div class="item-name">
         <div class="item-image">
           <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
         </div>
-        <a class="item-edit">{{item.name}}</a>
+        <a class="item-edit">
+          {{item.name}}
+          {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
+        </a>
       </div>
       <div class="item-formula-small item-prop">{{item.system.weaponType}}</div>
       <div class="item-formula-small item-prop">{{item.system.damageFormula}}</div>
@@ -33,6 +37,7 @@
         {{> "stellarmisadventures.item-summary" (lookup @root.expandedData item.id)}}
       {{/if}}
     </li>
+  {{/stellarmisadventures-itemContext}}
   {{/each}}
   {{!-- Armor --}}
   <li class="item flexrow items-header">
@@ -46,12 +51,16 @@
     </div>
   </li>
   {{#each armor as |item id|}}
+  {{#stellarmisadventures-itemContext item as |ctx|}}
     <li class="item flexrow" data-item-id="{{item._id}}">
       <div class="item-name">
         <div class="item-image">
           <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
         </div>
-        <a class="item-edit">{{item.name}}</a>
+        <a class="item-edit">
+          {{item.name}}
+          {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}  
+        </a>
       </div>
       <div class="item-formula-small item-prop">{{item.system.armorType}}</div>
       <div class="item-formula-small item-prop">{{item.system.armorclass}}</div>
@@ -62,6 +71,7 @@
         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
       </div>
     </li>
+  {{/stellarmisadventures-itemContext}}
   {{/each}}
   {{!-- Shields --}}
   <li class="item flexrow items-header">
@@ -73,12 +83,16 @@
     </div>
   </li>
   {{#each shields as |item id|}}
+  {{#stellarmisadventures-itemContext item as |ctx|}}
     <li class="item flexrow" data-item-id="{{item._id}}">
       <div class="item-name">
         <div class="item-image">
           <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
         </div>
-        <a class="item-edit">{{item.name}}</a>
+        <a class="item-edit">
+          {{item.name}}
+          {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
+        </a>
       </div>
       <div class="item-prop">{{item.system.shieldMax}}</div>
       <div class="item-prop">{{item.system.shieldRegen}}</div>
@@ -87,6 +101,7 @@
         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
       </div>
     </li>
+  {{/stellarmisadventures-itemContext}}
   {{/each}}
   {{!-- Other Items --}}
   <li class="item flexrow items-header">
@@ -97,12 +112,16 @@
     </div>
   </li>
   {{#each gear as |item id|}}
+  {{#stellarmisadventures-itemContext item as |ctx|}}
     <li class="item flexrow" data-item-id="{{item._id}}">
       <div class="item-name">
         <div class="item-image">
           <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
         </div>
-        <a class="item-edit">{{item.name}}</a>
+        <a class="item-edit">
+          {{item.name}}
+          {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
+        </a>
       </div>
       <div class="item-formula item-prop">{{item.system.formula}}</div>
       <div class="item-controls">
@@ -110,5 +129,6 @@
         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
       </div>
     </li>
+  {{/stellarmisadventures-itemContext}}
   {{/each}}
 </ol>

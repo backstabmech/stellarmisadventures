@@ -365,6 +365,9 @@ export class StellarMisadventuresItem extends Item {
   get isFlatDC() {
     return (this.system.save?.scaling === "flat") ?? false;
   }
+  get isStack() {
+    return (itemData.system.quantity > 1) ?? false;
+  }
 
  /**
    * Update a label to the Item detailing its total to hit bonus:

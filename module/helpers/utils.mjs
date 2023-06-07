@@ -7,14 +7,21 @@
  * @returns {string}
  */
 function itemContext(context, options) {
-    if ( arguments.length !== 2 ) throw new Error("#dnd5e-itemContext requires exactly one argument");
+    if ( arguments.length !== 2 ) throw new Error("#stellarmisadventures-itemContext requires exactly one argument");
     if ( foundry.utils.getType(context) === "function" ) context = context.call(this);
   
-    const ctx = options.data.root.itemContext?.[context.id];
+    const ctx = options.data.root.itemContext?.[context._id];
     if ( !ctx ) {
       const inverse = options.inverse(this);
       if ( inverse ) return options.inverse(this);
     }
   
     return options.fn(context, { data: options.data, blockParams: [ctx] });
-  }
+}
+
+export function registerHandlebarsHelpers() {
+  Handlebars.registerHelper({
+    getProperty: foundry.utils.getProperty,
+    "stellarmisadventures-itemContext": itemContext
+  });
+}
