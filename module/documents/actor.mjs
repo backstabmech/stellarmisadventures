@@ -240,14 +240,15 @@ export class StellarMisadventuresActor extends Actor {
     if ( !stamina || !shield ) return this;
     
     if (shield.value > 0 && amount > 0) {
-      // Apply to shield first
+      // Damage shield first
       const newVal = Math.max(shield.value - amount, 0);
       this.update({"system.shield.value": newVal});
     } else {
-      amount = Math.max(amount - this.system.dr.value, 1);
+      // Apply DR if taking damage
+      if (multiplier > 0) amount = Math.max(amount - this.system.dr.value, 1);
       // Apply modifier and round up
       amount = Math.ceil(amount * multiplier);
-      const newVal = Math.clamped(stamina.value - amount, 1, stamina.max);
+      const newVal = Math.clamped(stamina.value - amount, 0, stamina.max);
       this.update({"system.stamina.value": newVal});
     }
 
