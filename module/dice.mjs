@@ -1,7 +1,8 @@
 export function D20Check({
   modifiers = null,
   rollData = null,
-  advantage = 0, 
+  advantage = 0,
+  criticalThreshold = 21, 
   flavor = ""
 } = {}) {
   // Determine advantage
@@ -17,6 +18,7 @@ export function D20Check({
     rollFormula += ` + ${modifiers[i]}`;
   }
   console.log(`Trying formula: ${rollFormula}`)
+  console.log(`Crits on: ${criticalThreshold}`)
   // Build chat message info
   let messageData = {
     speaker: ChatMessage.getSpeaker(),
@@ -26,6 +28,11 @@ export function D20Check({
   // Roll
   const roll = new Roll(rollFormula, rollData);
   roll.toMessage(messageData);
+  //console.log(`Rolled: ${roll.dice[0].total}`);
+  // Record criticals for highlighting No highlighting if critThreshold is 21
+  roll.options.isCritSuccess = roll.dice[0].total >= criticalThreshold;
+  roll.options.isCritFail = (criticalThreshold != 21 && roll.dice[0].total == 1);
+  //console.log(roll.options.isCritSuccess)
   return roll;
 }
 

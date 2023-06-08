@@ -112,7 +112,7 @@ export class StellarMisadventuresItem extends Item {
       return ui.notifications.error(err);
     }
     // TODO: get gadgetTier here?
-    console.log("Card button clicked!");
+    //console.log("Card button clicked!");
 
     let targets;
     switch ( action ) {
@@ -254,6 +254,7 @@ export class StellarMisadventuresItem extends Item {
     const attackRoll = {
       modifiers: attackBonus.parts,
       rollData: attackBonus.rollData,
+      criticalThreshold: this.getCritThreshold(),
       flavor: label
     }
     Dice.D20Check(attackRoll)
@@ -392,13 +393,25 @@ export class StellarMisadventuresItem extends Item {
     if (!["weapon"].includes(this.type) || this.system.proficient) {
       parts.push("@prof");
     }
-
+    // Accurate property
+    if (["weapon"].includes(this.type) && this.system.properties["accu"]) {
+      parts.push("2");
+    }
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
     const formula = simplifyRollFormula(roll.formula) || "0";
     // Update label
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return {rollData, parts};
+  }
+  getCritThreshold() {
+    if ( !this.hasAttack) return null;
+    let crit = this.system.critical.chance ?? 0;
+
+    if (["weapon"].includes(this.type) && this.system.properties["prec"]) {
+      crit += 1;
+    }
+    return 20 - crit;
   }
   /**
    * Update the derived spell DC for an item that requires a saving throw.

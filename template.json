@@ -219,7 +219,7 @@
         "chatflavor": "",
         "formula": "",
         "critical": {
-          "threshold": null,
+          "chance": 0,
           "damage": ""
         },
         "save": {
@@ -247,7 +247,7 @@
     "armor": {
       "templates": ["base", "physicalItem"],
       "armorType": "light",
-      "armorclass": 10,
+      "armorClass": 10,
       "dr": 0,
       "armorPenalty": 0,
       "resistMelee": false
