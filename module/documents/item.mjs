@@ -276,6 +276,10 @@ export class StellarMisadventuresItem extends Item {
       if (systemData.weaponType) {
         mods.push(`@${systemData.ability}`);
       }
+      // Damaged property
+      if (["weapon"].includes(this.type) && systemData.properties["dama"]) {
+        mods.push("-1");
+      }
       const damageRoll = {
         dice: event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula,
         modifiers: mods,
@@ -396,6 +400,10 @@ export class StellarMisadventuresItem extends Item {
     // Accurate property
     if (["weapon"].includes(this.type) && this.system.properties["accu"]) {
       parts.push("2");
+    }
+    // Damaged property
+    if (["weapon"].includes(this.type) && this.system.properties["dama"]) {
+      parts.push("-1");
     }
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
