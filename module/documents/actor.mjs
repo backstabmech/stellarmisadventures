@@ -234,6 +234,7 @@ export class StellarMisadventuresActor extends Actor {
   }
   async applyDamage(amount=0, multiplier=0) {
     amount = parseInt(amount);
+    if (amount == 0) return this;
     const stamina = this.system.stamina;
     const shield = this.system.shield;
     if ( !stamina || !shield ) return this;
