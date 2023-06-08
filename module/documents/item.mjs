@@ -20,7 +20,7 @@ export class StellarMisadventuresItem extends Item {
     this.labels = {};
     // Auto set attack type for weapon if blank
     if (this.type == "weapon") {
-      if (this.system.attackType === "") {
+      if (this.system.attackType === "" && (this.system.weaponType) in STELLARMISADVENTURES.weaponTypes) {
         this.system.attackType = this.system.weaponType == "melee" ? "mwatk": "rwatk";
       }
     }
