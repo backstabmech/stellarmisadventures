@@ -233,8 +233,7 @@ export class StellarMisadventuresActor extends Actor {
     }
   }
   async applyDamage(amount=0, multiplier=0) {
-    // Apply modifier and round up
-    amount = Math.ceil(parseInt(amount) * multiplier);
+    
     const stamina = this.system.stamina;
     const shield = this.system.shield;
     if ( !stamina || !shield ) return this;
@@ -244,7 +243,10 @@ export class StellarMisadventuresActor extends Actor {
       const newVal = Math.max(shield.value - amount, 0);
       this.update({"system.shield.value": newVal});
     } else {
-      const newVal = Math.clamped(stamina.value - amount, 0, stamina.max);
+      amount = Math.max(amount - this.system.dr.value, 1);
+      // Apply modifier and round up
+      amount = Math.ceil(parseInt(amount) * multiplier);
+      const newVal = Math.clamped(stamina.value - amount, 1, stamina.max);
       this.update({"system.stamina.value": newVal});
     }
 
