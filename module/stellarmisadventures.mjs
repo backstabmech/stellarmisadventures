@@ -134,7 +134,6 @@ async function createItemMacro(data, slot) {
  * @param {string} itemUuid
  */
 function rollItemMacro(itemUuid) {
-  console.log("ROLLING ITEM MACRO");
   // Reconstruct the drop data so that we can load the item.
   const dropData = {
     type: 'Item',

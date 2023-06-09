@@ -1,6 +1,7 @@
-import * as Dice from "../dice.mjs"
-import simplifyRollFormula from "../helpers/simplify-roll-formula.mjs"
 import { STELLARMISADVENTURES } from "../helpers/config.mjs";
+import simplifyRollFormula from "../helpers/simplify-roll-formula.mjs"
+import * as Dice from "../dice.mjs"
+import * as Dialogs from "../applications/dialogs.mjs"
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -203,7 +204,6 @@ export class StellarMisadventuresItem extends Item {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `[${this.type}] ${this.name}`;
-    // TODO: Ask for gadget tier + usage
     // Set card data
     const cardData = {
       actor: this.actor,
@@ -214,13 +214,24 @@ export class StellarMisadventuresItem extends Item {
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
       hasDamage: this.hasDamage,
-      //isSpell: this.type === "spell",
+      //isGadget: this.type === "gadget",
       hasSave: this.hasSave,
       //hasAreaTarget: this.hasAreaTarget,
       //isTool: this.type === "tool",
       hasAbilityCheck: this.hasAbilityCheck
     }
+    // TODO: Ask for gadget tier + usage
+    if (this.type === 'gadget') {
+      const options = {
 
+      }
+      const useOptions = await Dialogs.GetGadgetUseOptions(options);
+      if (useOptions.cancelled) return;
+      // Set gadget tier
+      cardData.gadgetTier = useOptions.gadgetTier;
+      cardData.data.properties.push("Tier " + useOptions.gadgetTier)
+      // Expend gadget points if needed
+    }
     const chatData = {
       user: game.user.id,
       content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData),
@@ -340,7 +351,7 @@ export class StellarMisadventuresItem extends Item {
       ...this.system.activatedEffectChatProperties ?? []
     ];*/
     
-    let props = []; 
+    let props = [];
     if (data.properties) {
       for ( const [k, v] of Object.entries(data.properties) ) {
         if ( v === true ) props.push(CONFIG.STELLARMISADVENTURES.weaponProperties[k]);
