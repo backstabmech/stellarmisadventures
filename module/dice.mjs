@@ -1,10 +1,37 @@
-export function D20Check({
+export const ADV_MODE = {
+  ADVANTAGE: 1,
+  NORMAL: 0,
+  DISADVANTAGE: -1
+}
+
+export async function D20Check({
+  checkType = "Ability Check",
   modifiers = null,
   rollData = null,
   advantage = 0,
-  criticalThreshold = 21, 
+  criticalThreshold = 21,
+  showDialog = true,
   flavor = ""
 } = {}) {
+  let bonus = null;
+  if (showDialog) {
+    const checkOptions = await GetD20CheckOptions(checkType);
+    // Stop if dialog is closed
+    if (checkOptions.cancelled) return;
+    // Proccess bonus modifiers
+    if (checkOptions.modifiers) {
+      const r = new Roll(checkOptions.modifiers, rollData);
+      // Add a plus if needed
+      if ( !(r.terms[0] instanceof OperatorTerm) ){
+        bonus = "+"; 
+      } else {
+        bonus = "";
+      }
+      bonus += r.formula;
+      console.log(`Bonus ${bonus}`);
+    }
+    advantage = checkOptions.advantage;
+  }
   // Determine advantage
   let baseDice = "1d20"
   if (advantage === 1) {
@@ -17,8 +44,10 @@ export function D20Check({
   for (let i = 0; i < modifiers.length; i++) {
     rollFormula += ` + ${modifiers[i]}`;
   }
+  if (bonus) rollFormula += bonus;
   console.log(`Trying formula: ${rollFormula}`)
-  console.log(`Crits on: ${criticalThreshold}`)
+  //console.log(`Crits on: ${criticalThreshold}`)
+
   // Build chat message info
   let messageData = {
     speaker: ChatMessage.getSpeaker(),
@@ -81,7 +110,10 @@ export async function damageRoll({
   roll.toMessage(messageData);
   return roll;
 }
-
+/**
+ * Proccess a roll's formula so it can be easily modified.
+ * @param {Roll} roll The roll to preprocess
+ */
 function preprocessDamageRoll(roll) {
   for ( let [i, term] of roll.terms.entries() ) {
     const nextTerm = roll.terms[i + 1];
@@ -125,4 +157,41 @@ function preprocessDamageRoll(roll) {
   }
   // Re-compile the underlying formula
   roll._formula = roll.constructor.getFormula(roll.terms);
+}
+
+async function GetD20CheckOptions(checkType) {
+  const template = "systems/stellarmisadventures/templates/apps/ability-check-dialog.hbs";
+  const html = await renderTemplate(template, {})
+  console.log("Wah");
+  
+  return new Promise(resolve => {
+    const data = {
+      title: checkType,
+      content: html,
+      buttons: {
+        advantage: {
+          label: "Advantage",
+          callback: html => resolve(_onD20DialogSubmit(html[0].querySelector("form"), ADV_MODE.ADVANTAGE))
+        },
+        normal: {
+          label: "Normal",
+          callback: html => resolve(_onD20DialogSubmit(html[0].querySelector("form"), ADV_MODE.NORMAL))
+        },
+        disadvantage: {
+          label: "Disadvantage",
+          callback: html => resolve(_onD20DialogSubmit(html[0].querySelector("form"), ADV_MODE.DISADVANTAGE))
+        }
+      },
+      default: "normal",
+      close: () => resolve({cancelled: true})
+    };
+    new Dialog(data, null).render(true)
+  });
+}
+
+function _onD20DialogSubmit(form, advantageMode) {
+  return {
+    modifiers: form.modifiers.value,
+    advantage: advantageMode
+  }
 }

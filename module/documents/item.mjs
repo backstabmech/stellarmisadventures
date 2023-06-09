@@ -203,6 +203,7 @@ export class StellarMisadventuresItem extends Item {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `[${this.type}] ${this.name}`;
+    // TODO: Ask for gadget tier + usage
     // Set card data
     const cardData = {
       actor: this.actor,
@@ -255,7 +256,8 @@ export class StellarMisadventuresItem extends Item {
       modifiers: attackBonus.parts,
       rollData: attackBonus.rollData,
       criticalThreshold: this.getCritThreshold(),
-      flavor: label
+      flavor: label,
+      showDialog: !(event.event?.shiftKey)
     }
     Dice.D20Check(attackRoll)
   }
