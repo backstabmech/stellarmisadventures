@@ -114,5 +114,6 @@
   "STELLARMISADVENTURES.SavingThrow": "Save",
   "STELLARMISADVENTURES.SaveDC": "DC {dc} {defence}",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",
-  "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}"
+  "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
+  "STELLARMISADVENTURES.ActionWarningGadgetTooExpensive": "Not enough gadget points!"
 }

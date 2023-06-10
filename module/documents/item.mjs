@@ -220,17 +220,41 @@ export class StellarMisadventuresItem extends Item {
       //isTool: this.type === "tool",
       hasAbilityCheck: this.hasAbilityCheck
     }
-    // TODO: Ask for gadget tier + usage
+    // Ask for gadget tier and point consumption
     if (this.type === 'gadget') {
-      const options = {
-
+      const tierCosts = CONFIG.STELLARMISADVENTURES.gadgetTierCosts;
+      // It would be great if the max was defined by the actor
+      // Figure out what tiers are available
+      let availableTiers = [];
+      for (let i = this.system.gadgetTier; i < 6; i++) {
+        availableTiers.push({
+          tier: i,
+          cost: tierCosts[i],
+          isDefault: !!(i == this.system.gadgetTier),
+          label: CONFIG.STELLARMISADVENTURES.gadgetTiers[i]
+        });
       }
-      const useOptions = await Dialogs.GetGadgetUseOptions(options);
+      console.log(availableTiers);
+      console.log(this.system.gadgetTier);
+      const dialogOptions = {
+        availableTiers
+      }
+      const useOptions = await Dialogs.GetGadgetUseOptions(dialogOptions);
       if (useOptions.cancelled) return;
       // Set gadget tier
       cardData.gadgetTier = useOptions.gadgetTier;
       cardData.data.properties.push("Tier " + useOptions.gadgetTier)
       // Expend gadget points if needed
+      if (useOptions.expend) {
+        const cost = tierCosts[useOptions.gadgetTier]
+        const points = this.actor.system.gadgetry.points.value;
+        if (points < cost) {
+          // Display warning if too expensive
+          return ui.notifications.warn(game.i18n.localize("STELLARMISADVENTURES.ActionWarningGadgetTooExpensive"));
+        } else {
+          this.actor.update({"system.gadgetry.points.value": points - cost})
+        }
+      }
     }
     const chatData = {
       user: game.user.id,

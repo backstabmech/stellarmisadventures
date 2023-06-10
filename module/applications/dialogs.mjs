@@ -1,6 +1,6 @@
-export async function GetGadgetUseOptions(options) {
+export async function GetGadgetUseOptions(dialogData = {}) {
   const template = "systems/stellarmisadventures/templates/apps/gadget-use-dialog.hbs";
-  const html = await renderTemplate(template, {});
+  const html = await renderTemplate(template, dialogData);
   return new Promise(resolve => {
     const data = {
       title: "Activate Gadget",
@@ -25,6 +25,6 @@ export async function GetGadgetUseOptions(options) {
 function _onGadgetUseDialogSubmit(form) {
   return {
     expend: form.expend.checked,
-    gadgetTier: form.tier.value
+    gadgetTier: parseInt(form.tier.value)
   }
 }

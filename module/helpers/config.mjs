@@ -122,3 +122,18 @@ STELLARMISADVENTURES.weaponProperties = {
   "unst": "STELLARMISADVENTURES.WeaponPropertiesUnst",
   "spec": "STELLARMISADVENTURES.WeaponPropertiesSpec"
 };
+
+STELLARMISADVENTURES.gadgetTiers = {
+  1: "Tier 1 (2pts)",
+  2: "Tier 2 (3pts)",
+  3: "Tier 3 (5pts)",
+  4: "Tier 4 (6pts)",
+  5: "Tier 5 (7pts)"
+};
+STELLARMISADVENTURES.gadgetTierCosts = {
+  1: 2,
+  2: 3,
+  3: 5,
+  4: 6,
+  5: 7
+};

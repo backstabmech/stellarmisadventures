@@ -1,10 +1,23 @@
-<form>
+<form style="height = 42">
   <div class="form-group">
     <label>Consume Gadget Points?</label>
     <input type="checkbox" name="expend" checked/>
   </div>
+  {{!--
   <div class="form-group">
     <label>Activation Tier</label>
-    <input type="text" name="tier" value="1" />
+    <input type="text" name="tier" value="{{minTier}}" />
+  </div>--}}
+  <div class="form-group gadget-tier-btn">
+    <label>Activation Tier</label>
+    <div class="form-fields">
+      {{#each availableTiers as |t|}}
+      <label title="{{t.label}}" class="gadget-tier-btn__label" for="{{t.tier}}">
+        <input type="radio" id="{{t.tier}}" name="tier" value="{{t.tier}}" {{#if isDefault}}checked{{/if}}>
+        <div class="gadget-tier-btn__btn">{{t.tier}}</div>
+        <span class="available-slots">{{t.cost}}</span>
+      </label>
+      {{/each}}
+    </div>
   </div>
 </form>

@@ -568,6 +568,53 @@
   border-right: none;
   padding-right: 0;
 }
+form .form-group.gadget-tier-btn {
+  justify-content:center;
+  flex-direction:column;
+  margin-bottom:15px
+}
+form .form-group.gadget-tier-btn label {
+  text-align:center
+}
+form .form-group.gadget-tier-btn .form-fields {
+  margin:auto
+}
+form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label {
+  padding:0;
+  margin-right:10px;
+  position:relative
+}
+form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label:last-child {
+  margin-right:0
+}
+form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label .gadget-tier-btn__btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  background:rgba(0,0,0,0.05);
+  border:2px groove #c9c7b8;
+  border-radius:3px;
+  font-size:16px;
+  font-weight:900;
+  user-select:none
+}
+form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label .gadget-tier-btn__btn:hover,form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label .gadget-tier-btn__btn:focus{cursor:pointer;outline:none;box-shadow:0 0 5px red}form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label input{display:none}form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label input:checked+.gadget-tier-btn__btn{box-shadow:0 0 5px red}form .form-group.gadget-tier-btn .form-fields .gadget-tier-btn__label .available-slots {
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:15px;
+  height:15px;
+  font-size:11px;
+  line-height:1;
+  border-radius:50%;
+  background:#ff6400;
+  color:rgba(255,255,255,0.8)
+}
 .dice-roll .dice-total.success {
   color: inherit;
   background: #c7d0c0;
