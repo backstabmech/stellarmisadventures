@@ -189,9 +189,16 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
+    // Reload inventory item
+    html.find('.item-reload').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      item.reload();
+    });
+
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
-
+    
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
