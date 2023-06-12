@@ -310,7 +310,7 @@ export class StellarMisadventuresItem extends Item {
       const rollData = this.getRollData();
 
       let mods = [];
-      if (systemData.weaponType) {
+      if (systemData.weaponType && systemData.ability) {
         mods.push(`@${systemData.ability}`);
       }
       // Damaged property
