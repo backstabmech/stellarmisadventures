@@ -238,6 +238,7 @@
       "templates": ["base", "physicalItem", "activate"],
       "weaponType": "melee",
       "range": "melee",
+      "ammoLoaded": 0,
       "ammoMax": 0,
       "ammoType": "",
       "ammoUsage": 0,

@@ -9,7 +9,7 @@
   <li class="item flexrow items-header">
     <div class="item-name">Weapons</div>
     <div class="item-formula-small">Type</div>
-    <div class="item-formula-small">Damage Die</div>
+    <div class="item-formula-small">Ammo</div>
     <div class="item-controls">
       <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add weapon</a>
     </div>
@@ -27,7 +27,15 @@
         </a>
       </div>
       <div class="item-formula-small item-prop">{{item.system.weaponType}}</div>
-      <div class="item-formula-small item-prop">{{item.system.damageFormula}}</div>
+      <div class="item-formula-small item-prop flexrow">
+      {{#if item.system.ammoMax}}
+        <div>{{item.system.ammoLoaded}}</div>
+        <div>/</div>
+        <div>{{item.system.ammoMax}}</div>
+      {{else}}
+        <div>-</div>
+      {{/if}}
+      </div>
       <div class="item-controls">
         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

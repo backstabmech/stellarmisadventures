@@ -489,6 +489,9 @@
   flex: 0 0 100px;
   padding: 0 8px;
 }
+.stellarmisadventures .item-formula-small  input{
+  height: inherit;
+}
 .stellarmisadventures .effects .item .effect-source,
 .stellarmisadventures .effects .item .effect-duration,
 .stellarmisadventures .effects .item .effect-controls {

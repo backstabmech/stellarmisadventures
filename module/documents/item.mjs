@@ -141,7 +141,13 @@ export class StellarMisadventuresItem extends Item {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
           await token.actor.rollSave(button.dataset.save, { event, speaker });
         }
-
+        break;
+      case "expendAmmo":
+        item.expendAmmo(event);
+        break;
+      case "reload":
+        item.reload(event);
+        break;
     }
 
     button.disabled = false;
@@ -218,6 +224,7 @@ export class StellarMisadventuresItem extends Item {
       hasSave: this.hasSave,
       //hasAreaTarget: this.hasAreaTarget,
       //isTool: this.type === "tool",
+      hasAmmo: !!(this.system.ammoMax > 0),
       hasAbilityCheck: this.hasAbilityCheck
     }
     // Ask for gadget tier and point consumption
@@ -350,6 +357,29 @@ export class StellarMisadventuresItem extends Item {
     }
   }
 
+  async expendAmmo(event) {
+    const systemData = this.system;
+    /*
+    if (!(systemData.ammoMax && systemData.ammoLoaded && systemData.ammoUsage)) {
+      const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningAmmoMisconfig", {item: this.name});
+      return ui.notifications.error(err);
+    }*/
+    if (systemData.ammoLoaded < systemData.ammoUsage) {
+      const warn = game.i18n.format("STELLARMISADVENTURES.ActionWarningNoAmmo");
+      return ui.notifications.warn(warn);
+    }
+    const newVal = systemData.ammoLoaded - systemData.ammoUsage;
+    this.update({"system.ammoLoaded": newVal});
+  }
+
+  async reload(event) {
+    const systemData = this.system;
+    if (!systemData.ammoMax) {
+      const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningAmmoMisconfig", {item: this.id});
+      return ui.notifications.error(err);
+    }
+    this.update({"system.ammoLoaded": systemData.ammoMax});
+  }
   /**
    * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function.

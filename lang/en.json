@@ -115,5 +115,7 @@
   "STELLARMISADVENTURES.SaveDC": "DC {dc} {defence}",
   "STELLARMISADVENTURES.OtherFormula": "Other Formula",
   "STELLARMISADVENTURES.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
+  "STELLARMISADVENTURES.ActionWarningAmmoMisconfig": "The requested item {item} does not have its ammunition configured",
+  "STELLARMISADVENTURES.ActionWarningNoAmmo": "Not enough ammo!",
   "STELLARMISADVENTURES.ActionWarningGadgetTooExpensive": "Not enough gadget points!"
 }

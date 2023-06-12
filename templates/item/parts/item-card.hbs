@@ -37,6 +37,13 @@
         {{#if data.formula}}
         <button data-action="formula">{{localize "STELLARMISADVENTURES.OtherFormula"}}</button>
         {{/if}}
+        
+        {{#if hasAmmo}}
+        <div class="flexrow">
+            <button data-action="expendAmmo">Spend Ammo</button>
+            <button data-action="reload">Reload</button>
+        </div>
+        {{/if}}
     
     </div>
     <footer class="card-footer">
