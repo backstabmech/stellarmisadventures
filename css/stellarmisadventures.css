@@ -304,6 +304,41 @@
   -ms-flex: 0;
   flex: 0;
 }
+.stellarmisadventures .sheet-body .counters {
+  flex: none;
+  padding: 5px 0;
+  margin-top: 5px;
+  border-top: 2px groove #eeede0;
+}
+.stellarmisadventures .sheet-body .counters .counter {
+  height: 20px;
+  line-height: 20px;
+}
+.stellarmisadventures .sheet-body .counters .counter label {
+  flex: auto;
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #4b4a44;
+}
+.stellarmisadventures .sheet-body .counter-value {
+  flex: none;
+  text-align: right;
+}
+.stellarmisadventures .sheet-body .counter-value  > *{
+  display: inline;
+}
+.stellarmisadventures .sheet-body .counters .counter input[type="text"],
+.stellarmisadventures .sheet-body .counters .counter input[type="number"] {
+  height: 20px;
+  max-width: 20px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.stellarmisadventures .sheet-body .counters .counter span.sep {
+  font-size: 12px;
+}
 .stellarmisadventures.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
   margin: 5px 5px 5px 0;

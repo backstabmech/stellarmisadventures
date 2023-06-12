@@ -105,6 +105,15 @@
   "STELLARMISADVENTURES.ChatContextDoubleDamage": "Apply double damage",
   "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
   
+  "STELLARMISADVENTURES.DeathSave": "Death Saving Throw",
+  "STELLARMISADVENTURES.DeathSaves": "Death Saves",
+  "STELLARMISADVENTURES.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+  "STELLARMISADVENTURES.DeathSaveCriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
+  "STELLARMISADVENTURES.DeathSaveSuccess": "{name} has survived with 3 death save successes and is now stable!",
+  "STELLARMISADVENTURES.DeathSaveSuccesses": "Successes",
+  "STELLARMISADVENTURES.DeathSaveFailure": "{name} has died with 3 death save failures!",
+  "STELLARMISADVENTURES.DeathSaveFailures": "Failures",
+
   "STELLARMISADVENTURES.AttackType": "Attack Type",
   "STELLARMISADVENTURES.UseTime": "Use Time",
   "STELLARMISADVENTURES.Attack": "Attack",

@@ -41,8 +41,10 @@ export async function D20Check({
   }
   // Build formula
   let rollFormula = `${baseDice}`;
-  for (let i = 0; i < modifiers.length; i++) {
-    rollFormula += ` + ${modifiers[i]}`;
+  if (modifiers) {
+    for (let i = 0; i < modifiers.length; i++) {
+      rollFormula += ` + ${modifiers[i]}`;
+    }
   }
   if (bonus) rollFormula += bonus;
   console.log(`Trying formula: ${rollFormula}`)

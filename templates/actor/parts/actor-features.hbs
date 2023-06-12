@@ -13,7 +13,19 @@
       </div>
       {{/each}}
     </div>
-
+    {{#if system.deathsaves}}
+    <div class="flexcol counters">
+      <div class="flexrow counter">
+        <label class="resource-label rollable" data-roll-type="deathsave">{{ localize "STELLARMISADVENTURES.DeathSaves" }}</label>
+        <div class="counter-value">
+          <i class="fas fa-check"></i>
+          <input type="text" name="system.deathsaves.success" value="{{system.deathsaves.success}}" placeholder="0" data-dtype="Number">
+          <i class="fas fa-times"></i>
+          <input type="text" name="system.deathsaves.failures" value="{{system.deathsaves.failures}}" placeholder="0" data-dtype="Number">
+        </div>
+      </div>
+    </div>
+    {{/if}}
   </aside>
   <aside class="sidebar">
     {{!-- Skills  --}}

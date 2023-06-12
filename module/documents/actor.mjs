@@ -218,6 +218,69 @@ export class StellarMisadventuresActor extends Actor {
     const roll = Dice.D20Check(d20Data);
     return roll;
   }
+  async deathSave() {
+    if (!this.system.deathsaves) return this;
+    const death = this.system.deathsaves
+    // Display a warning if we are not at zero stamina or if we already have reached 3
+    if ( (this.system.stamina.value > 0) || (death.failures >= 3) || (death.success >= 3) ) {
+      ui.notifications.warn(game.i18n.localize("STELLARMISADVENTURES.DeathSaveUnnecessary"));
+      return null;
+    }
+    const label = game.i18n.localize("STELLARMISADVENTURES.DeathSave");
+    const d20Data = {
+      rollData: this.getRollData(),
+      criticalThreshold: 20,
+      flavor: label
+    };
+    const roll = await Dice.D20Check(d20Data);
+    if (!roll) return null;
+    // Store updates here
+    const details = {};
+
+    if (roll.total >= 10) {
+      // Success
+      let successes = (death.success || 0) + 1;
+      if (roll.options.isCritSuccess) {
+        // Revive on crit
+        details.updates = {
+          "system.deathsaves.success": 0,
+          "system.deathsaves.failures": 0,
+          "system.stamina.value": 1
+        };
+        details.chatString = "STELLARMISADVENTURES.DeathSaveCriticalSuccess";
+      } else if (successes == 3) {
+        // Stable on 3 success
+        details.updates = {
+          "system.deathsaves.success": 0,
+          "system.deathsaves.failures": 0,
+        };
+        details.chatString = "STELLARMISADVENTURES.DeathSaveSuccess";
+      } else {
+        // Otherwise, add a success
+        details.updates = {"system.deathsaves.success": Math.clamped(successes, 0, 3)};
+      }
+    } else {
+      // Failure (2 on crit fail)
+      let fails = (death.failures || 0) + (roll.options.isCritFail ? 2 : 1);
+      details.updates = {"system.deathsaves.failures": Math.clamped(fails, 0, 3)};
+      if ( fails >= 3 ) {  // 3 Failures = death
+        details.chatString = "DND5E.DeathSaveFailure";
+      }
+      
+    }
+    
+    // Updates
+    if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
+    
+    // Display success/failure chat message
+    if ( details.chatString ) {
+      let chatData = { content: game.i18n.format(details.chatString, {name: this.name}), speaker: ChatMessage.getSpeaker() };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData);
+    }
+
+    return roll;
+  }
 
   /* -------------------------------------------- */
   /*  Gameplay Mechanics                          */

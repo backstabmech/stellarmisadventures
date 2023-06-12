@@ -260,6 +260,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
         return this.actor.rollInitiative({event});
       case 'regen':
         return this.actor.regenShield();
+      case 'deathsave':
+        return this.actor.deathSave();
     }
         
     // Handle ability rolls.
