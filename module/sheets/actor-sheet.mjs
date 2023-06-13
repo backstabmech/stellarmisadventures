@@ -270,6 +270,7 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       return Dice.D20Check({
         modifiers: [dataset.roll],
         rollData: this.actor.getRollData(),
+        showDialog: !(event?.shiftKey),
         flavor: label
       });
     }
