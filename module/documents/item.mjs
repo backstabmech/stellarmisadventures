@@ -39,16 +39,23 @@ export class StellarMisadventuresItem extends Item {
       // Set ability to actor's gadgetry ability
       this.system.ability = this.actor.system.gadgetry.ability;
     }
+    
     // Prepare damage label
-    /*
-    if (!("actionType" in this.system)) {
-      let dmg = this.system.damage || {};
-      if ( dmg.parts ) {
-        const types = CONFIG.STELLARMISADVENTURES.damageTypes;
-        this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
-        this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
+    if (this.hasDamage) {
+      // Assemble damage formula, minus actor stuff
+      const parts = [];
+      parts.push(this.system.damageFormula)
+      // Damaged property
+      if (["weapon"].includes(this.type) && this.system.properties["dama"]) {
+        parts.push("-1");
       }
-    }*/
+      // Add abl if owned and a weapon with an abl
+      if (this.isOwned && this.system.weaponType && this.system.ability) {
+        parts.push(`@${this.system.ability}`);
+      }
+      const roll = new Roll(parts.join("+"), this.getRollData());
+      this.labels.damage = `${simplifyRollFormula(roll.formula)} damage`;
+    }
     // Save
     this.getSaveDC();
     // To Hit
@@ -152,7 +159,6 @@ export class StellarMisadventuresItem extends Item {
 
     button.disabled = false;
   }
-  /* -------------------------------------------- */
 
   /**
    * Handle toggling the visibility of chat card content when the name is clicked
@@ -167,8 +173,6 @@ export class StellarMisadventuresItem extends Item {
     content.style.display = content.style.display === "none" ? "block" : "none";
   }
 
-  /* -------------------------------------------- */
-  
    /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
@@ -189,8 +193,6 @@ export class StellarMisadventuresItem extends Item {
     return game.actors.get(actorId) || null;
   }
 
-  /* -------------------------------------------- */
-
   static _getChatCardTargets(card) {
     let targets = canvas.tokens.controlled.filter(t => !!t.actor);
     if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
@@ -199,7 +201,6 @@ export class StellarMisadventuresItem extends Item {
   }
 
   /* -------------------------------------------- */
-
 
   /**
    * Send chat card on click.
@@ -412,7 +413,7 @@ export class StellarMisadventuresItem extends Item {
     return false;
   }
   get hasDamage() {
-    return false;
+    return !!this.system.damageFormula;
   }
   get hasSave() {
     return !!(this.system.save && this.system.save.defence);
@@ -446,6 +447,7 @@ export class StellarMisadventuresItem extends Item {
     const ab = this.system.attackBonus;
     if (ab) {
       parts.push(ab);
+      // Put a + at the start front if there is no operator 
       this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
     }
     
