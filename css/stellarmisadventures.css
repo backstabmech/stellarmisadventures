@@ -330,6 +330,9 @@
 .stellarmisadventures .sheet-body .skill-mod {
   font-weight: bold;
 }
+.stellarmisadventures .sheet-body .skill label {
+  padding-right: 8px;
+}
 .stellarmisadventures .sheet-body .skill input {
   flex: 0 40px;
 }
