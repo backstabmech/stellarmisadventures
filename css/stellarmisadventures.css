@@ -202,6 +202,12 @@
   flex: 2;
 }
 
+.flexhuge {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+
 .align-left {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -277,10 +283,9 @@
   border-bottom: 0;
 }
 .stellarmisadventures .sheet-header .header-exp {
-  flex: 0 0 20px;
-  height: 20px;
+  flex: 0.2;
   text-overflow: ellipsis;
-  font-size: 18px;
+  font-size: 20px;
   white-space: nowrap;
 }
 .stellarmisadventures .sheet-header .header-exp input {
@@ -304,9 +309,35 @@
   -ms-flex: 0;
   flex: 0;
 }
+.stellarmisadventures .sheet-body .main {
+  flex: 1.2;
+}
+.stellarmisadventures .sheet-body .ability {
+  flex: 2;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}/*
+.stellarmisadventures .sheet-body .ability-mod {
+  flex: 0 0 20px;
+}*/
+.stellarmisadventures .sheet-body .ability input {
+  flex: 0 50px;
+}
+.stellarmisadventures .sheet-body .skills {
+  flex: 0.9;
+}
+.stellarmisadventures .sheet-body .skill-mod {
+  font-weight: bold;
+}
+.stellarmisadventures .sheet-body .skill input {
+  flex: 0 40px;
+}
 .stellarmisadventures .sheet-body .counters {
   flex: none;
-  padding: 5px 0;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 0;
   margin-top: 5px;
   border-top: 2px groove #eeede0;
 }

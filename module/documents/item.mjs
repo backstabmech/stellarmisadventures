@@ -250,7 +250,7 @@ export class StellarMisadventuresItem extends Item {
       if (useOptions.cancelled) return;
       // Set gadget tier
       cardData.gadgetTier = useOptions.gadgetTier;
-      cardData.data.properties.push("Tier " + useOptions.gadgetTier)
+      cardData.data.properties.unshift("Tier " + useOptions.gadgetTier)
       // Expend gadget points if needed
       if (useOptions.expend) {
         const cost = tierCosts[useOptions.gadgetTier]
@@ -359,11 +359,6 @@ export class StellarMisadventuresItem extends Item {
 
   async expendAmmo(event) {
     const systemData = this.system;
-    /*
-    if (!(systemData.ammoMax && systemData.ammoLoaded && systemData.ammoUsage)) {
-      const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningAmmoMisconfig", {item: this.name});
-      return ui.notifications.error(err);
-    }*/
     if (systemData.ammoLoaded < systemData.ammoUsage) {
       const warn = game.i18n.format("STELLARMISADVENTURES.ActionWarningNoAmmo");
       return ui.notifications.warn(warn);
@@ -396,18 +391,12 @@ export class StellarMisadventuresItem extends Item {
       ...htmlOptions
     });
 
-    // Type specific properties
-    // TODO: investigate how this works
-    /*
-    data.properties = [
-      ...this.system.chatProperties ?? [],
-      ...this.system.equippableItemChatProperties ?? [],
-      ...this.system.activatedEffectChatProperties ?? []
-    ];*/
-    
-    let props = [];
-    if (data.properties) {
-      for ( const [k, v] of Object.entries(data.properties) ) {
+    // Properties
+    let props = [
+      ...this.chatProperties ?? []
+    ];
+    if (this.system.properties) {
+      for ( const [k, v] of Object.entries(this.system.properties) ) {
         if ( v === true ) props.push(CONFIG.STELLARMISADVENTURES.weaponProperties[k]);
       }
     }
@@ -416,7 +405,6 @@ export class StellarMisadventuresItem extends Item {
   }
 
   // Getters primarily used by chat cards
-
   get hasAttack() {
     return ["mwatk","rwatk","mgatk","rgatk"].includes(this.system.attackType);
   }
@@ -440,7 +428,13 @@ export class StellarMisadventuresItem extends Item {
   get isStack() {
     return (itemData.system.quantity > 1) ?? false;
   }
-
+  get chatProperties() {
+    let props = [];
+    if (this.system.weaponType) props.push(CONFIG.STELLARMISADVENTURES.weaponTypes[this.system.weaponType]);
+    else if (this.system.useTime) props.push(CONFIG.STELLARMISADVENTURES.useTimes[this.system.useTime]);
+    if (this.system.range) props.push(this.system.range);
+    return props;
+  }
  /**
    * Update a label to the Item detailing its total to hit bonus:
    */

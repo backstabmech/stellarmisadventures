@@ -263,7 +263,8 @@
     },
     "gadget": {
       "templates": ["base", "activate"],
-      "gadgetTier": 1
+      "gadgetTier": 1,
+      "range": ""
     }
   }
 }

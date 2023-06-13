@@ -1,5 +1,5 @@
-<section class="grid grid-3col">
-  <aside class="sidebar">
+<section class="flexrow flex-between">
+  <aside class="sidebar" style="padding-right: 5px;">
 
     {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
     use both the "grid" and "grid-Ncol" class where "N" can be any number
@@ -27,19 +27,18 @@
     </div>
     {{/if}}
   </aside>
-  <aside class="sidebar">
+  <aside class="sidebar skills">
     {{!-- Skills  --}}
-    <div class="abilities flexcol">
+    <div class="flexcol">
       {{#each system.skills as |skill key|}}
-      <div class="ability flexrow flex-group-center">
-        <label for="system.skills.{{key}}.points" class="resource-label rollable flexlarge align-left" data-roll="@skills.{{key}}.mod" data-label="{{skill.label}}">{{skill.label}}</label>
+      <div class="skill flexrow flex-group-center">
+        <label for="system.skills.{{key}}.points" class="resource-label rollable flexlarge align-right" data-roll="@skills.{{key}}.mod" data-label="{{skill.label}}">{{skill.label}}</label>
         <input type="text" name="system.skills.{{key}}.points" value="{{skill.points}}" data-dtype="Number"/>
-        <span class="ability-mod rollable" data-roll="@skills.{{key}}.mod" data-label="{{skill.label}}">{{numberFormat skill.mod decimals=0 sign=true}}</span>
+        <span class="skill-mod rollable" data-roll="@skills.{{key}}.mod" data-label="{{skill.label}}">{{numberFormat skill.mod decimals=0 sign=true}}</span>
       </div>
       {{/each}}
     </div>
   </aside>
-  {{!-- For the main features list, span the right two columns --}}
   <section class="main">
     <ol class="items-list">
       <li class="item flexrow items-header">
@@ -54,7 +53,7 @@
             <div class="item-image">
               <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
             </div>
-            <h4 class="item-edit">{{item.name}}</h4>
+            <h4 class="rollable item-edit">{{item.name}}</h4>
           </div>
           <div class="item-controls">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

@@ -44,10 +44,10 @@
   "STELLARMISADVENTURES.AttackMGATK": "Melee Gadget Attack",
   "STELLARMISADVENTURES.AttackRGATK": "Ranged Gadget Attack",
 
-  "STELLARMISADVENTURES.StandardAction": "Standard",
-  "STELLARMISADVENTURES.MinorAction": "Minor",
+  "STELLARMISADVENTURES.StandardAction": "Standard Action",
+  "STELLARMISADVENTURES.MinorAction": "Minor Action",
   "STELLARMISADVENTURES.Reaction": "Reaction",
-  "STELLARMISADVENTURES.FreeAction": "Free",
+  "STELLARMISADVENTURES.FreeAction": "Free Action",
 
   "STELLARMISADVENTURES.ItemWeaponType": "Type",
   "STELLARMISADVENTURES.WeaponTypeMelee": "Melee",
