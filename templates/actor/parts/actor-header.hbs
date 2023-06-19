@@ -3,15 +3,17 @@
       
       <div class="flexrow">
         <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-        {{#if system.attributes.level}}
         <aside class="header-exp flexcol">
           <div class="char-level flex-group-right">
             <label>Level </label>
             <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
           </div>
+          {{#if isCharacter}}
           <label class="flex-group-right">{{numberFormat system.attributes.level.prof decimals=0 sign=true}}</label>
+          {{else}}
+          <input class="flex-group-right" type="text" name="system.attributes.level.prof" value="{{system.attributes.level.prof}}" data-dtype="Number"/>
+          {{/if}}
         </aside>
-        {{/if}}
       </div>
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
@@ -73,7 +75,7 @@
         {{!-- Saving Throws --}}
         {{#each system.saves as |save key|}}
         <div class="resource felxcol flex-group-center">
-          <label for="system.saves.{{key}}.value" class="header-label rollable" data-roll="d20+@saves.{{key}}.mod" data-label="{{save.label}} Save">{{save.label}} {{numberFormat save.mod decimals=0 sign=true}}</label>
+          <label for="system.saves.{{key}}.value" class="header-label rollable" data-roll="@saves.{{key}}.mod" data-label="{{save.label}} Save">{{save.label}} {{numberFormat save.mod decimals=0 sign=true}}</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input class="prof" type="checkbox" name="system.saves.{{key}}.proficient"  {{checked save.proficient}}/>
             <input type="text" name="system.saves.{{key}}.value" value="{{save.value}}" data-dtype="Number"/>

@@ -149,8 +149,16 @@ export class StellarMisadventuresActor extends Actor {
     if (data.saves.will.mod) {
       data.will = data.saves.will.mod;
     }
+    // Add level for easier access, or fall back to 0.
+    if (data.attributes?.level) {
+      data.lvl = data.attributes.level.value ?? 0;
+    }
+    // Copy proficiency bonus
+    if (data.attributes?.level.prof) {
+      data.prof = data.attributes.level.prof ?? 0;
+    }
     data.initiative = data.init.mod;
-
+    
   } 
   /**
    * Prepare character roll data.
@@ -158,14 +166,7 @@ export class StellarMisadventuresActor extends Actor {
   _getCharacterRollData(data) {
     if (this.type !== 'character') return;
 
-    // Add level for easier access, or fall back to 0.
-    if (data.attributes.level) {
-      data.lvl = data.attributes.level.value ?? 0;
-    }
-    // Copy proficiency bonus
-    if (data.attributes.level.prof) {
-      data.prof = data.attributes.level.prof ?? 0;
-    }
+    
   }
 
   /**

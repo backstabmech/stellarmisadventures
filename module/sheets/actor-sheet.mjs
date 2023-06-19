@@ -47,6 +47,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     context.flags = actorData.flags;
 
     context.itemContext = {};
+    context.isCharacter = this.actor.type === "character";
+    context.isNPC = this.actor.type === "npc";
     this._prepareBasicData(context);
     // Prepare character data and items.
     if (actorData.type == 'character') {

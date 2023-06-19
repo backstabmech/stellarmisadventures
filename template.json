@@ -76,7 +76,7 @@
           },
           "int": {
             "points": 0,
-            "ability": "per",
+            "ability": "cha",
             "expertise": false
           },
           "inv": {
@@ -179,16 +179,17 @@
             "max": 0
           }
        },
+       "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
         "biography": ""
       }
     },
     "character": {
       "templates": ["base"],
-      "attributes": {
-        "level": {
-          "value": 1
-        }
-      },
+      
       "deathsaves": {
         "success": 0,
         "failures": 0
