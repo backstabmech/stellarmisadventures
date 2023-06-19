@@ -88,12 +88,11 @@ export class StellarMisadventuresActor extends Actor {
         skill.mod += Math.ceil(skill.points / 2 ) + 1;
       }
     }
-    // Calculate gadgetry info
+    // Calculate character gadgetry info
     if (systemData.gadgetry.ability) {
-      //systemData.gadgetry.ability = "int";
-      systemData.gadgetry.mod = systemData.abilities[systemData.gadgetry.ability].mod;
+      systemData.gadgetry.mod = systemData.abilities[systemData.gadgetry.ability].mod ?? 0;
       systemData.gadgetry.dc = 8 + systemData.attributes.level.prof + systemData.gadgetry.mod;
-      systemData.gadgetry.attack = systemData.attributes.level.prof + systemData.gadgetry.mod;
+      systemData.gadgetry.attack = (systemData.attributes.level.prof + systemData.gadgetry.mod) ?? 0;
     }
     
   }
@@ -111,7 +110,9 @@ export class StellarMisadventuresActor extends Actor {
     // Calculate skill modifiers
     for (let [key, skill] of Object.entries(systemData.skills)) {
       skill.mod = systemData.abilities[skill.ability].mod + skill.points;
-    }    
+    }
+    // Placeholder gadget attack
+    if (!systemData.gadgetry.attack) systemData.gadgetry.attack = 0;
   }
 
   /**
