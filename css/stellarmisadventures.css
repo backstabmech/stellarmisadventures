@@ -500,6 +500,12 @@
   text-align: center;
   margin: 0 6px;
 }
+.stellarmisadventures .items-list .item-controls .item-equip {
+  color: #b5b3a4;
+}
+.stellarmisadventures .items-list .item-controls .active {
+  color: inherit;
+}
 .stellarmisadventures .items-list .item {
   -webkit-box-align: center;
   -ms-flex-align: center;

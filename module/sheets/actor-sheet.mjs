@@ -129,7 +129,12 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       i.img = i.img || DEFAULT_TOKEN;     
       ctx.isExpanded = this._expanded.has(i._id);
       ctx.isStack = i.system.quantity !== 1;
-      //console.log(`${ctx.isStack}`)
+      
+      // Item equip toggle
+      const isActive = !!i.system.equipped;
+      ctx.toggleClass = isActive ? "active" : "";
+      ctx.canEquip = "equipped" in i.system;
+
       // Group items by type 
       if (i.type === 'item') {
         gear.push(i);
@@ -197,6 +202,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       const item = this.actor.items.get(li.data("itemId"));
       item.reload();
     });
+    // Equip inventory item
+    html.find('.item-equip').click(ev=> this._onEquipItem(ev));
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
@@ -240,6 +247,17 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
 
     // Finally, create the item!
     return await Item.create(itemData, {parent: this.actor});
+  }
+  /**
+   * Handle toggling equip state
+   * @param {Event} event The originating click event
+   */
+  async _onEquipItem(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    console.log(`Toggling from ${item.system.equipped}`);
+    return item.update({"system.equipped": !item.system.equipped})
   }
 
   /**
