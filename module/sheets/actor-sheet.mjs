@@ -256,7 +256,6 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    console.log(`Toggling from ${item.system.equipped}`);
     return item.update({"system.equipped": !item.system.equipped})
   }
 
@@ -270,8 +269,8 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
-    // Handle item rolls.
     switch (dataset.rollType) {
+      // Handle item rolls.
       case 'item': 
         const itemId = element.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
@@ -286,6 +285,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
       case 'armor-class':
         // Toggle between equipped armor and flat ac
         this.actor.update({"system.ac.flat": !this.actor.system.ac.flat});
+        break;
+      case 'shield':
+        // Toggle between equipped shield and flat shield
+        this.actor.update({"system.shield.flat": !this.actor.system.shield.flat});
         break;
     }
         

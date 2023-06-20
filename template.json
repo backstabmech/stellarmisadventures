@@ -11,7 +11,9 @@
         "shield": {
           "value": 0,
           "min": 0,
-          "max": 0
+          "max": 0,
+          "bonus": 0,
+          "flat": true
         },
         "abilities": {
           "str": {
@@ -159,7 +161,8 @@
           "value": 0
         },
         "regen": {
-          "value": 0
+          "value": 0,
+          "bonus": 0
         },
         "traits": {
           "size": "med",

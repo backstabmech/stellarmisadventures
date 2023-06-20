@@ -34,11 +34,11 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.shield.value" class="header-label">Shield</label>
+          <label for="system.shield.value" class="header-label rollable" data-roll-type="shield">Shield</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="text" name="system.shield.value" value="{{system.shield.value}}" data-dtype="Number"/>
             <span> / </span>
-            <input type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
+            <input {{#unless system.shield.flat}} disabled {{/unless}} type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Damage Reduction and Shield Regen --}}
@@ -52,7 +52,7 @@
         <div class="resource flex-group-center">
           <label for="system.regen.value" class="header-label rollable" data-roll-type="regen">Regen</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
+            <input {{#unless system.shield.flat}} disabled {{/unless}} type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Speed --}}
@@ -69,11 +69,7 @@
         <div class="resource flex-group-center">
           <label for="system.ac.value" class="header-label rollable" data-roll-type="armor-class">{{ localize "STELLARMISADVENTURES.ArmorClass" }}</label>
           <div class="resource-content flexrow flex-center flex-between armor-class">
-            {{#if system.ac.flat}}
-            <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
-            {{else}}
-            <input disabled type="text" name="system.ac.total" value="{{system.ac.total}}" data-dtype="Number"/>
-            {{/if}}
+            <input {{#unless system.ac.flat}} disabled {{/unless}} type="text" name="system.ac.total" value="{{system.ac.total}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Saving Throws --}}

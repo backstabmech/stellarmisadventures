@@ -42,6 +42,7 @@ export class StellarMisadventuresActor extends Actor {
     this._prepareCharacterData(actorData);
     this._prepareNpcData(actorData);
     this._prepareArmorClass(actorData);
+    this._prepareShield(actorData);
   }
 
   /**
@@ -120,7 +121,7 @@ export class StellarMisadventuresActor extends Actor {
     // Error prevention
     if (isNaN(systemData.ac.bonus)) systemData.ac.bonus = 0;
     // Flat (+ bonus) AC
-    if (systemData.ac.flat) return systemData.ac.total = systemData.ac.value + systemData.ac.bonus;
+    if (systemData.ac.flat) return ;
     
     // Otherwise, derive AC from armor
     // Get equipped armor
@@ -133,7 +134,7 @@ export class StellarMisadventuresActor extends Actor {
     let dex = systemData.abilities.dex.mod;
     if (armors.length) {
       if (armors.length > 1) {
-        // warning
+        // TODO: warning multiple armors equipped
       }
       const armorData = armors[0].system;
       // armor class math
@@ -148,7 +149,35 @@ export class StellarMisadventuresActor extends Actor {
     }
     systemData.ac.total = base + dex + systemData.ac?.bonus;
   }
+  _prepareShield(actorData) {
+    const systemData = actorData.system;
+    if (systemData.shield.flat) return;
+    // Error prevention
+    if (isNaN(systemData.shield.bonus)) systemData.shield.bonus = 0;
+    if (isNaN(systemData.regen.bonus)) systemData.regen.bonus = 0;
+    
+    // Get equipped shield
+    const {shields} = this.itemTypes.shield.reduce((obj, equip) => {
+      if (equip.system.equipped) obj.shields.push(equip);
+      return obj;
+    }, {shields: []})
 
+    if (shields.length) {
+      if (shields.length > 1) {
+        // TODO: warning multiple shields equipped
+      }
+      // Derive shield.max and regen from equipped shield
+      const shieldData = shields[0].system;
+      // max shield math
+      systemData.shield.max = shieldData.shieldMax + systemData.shield.bonus;
+      // shield regen math
+      systemData.regen.value = shieldData.shieldRegen + systemData.regen.bonus;
+    } else {
+      // No shield equipped
+      systemData.shield.max = 0;
+      systemData.regen.value = 0;
+    }
+  }
   /**
    * Override getRollData() that's supplied to rolls.
    */
