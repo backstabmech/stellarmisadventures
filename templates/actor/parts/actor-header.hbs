@@ -69,7 +69,12 @@
         <div class="resource flex-group-center">
           <label for="system.ac.value" class="header-label">AC</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
+            <input class="prof" type="checkbox" title="{{ localize "STELLARMISADVENTURES.UseFlat" }}" name="system.ac.flat"  {{checked system.ac.flat}}/>
+            {{#if system.ac.flat}}
+            <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
+            {{else}}
+            <div>{{system.ac.total}}</div>
+            {{/if}}
           </div>
         </div>
         {{!-- Saving Throws --}}
@@ -77,7 +82,7 @@
         <div class="resource felxcol flex-group-center">
           <label for="system.saves.{{key}}.value" class="header-label rollable" data-roll="@saves.{{key}}.mod" data-label="{{save.label}} Save">{{save.label}} {{numberFormat save.mod decimals=0 sign=true}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input class="prof" type="checkbox" name="system.saves.{{key}}.proficient"  {{checked save.proficient}}/>
+            <input class="prof" type="checkbox" title="{{ localize "STELLARMISADVENTURES.Proficient" }}" name="system.saves.{{key}}.proficient"  {{checked save.proficient}}/>
             <input type="text" name="system.saves.{{key}}.value" value="{{save.value}}" data-dtype="Number"/>
           </div>
         </div>

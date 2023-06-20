@@ -41,6 +41,7 @@ export class StellarMisadventuresActor extends Actor {
     this._prepareBaseData(actorData);
     this._prepareCharacterData(actorData);
     this._prepareNpcData(actorData);
+    this._prepareArmorClass(actorData);
   }
 
   /**
@@ -106,13 +107,46 @@ export class StellarMisadventuresActor extends Actor {
     // Make modifications to data here.
     const systemData = actorData.system;
 
-    systemData.xp = (systemData.cr * systemData.cr) * 100;
     // Calculate skill modifiers
     for (let [key, skill] of Object.entries(systemData.skills)) {
       skill.mod = systemData.abilities[skill.ability].mod + skill.points;
     }
     // Placeholder gadget attack
     if (!systemData.gadgetry.attack) systemData.gadgetry.attack = 0;
+  }
+
+  _prepareArmorClass(actorData) {
+    const systemData = actorData.system;
+    // Error prevention
+    if (isNaN(systemData.ac.bonus)) systemData.ac.bonus = 0;
+    // Flat (+ bonus) AC
+    if (systemData.ac.flat) return systemData.ac.total = systemData.ac.value + systemData.ac.bonus;
+    
+    // Otherwise, derive AC from armor
+    // Get equipped armor
+    const {armors} = this.itemTypes.armor.reduce((obj, armor) => {
+      if (armor.system.equipped) obj.armors.push(armor);
+      return obj;
+    }, {armors: []})
+    // Set base ac calc numbers
+    let base = 10;
+    let dex = systemData.abilities.dex.mod;
+    if (armors.length) {
+      if (armors.length > 1) {
+        // warning
+      }
+      const armorData = armors[0].system;
+      // armor class math
+      base = armorData.armorClass;
+      if (armorData.armorType === "medium") {
+        dex = Math.min(dex, 2);
+      } else if (armorData.armorType === "heavy") {
+        dex = 0;
+      }
+      // Apply DR?
+      // Apply armor penalty?
+    }
+    systemData.ac.total = base + dex + systemData.ac?.bonus;
   }
 
   /**
@@ -134,7 +168,7 @@ export class StellarMisadventuresActor extends Actor {
    */
   _getBaseRollData(data) {
     // Copy the ability scores to the top level, so that rolls can use
-    // formulas like `@str.mod + 4`.
+    // formulas like `@str + 4`.
     if (data.abilities) {
       for (let [k, v] of Object.entries(data.abilities)) {
         data[k] = foundry.utils.deepClone(v.mod);

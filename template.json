@@ -131,7 +131,9 @@
           }
         },
         "ac": {
-          "value": 10
+          "value": 10,
+          "bonus": 0,
+          "flat": false
         },
         "saves": {
           "reflex": {
