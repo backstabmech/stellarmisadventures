@@ -101,7 +101,8 @@
   "STELLARMISADVENTURES.Add": "Add",
   
   "STELLARMISADVENTURES.ChatContextDamage": "Apply damage",
-  "STELLARMISADVENTURES.ChatContextHealing": "Apply healing",
+  "STELLARMISADVENTURES.ChatContextHealing": "Restore stamina",
+  "STELLARMISADVENTURES.ChatContextShielding": "Restore shield",
   "STELLARMISADVENTURES.ChatContextDoubleDamage": "Apply double damage",
   "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
   
