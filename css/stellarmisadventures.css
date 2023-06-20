@@ -305,6 +305,11 @@
   height: 23px;
   margin-top: 1px;
 }
+.stellarmisadventures .sheet-header .header-fields .armor-class input{
+  font-size: 26px;
+  /*background-color: rgba(0, 0, 0, 0);*/
+  background: none;
+}
 .stellarmisadventures .sheet-tabs {
   -webkit-box-flex: 0;
   -ms-flex: 0;

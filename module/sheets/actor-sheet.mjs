@@ -282,6 +282,11 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
         return this.actor.regenShield();
       case 'deathsave':
         return this.actor.deathSave();
+      // Config buttons
+      case 'armor-class':
+        // Toggle between equipped armor and flat ac
+        this.actor.update({"system.ac.flat": !this.actor.system.ac.flat});
+        break;
     }
         
     // Handle ability rolls.

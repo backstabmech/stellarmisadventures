@@ -27,39 +27,39 @@
         <div class="resource flex-group-center">
           <label for="system.stamina.value" class="header-label">Stamina</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.stamina.value" value="{{system.stamina.value}}" data-dtype="Number"/>
-          <span> / </span>
-          <input type="text" name="system.stamina.max" value="{{system.stamina.max}}" data-dtype="Number"/>
+            <input type="text" name="system.stamina.value" value="{{system.stamina.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <input type="text" name="system.stamina.max" value="{{system.stamina.max}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
           <label for="system.shield.value" class="header-label">Shield</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.shield.value" value="{{system.shield.value}}" data-dtype="Number"/>
-          <span> / </span>
-          <input type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
+            <input type="text" name="system.shield.value" value="{{system.shield.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <input type="text" name="system.shield.max" value="{{system.shield.max}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Damage Reduction and Shield Regen --}}
         <div class="resource flex-group-center">
           <label for="system.dr.value" class="header-label">DR</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.dr.value" value="{{system.dr.value}}" data-dtype="Number"/>
+            <input type="text" name="system.dr.value" value="{{system.dr.value}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
           <label for="system.regen.value" class="header-label rollable" data-roll-type="regen">Regen</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
+            <input type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
           </div>
         </div>
         {{!-- Speed --}}
         <div class="resource flex-group-center">
           <label for="system.speed.value" class="header-label">Speed</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.speed.value" value="{{system.speed.value}}" data-dtype="Number"/>
+            <input type="text" name="system.speed.value" value="{{system.speed.value}}" data-dtype="Number"/>
           </div>
         </div>
         
@@ -67,13 +67,12 @@
         
         {{!-- Armor Class --}}
         <div class="resource flex-group-center">
-          <label for="system.ac.value" class="header-label">AC</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input class="prof" type="checkbox" title="{{ localize "STELLARMISADVENTURES.UseFlat" }}" name="system.ac.flat"  {{checked system.ac.flat}}/>
+          <label for="system.ac.value" class="header-label rollable" data-roll-type="armor-class">{{ localize "STELLARMISADVENTURES.ArmorClass" }}</label>
+          <div class="resource-content flexrow flex-center flex-between armor-class">
             {{#if system.ac.flat}}
             <input type="text" name="system.ac.value" value="{{system.ac.value}}" data-dtype="Number"/>
             {{else}}
-            <div>{{system.ac.total}}</div>
+            <input disabled type="text" name="system.ac.total" value="{{system.ac.total}}" data-dtype="Number"/>
             {{/if}}
           </div>
         </div>
