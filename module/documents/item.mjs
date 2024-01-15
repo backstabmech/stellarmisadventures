@@ -437,7 +437,7 @@ export class StellarMisadventuresItem extends Item {
     if (this.system.weaponType) props.push(CONFIG.STELLARMISADVENTURES.weaponTypes[this.system.weaponType]);
     else if (this.system.useTime) props.push(CONFIG.STELLARMISADVENTURES.useTimes[this.system.useTime]);
     if (this.system.range) props.push(this.system.range);
-    if (this.system.damageType) props.push(`${this.system.damageType} damage`);
+    if (this.system.damageType) props.push(CONFIG.STELLARMISADVENTURES.damageTypes[this.system.damageType]);
     return props;
   }
  /**
