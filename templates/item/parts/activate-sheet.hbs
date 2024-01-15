@@ -59,12 +59,12 @@
         <input type="text" name="system.damageAlternate" value="{{system.damageAlternate}}" data-dtype="String"/>
     </div>
     {{/if}}
-
+    {{#unless system.gadgetTier}}
     <div class="resource flexrow">
         <label class="resource-label">Bonus Critical Damage</label>
         <input type="text" name="system.critical.damage" value="{{system.critical.damage}}" data-dtype="String"/>
     </div>
-
+    {{/unless}}
 </section>
 
 
