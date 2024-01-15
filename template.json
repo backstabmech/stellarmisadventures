@@ -235,6 +235,7 @@
           "scaling": "gadget"
         },
         "damageFormula": "",
+        "damageType": null,
         "damageAlternate": ""
       }
     },

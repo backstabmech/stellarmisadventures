@@ -54,7 +54,10 @@ export class StellarMisadventuresItem extends Item {
         parts.push(`@${this.system.ability}`);
       }
       const roll = new Roll(parts.join("+"), this.getRollData());
-      this.labels.damage = `${simplifyRollFormula(roll.formula)} damage`;
+     
+      this.labels.damage = `${simplifyRollFormula(roll.formula)}`; 
+      if (this.system.damageType) this.labels.damage += ` ${this.system.damageType}`;
+      else this.labels.damage += " damage";
     }
     // Save
     this.getSaveDC();
@@ -434,6 +437,7 @@ export class StellarMisadventuresItem extends Item {
     if (this.system.weaponType) props.push(CONFIG.STELLARMISADVENTURES.weaponTypes[this.system.weaponType]);
     else if (this.system.useTime) props.push(CONFIG.STELLARMISADVENTURES.useTimes[this.system.useTime]);
     if (this.system.range) props.push(this.system.range);
+    if (this.system.damageType) props.push(`${this.system.damageType} damage`);
     return props;
   }
  /**

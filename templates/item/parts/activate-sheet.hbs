@@ -46,12 +46,20 @@
         <input type="text" name="system.damageFormula" value="{{system.damageFormula}}" data-dtype="String"/>
     </div>
 
+    <div class="resource flexrow">
+        <label class="resource-label">Damage Type</label>
+        <select name="system.damageType">
+            {{selectOptions config.damageTypes selected=system.damageType blank="None" localize=true }}
+        </select>
+    </div>
+
     {{#if system.weaponType}}
     <div class="resource flexrow">
         <label class="resource-label">Alternate Damage Die</label>
         <input type="text" name="system.damageAlternate" value="{{system.damageAlternate}}" data-dtype="String"/>
     </div>
     {{/if}}
+
     <div class="resource flexrow">
         <label class="resource-label">Bonus Critical Damage</label>
         <input type="text" name="system.critical.damage" value="{{system.critical.damage}}" data-dtype="String"/>
