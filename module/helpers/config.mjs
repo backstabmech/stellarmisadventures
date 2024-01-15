@@ -93,6 +93,7 @@ STELLARMISADVENTURES.damageTypes = {
   "melee": "STELLARMISADVENTURES.DamageTypeMelee",
   "piercing": "STELLARMISADVENTURES.DamageTypePiercing",
   "plasma": "STELLARMISADVENTURES.DamageTypePlasma",
+  "poison": "STELLARMISADVENTURES.DamageTypePoison",
   "sonic": "STELLARMISADVENTURES.DamageTypeSonic",
 };
 /**

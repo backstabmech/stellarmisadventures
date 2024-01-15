@@ -91,6 +91,7 @@
   "STELLARMISADVENTURES.DamageTypeMelee": "Melee",
   "STELLARMISADVENTURES.DamageTypePiercing": "Piercing",
   "STELLARMISADVENTURES.DamageTypePlasma": "Plasma",
+  "STELLARMISADVENTURES.DamageTypePoison": "Poison",
   "STELLARMISADVENTURES.DamageTypeSonic": "Sonic",
 
   "STELLARMISADVENTURES.EffectCreate": "Create Effect",
