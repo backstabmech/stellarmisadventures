@@ -149,6 +149,10 @@ export class StellarMisadventuresItem extends Item {
         targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
+          //const speaker = token.document;
+          console.log(token);
+          console.log(speaker);
+
           await token.actor.rollSave(button.dataset.save, { event, speaker });
         }
         break;

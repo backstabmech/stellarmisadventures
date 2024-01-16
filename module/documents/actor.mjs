@@ -278,7 +278,8 @@ export class StellarMisadventuresActor extends Actor {
     const d20Data = {
       modifiers: [`@${saveId}`],
       rollData: this.getRollData(),
-      flavor: label
+      flavor: label,
+      speaker: options.speaker
     };
     const roll = Dice.D20Check(d20Data);
     return roll;

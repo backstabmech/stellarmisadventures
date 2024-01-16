@@ -5,6 +5,7 @@ export const ADV_MODE = {
 }
 
 export async function D20Check({
+  speaker = null,
   checkType = "Ability Check",
   modifiers = null,
   rollData = null,
@@ -47,12 +48,12 @@ export async function D20Check({
     }
   }
   if (bonus) rollFormula += bonus;
-  console.log(`Trying formula: ${rollFormula}`)
+  //console.log(`Trying formula: ${rollFormula}`)
   //console.log(`Crits on: ${criticalThreshold}`)
 
   // Build chat message info
   let messageData = {
-    speaker: ChatMessage.getSpeaker(),
+    speaker: speaker ? speaker : ChatMessage.getSpeaker(),
     rollMode: game.settings.get('core','rollMode'),
     flavor: flavor
   };
@@ -164,7 +165,6 @@ function preprocessDamageRoll(roll) {
 async function GetD20CheckOptions(checkType) {
   const template = "systems/stellarmisadventures/templates/apps/ability-check-dialog.hbs";
   const html = await renderTemplate(template, {})
-  console.log("Wah");
   
   return new Promise(resolve => {
     const data = {
