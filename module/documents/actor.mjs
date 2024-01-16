@@ -252,8 +252,7 @@ export class StellarMisadventuresActor extends Actor {
       rollData: this.getRollData(),
       flavor: label
     }
-    //const roll = Dice.D20Check(d20Data);
-    //this._cachedInitiativeRoll = roll;
+
     // Add to combat tracker
     const combat = await super.rollInitiative({createCombatants: true});
     const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
@@ -261,10 +260,10 @@ export class StellarMisadventuresActor extends Actor {
       if ( combatant ) arr.push(combatant);
       return arr;
     }, []) : [game.combat.getCombatantByActor(this.id)];
-    //delete this._cachedInitiativeRoll;
-    //return roll;
+
     return;
   }
+
   /**
    * Roll a Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
@@ -284,6 +283,7 @@ export class StellarMisadventuresActor extends Actor {
     const roll = Dice.D20Check(d20Data);
     return roll;
   }
+  
   async deathSave() {
     if (!this.system.deathsaves) return this;
     const death = this.system.deathsaves
