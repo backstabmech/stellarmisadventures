@@ -15,11 +15,10 @@
     </div>
     {{!-- Section under abilities --}}
     <div class="flexcol counters">
+
       <div class="flexrow counter">
-        <a class="resource-label short-rest">{{ localize "STELLARMISADVENTURES.ShortRest" }}</a>
-      </div>
-      <div class="flexrow counter">
-        <a class="resource-label long-rest">{{ localize "STELLARMISADVENTURES.LongRest" }}</a>
+        <a class="ability resource short-rest">{{ localize "STELLARMISADVENTURES.ShortRest" }}</a>
+        <a class="ability resource long-rest align-right">{{ localize "STELLARMISADVENTURES.LongRest" }}</a>
       </div>
 
       {{#if system.deathsaves}}
@@ -52,7 +51,7 @@
   <section class="main">
     <ol class="items-list">
       <li class="item flexrow items-header">
-        <div class="item-name">Name</div>
+        <div class="item-name">Feature</div>
         <div class="item-controls">
           <a class="item-control item-create" title="Create item" data-type="feature"><i class="fas fa-plus"></i> Add item</a>
         </div>
