@@ -509,7 +509,7 @@ export class StellarMisadventuresItem extends Item {
       if (this.isOwned) {
         const actorData = this.actor.system;
         let bonus = this.system.attackBonus ?? 0;
-        if (actorData.abilities[this.system.ability].mod) {
+        if (this.system.ability && actorData.abilities[this.system.ability].mod) {
           bonus += actorData.abilities[this.system.ability].mod ?? 0;
         }
         if (this.system.proficient) {
