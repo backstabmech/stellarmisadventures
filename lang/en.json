@@ -109,6 +109,9 @@
   
   "STELLARMISADVENTURES.ShortRest": "Short Rest",
   "STELLARMISADVENTURES.LongRest": "Long Rest",
+  "STELLARMISADVENTURES.ShortRestResult": "{name} completed a short rest, regaining {shield} shield.",
+  "STELLARMISADVENTURES.LongRestResult": "{name} completed a long rest, regaining {shield} shield and {stamina} stamina.",
+
 
   "STELLARMISADVENTURES.DeathSave": "Death Saving Throw",
   "STELLARMISADVENTURES.DeathSaves": "Death Saves",

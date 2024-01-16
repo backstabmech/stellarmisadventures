@@ -400,13 +400,21 @@ export class StellarMisadventuresActor extends Actor {
       this.update({"system.gadgetry.points.value": this.system.gadgetry.points.max});
     }
 
+    
     // Send a chat message
     if (chat) {
+
+      let message = `STELLARMISADVENTURES.${length}RestResult`;
+
       let chatData = {
         user: game.user.id,
         speaker: {actor: this, alias: this.name},
         rollMode: game.settings.get('core','rollMode'),
-        content: `${this.name} completed a ${length} rest.`
+        content: game.i18n.format(message, {
+          name: this.name,
+          stamina: staminaRegained,
+          shield : shieldRegained
+        })
       };
       return ChatMessage.create(chatData);
     }
