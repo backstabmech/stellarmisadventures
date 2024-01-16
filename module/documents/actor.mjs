@@ -360,6 +360,7 @@ export class StellarMisadventuresActor extends Actor {
       this.update({"system.shield.value": newVal});
     }
   }
+
   async applyDamage(amount=0, multiplier=0) {
     amount = parseInt(amount);
     if (amount == 0) return this;
@@ -380,6 +381,35 @@ export class StellarMisadventuresActor extends Actor {
       this.update({"system.stamina.value": newVal});
     }
 
+  }
+
+  async _rest(chat, longRest) {
+    let staminaRegained = 0;
+    let shieldRegained = 0;
+    let length = longRest ? "Long" : "Short";
+
+    // Restore shield
+    shieldRegained = this.system.shield.max - this.system.shield.value;
+    this.update({"system.shield.value": this.system.shield.max});
+
+    if (longRest) {
+      // Restore stamina
+      staminaRegained = this.system.stamina.max - this.system.stamina.value;
+      this.update({"system.stamina.value": this.system.stamina.max});
+      // Restore gadget points
+      this.update({"system.gadgetry.points.value": this.system.gadgetry.points.max});
+    }
+
+    // Send a chat message
+    if (chat) {
+      let chatData = {
+        user: game.user.id,
+        speaker: {actor: this, alias: this.name},
+        rollMode: game.settings.get('core','rollMode'),
+        content: `${this.name} completed a ${length} rest.`
+      };
+      return ChatMessage.create(chatData);
+    }
   }
 
 }
