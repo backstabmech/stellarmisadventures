@@ -86,6 +86,7 @@
   "STELLARMISADVENTURES.DamageTypeChemical": "Chemical",
   "STELLARMISADVENTURES.DamageTypeElectric": "Electric",
   "STELLARMISADVENTURES.DamageTypeFire": "Fire",
+  "STELLARMISADVENTURES.DamageTypeHeal": "Healing",
   "STELLARMISADVENTURES.DamageTypeIce": "Ice",
   "STELLARMISADVENTURES.DamageTypeKinetic": "Kinetic",
   "STELLARMISADVENTURES.DamageTypeMelee": "Melee",

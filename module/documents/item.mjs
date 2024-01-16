@@ -327,7 +327,7 @@ export class StellarMisadventuresItem extends Item {
       const systemData = this.system;
       const actorData = this.actor.system;
       // Initialize chat data.
-      const label = `[Damage] ${this.name}`;
+      const label = `[${this.isHealing ? "Healing" : "Damage"}] ${this.name}`;
       // Retrieve roll data.
       const rollData = this.getRollData();
 
@@ -424,7 +424,7 @@ export class StellarMisadventuresItem extends Item {
     return ["mwatk","rwatk","mgatk","rgatk"].includes(this.system.attackType);
   }
   get isHealing() {
-    return false;
+    return this.hasDamage && ["heal"].includes(this.system.damageType);
   }
   get hasDamage() {
     return !!this.system.damageFormula;

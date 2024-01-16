@@ -88,6 +88,7 @@ STELLARMISADVENTURES.damageTypes = {
   "chemical": "STELLARMISADVENTURES.DamageTypeChemical",
   "electric": "STELLARMISADVENTURES.DamageTypeElectric",
   "fire": "STELLARMISADVENTURES.DamageTypeFire",
+  "heal": "STELLARMISADVENTURES.DamageTypeHeal",
   "ice": "STELLARMISADVENTURES.DamageTypeIce",
   "kinentic": "STELLARMISADVENTURES.DamageTypeKinetic",
   "melee": "STELLARMISADVENTURES.DamageTypeMelee",
