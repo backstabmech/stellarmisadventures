@@ -59,6 +59,13 @@ export class StellarMisadventuresItem extends Item {
       if (this.system.damageType) this.labels.damage += ` ${this.system.damageType}`;
       else this.labels.damage += " damage";
     }
+    
+    // prep labels for shields
+    if (["shield"].includes(this.type)) {
+      this.labels.shield = `${this.system.shieldMax} Shield`;
+      this.labels.regen = `${this.system.shieldRegen} Regen`;
+    }
+
     // Save
     this.getSaveDC();
     // To Hit

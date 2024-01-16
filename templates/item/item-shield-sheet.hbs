@@ -26,7 +26,14 @@
   <section class="sheet-body">
 
     {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
+    <div class="tab flexrow" data-group="primary" data-tab="description">
+      <div class="item-properties">
+        <h4 class="properties-header">Personal Shield</h4>
+        <ol class="properties-list">
+          <li>{{labels.shield}}</li>
+          <li>{{labels.regen}}</li>
+        </ol>
+      </div>
       {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
       {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
     </div>
