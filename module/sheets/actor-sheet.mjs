@@ -211,6 +211,10 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    // Resting buttons
+    html.find('.short-rest').click(this._onShortRest.bind(this));
+    html.find('.long-rest').click(this._onLongRest.bind(this));
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -304,4 +308,49 @@ export class StellarMisadventuresActorSheet extends ActorSheet {
     }
   }
 
+  /**
+   * Handle short rests.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async _onShortRest(event) {
+    return this._rest(true, false);
+  }
+
+  /**
+   * Handle long rests.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async _onLongRest(event) {
+    return this._rest(true, true);  
+  }
+  
+  async _rest(chat, longRest) {
+    let staminaRegained = 0;
+    let shieldRegained = 0;
+    let length = longRest ? "Long" : "Short";
+
+    // Restore shield
+    shieldRegained = this.actor.system.shield.max - this.actor.system.shield.value;
+    this.actor.update({"system.shield.value": this.actor.system.shield.max});
+
+    if (longRest) {
+      // Restore stamina
+      staminaRegained = this.actor.system.stamina.max - this.actor.system.stamina.value;
+      this.actor.update({"system.stamina.value": this.actor.system.stamina.max});
+      // Restore gadget points
+      this.actor.update({"system.gadgetry.points.value": this.actor.system.gadgetry.points.max});
+    }
+
+    // Send a chat message
+    /*
+    let chatData = {
+      user: game.user.id,
+      speaker: {actor: this, alias: this.name},
+      content: `${this.name} completed a ${length} rest.`
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    return ChatMessage.create(chatData);*/
+  }
 }

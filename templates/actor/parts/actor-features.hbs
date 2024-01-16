@@ -13,8 +13,16 @@
       </div>
       {{/each}}
     </div>
-    {{#if system.deathsaves}}
+    {{!-- Section under abilities --}}
     <div class="flexcol counters">
+      <div class="flexrow counter">
+        <a class="resource-label short-rest">{{ localize "STELLARMISADVENTURES.ShortRest" }}</a>
+      </div>
+      <div class="flexrow counter">
+        <a class="resource-label long-rest">{{ localize "STELLARMISADVENTURES.LongRest" }}</a>
+      </div>
+
+      {{#if system.deathsaves}}
       <div class="flexrow counter">
         <label class="resource-label rollable" data-roll-type="deathsave">{{ localize "STELLARMISADVENTURES.DeathSaves" }}</label>
         <div class="counter-value">
@@ -24,8 +32,9 @@
           <input type="text" name="system.deathsaves.failures" value="{{system.deathsaves.failures}}" placeholder="0" data-dtype="Number">
         </div>
       </div>
+      {{/if}}
+
     </div>
-    {{/if}}
   </aside>
   <aside class="sidebar skills">
     {{!-- Skills --}}

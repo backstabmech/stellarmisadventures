@@ -107,6 +107,9 @@
   "STELLARMISADVENTURES.ChatContextDoubleDamage": "Apply double damage",
   "STELLARMISADVENTURES.ChatContextHalfDamage": "Apply half damage",
   
+  "STELLARMISADVENTURES.ShortRest": "Short Rest",
+  "STELLARMISADVENTURES.LongRest": "Long Rest",
+
   "STELLARMISADVENTURES.DeathSave": "Death Saving Throw",
   "STELLARMISADVENTURES.DeathSaves": "Death Saves",
   "STELLARMISADVENTURES.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
