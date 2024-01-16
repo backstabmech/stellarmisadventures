@@ -34,7 +34,7 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.shield.value" class="header-label rollable" data-roll-type="shield">Shield</label>
+          <label for="system.shield.value" class="header-label rollable" data-roll-type="shield" title="Override">Shield</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="text" name="system.shield.value" value="{{system.shield.value}}" data-dtype="Number"/>
             <span> / </span>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.regen.value" class="header-label rollable" data-roll-type="regen">Regen</label>
+          <label for="system.regen.value" class="header-label rollable" data-roll-type="regen" title="Regen Shield">Regen</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input {{#unless system.shield.flat}} disabled {{/unless}} type="text" name="system.regen.value" value="{{system.regen.value}}" data-dtype="Number"/>
           </div>
@@ -67,7 +67,7 @@
         
         {{!-- Armor Class --}}
         <div class="resource flex-group-center">
-          <label for="system.ac.value" class="header-label rollable" data-roll-type="armor-class">{{ localize "STELLARMISADVENTURES.ArmorClass" }}</label>
+          <label for="system.ac.value" class="header-label rollable" data-roll-type="armor-class" title="Override">{{ localize "STELLARMISADVENTURES.ArmorClass" }}</label>
           <div class="resource-content flexrow flex-center flex-between armor-class">
             <input {{#unless system.ac.flat}} disabled {{/unless}} type="text" name="system.ac.total" value="{{system.ac.total}}" data-dtype="Number"/>
           </div>
