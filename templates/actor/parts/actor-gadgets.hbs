@@ -19,6 +19,7 @@
   {{#each gadgets as |gadgets gadgetTier|}}
     <li class="item flexrow items-header">
       <div class="item-name">Tier {{gadgetTier}} Gadgets</div>
+      <div class="item-prop">Range</div>
       <div class="item-prop">Use Time</div>
       <div class="item-controls">
         <a class="item-control item-create" title="Create item" data-type="gadget" data-gadget-tier="{{gadgetTier}}"><i class="fas fa-plus"></i> Add Tier {{gadgetTier}}</a>
@@ -32,6 +33,7 @@
           </div>
           <a class="item-edit">{{item.name}}</a>
         </div>
+        <div class="item-prop">{{item.system.range}}</div>
         <div class="item-prop">{{item.system.useTime}}</div>
         <div class="item-controls">
           <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
