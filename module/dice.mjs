@@ -29,7 +29,6 @@ export async function D20Check({
         bonus = "";
       }
       bonus += r.formula;
-      console.log(`Bonus ${bonus}`);
     }
     advantage = checkOptions.advantage;
   }
@@ -48,8 +47,6 @@ export async function D20Check({
     }
   }
   if (bonus) rollFormula += bonus;
-  //console.log(`Trying formula: ${rollFormula}`)
-  //console.log(`Crits on: ${criticalThreshold}`)
 
   // Build chat message info
   let messageData = {
@@ -60,11 +57,9 @@ export async function D20Check({
   // Roll
   const roll = new Roll(rollFormula, rollData);
   roll.toMessage(messageData);
-  //console.log(`Rolled: ${roll.dice[0].total}`);
   // Record criticals for highlighting No highlighting if critThreshold is 21
   roll.options.isCritSuccess = roll.dice[0].total >= criticalThreshold;
   roll.options.isCritFail = (criticalThreshold != 21 && roll.dice[0].total == 1);
-  //console.log(roll.options.isCritSuccess)
   return roll;
 }
 
@@ -76,7 +71,6 @@ export async function damageRoll({
   criticalBonusDamage = null,
   flavor = "",
 } = {}) {
-  console.log(`Rolling ${dice} + ${modifiers}`)
   // Build formula
   let rollFormula = dice;
   

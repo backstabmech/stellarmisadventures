@@ -134,10 +134,9 @@ export class StellarMisadventuresItem extends Item {
       const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name});
       return ui.notifications.error(err);
     }
-    // TODO: get gadgetTier here
+    // get gadgetTier from the chat card
     const tier = parseInt(card.dataset.tier) || null;
-    if (!!tier) console.log(`Tier ${tier}`);
-
+    
     let targets;
     switch ( action ) {
       case "attack":
@@ -147,7 +146,6 @@ export class StellarMisadventuresItem extends Item {
         break;
       case "damageFormula":
       case "damageAlternate":
-        if (!!tier) console.log(`Tier ${tier}`);
         await item.rollDamage( {
           event: event,
           damageAlternate: action === "damageAlternate",
@@ -155,17 +153,12 @@ export class StellarMisadventuresItem extends Item {
         });
         break;
       case "formula":
-        console.log("Rolled Formula");
         await item.rollFormula(event);
         break;
       case "save":
         targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-          //const speaker = token.document;
-          console.log(token);
-          console.log(speaker);
-
           await token.actor.rollSave(button.dataset.save, { event, speaker });
         }
         break;
@@ -247,8 +240,6 @@ export class StellarMisadventuresItem extends Item {
           label: CONFIG.STELLARMISADVENTURES.gadgetTiers[i]
         });
       }
-      console.log(availableTiers);
-      console.log(this.system.gadgetTier);
       const dialogOptions = {
         availableTiers
       }
@@ -567,7 +558,6 @@ export class StellarMisadventuresItem extends Item {
     // Update save DC label e.g. DC 12 
     const def = game.i18n.format(CONFIG.STELLARMISADVENTURES.savesAbbr[save.defence]) ?? "";
     this.labels.save = game.i18n.format("STELLARMISADVENTURES.SaveDC", {dc: save.dc || "", defence: def});
-    //console.log(`Save Label: ${this.labels.save}`);
     return save.dc;
   }
 }
