@@ -128,7 +128,7 @@
           },
           "str": {
             "points": 0,
-            "ability": "dex",
+            "ability": "cha",
             "expertise": false
           }
         },
@@ -272,7 +272,8 @@
     "gadget": {
       "templates": ["base", "activate"],
       "gadgetTier": 1,
-      "range": ""
+      "range": "",
+      "damageScaling": ""
     }
   }
 }

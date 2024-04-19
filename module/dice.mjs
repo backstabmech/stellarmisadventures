@@ -83,12 +83,7 @@ export async function damageRoll({
   for (let i = 0; i < modifiers.length; i++) {
     rollFormula += ` + ${modifiers[i]}`;
   }
-  // Build chat message info
-  let messageData = {
-    speaker: ChatMessage.getSpeaker(),
-    rollMode: game.settings.get('core','rollMode'),
-    flavor: flavor
-  };
+
   // Roll
   let roll = new Roll(rollFormula, rollData);
   preprocessDamageRoll(roll);
@@ -109,7 +104,12 @@ export async function damageRoll({
     }
     roll._formula = roll.constructor.getFormula(roll.terms);
   }
-  //console.log(roll.formula)
+  // Build chat message info
+  let messageData = {
+    speaker: ChatMessage.getSpeaker(),
+    rollMode: game.settings.get('core','rollMode'),
+    flavor: flavor
+  };
   roll.toMessage(messageData);
   return roll;
 }

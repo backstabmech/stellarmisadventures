@@ -16,7 +16,33 @@
   <section class="sheet-body">
 
     {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
+    <div class="tab flexrow" data-group="primary" data-tab="description">
+      <div class="item-properties">
+        <h4 class="properties-header">Gadget Details</h4>
+        <ol class="properties-list">        
+          {{#if labels.tier}}
+          <li>
+            {{labels.tier}}
+          </li>
+          {{/if}}
+          {{#if labels.toHit}}
+          <li>
+            {{labels.toHit}} attack
+          </li>
+          {{/if}}
+          {{#if labels.save}}
+          <li>
+            {{labels.save}}
+          </li>
+          {{/if}}
+          {{#if labels.damage}}
+          <li>
+            {{labels.damage}}
+          </li>
+          {{/if}}
+        </ol>
+
+      </div>
       {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
     </div>
 
@@ -31,7 +57,11 @@
         <label class="resource-label">Range</label>
         <input type="text" name="system.range" value="{{system.range}}" data-dtype="String"/>
       </div>
-      
+      <div class="resource flexrow">
+        <label class="resource-label">Damage Scaling</label>
+        <input type="text" name="system.damageScaling" value="{{system.damageScaling}}" data-dtype="String"/>
+      </div>
+
       {{> "systems/stellarmisadventures/templates/item/parts/activate-sheet.hbs"}}
     </div>
 

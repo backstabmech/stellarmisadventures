@@ -1,5 +1,5 @@
 <div class="stellarmisadventures chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
-     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+    {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isGadget}}data-tier="{{item.system.gadgetTier}}" {{/if}}>
     {{!-- Header: image, title, and name stuff--}}
     <header class="card-header flexrow">
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>

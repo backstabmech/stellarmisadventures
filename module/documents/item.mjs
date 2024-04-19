@@ -65,6 +65,11 @@ export class StellarMisadventuresItem extends Item {
       this.labels.shield = `${this.system.shieldMax} Shield`;
       this.labels.regen = `${this.system.shieldRegen} Regen`;
     }
+    // labels for gadgets
+    if (["gadget"].includes(this.type)){
+      this.labels.tier = `Tier ${this.system.gadgetTier}`;
+    }
+
 
     // Save
     this.getSaveDC();
@@ -129,23 +134,24 @@ export class StellarMisadventuresItem extends Item {
       const err = game.i18n.format("STELLARMISADVENTURES.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name});
       return ui.notifications.error(err);
     }
-    // TODO: get gadgetTier here?
-    //console.log("Card button clicked!");
+    // TODO: get gadgetTier here
+    const tier = parseInt(card.dataset.tier) || null;
+    if (!!tier) console.log(`Tier ${tier}`);
 
     let targets;
     switch ( action ) {
       case "attack":
         await item.rollAttack( {
           event: event,
-          //gadgetTier: gadgetTier
         });
         break;
       case "damageFormula":
       case "damageAlternate":
+        if (!!tier) console.log(`Tier ${tier}`);
         await item.rollDamage( {
           event: event,
-          damageAlternate: action === "damageAlternate"
-          //gadgetTier: gadgetTier,
+          damageAlternate: action === "damageAlternate",
+          tier: tier
         });
         break;
       case "formula":
@@ -221,29 +227,14 @@ export class StellarMisadventuresItem extends Item {
    * @private
    */
   async use() {
+    let item = this;
     // Initialize chat data.
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${this.type}] ${this.name}`;
     // Set card data
-    const cardData = {
-      actor: this.actor,
-      tokenId: this.actor.token?.uuid || null,
-      item: this,
-      data: await this.getChatData(),
-      labels: this.labels,
-      hasAttack: this.hasAttack,
-      isHealing: this.isHealing,
-      hasDamage: this.hasDamage,
-      //isGadget: this.type === "gadget",
-      hasSave: this.hasSave,
-      //hasAreaTarget: this.hasAreaTarget,
-      //isTool: this.type === "tool",
-      hasAmmo: !!(this.system.ammoMax > 0),
-      hasAbilityCheck: this.hasAbilityCheck
-    }
+
+
     // Ask for gadget tier and point consumption
     if (this.type === 'gadget') {
+      let tier = null;
       const tierCosts = CONFIG.STELLARMISADVENTURES.gadgetTierCosts;
       // It would be great if the max was defined by the actor
       // Figure out what tiers are available
@@ -263,9 +254,8 @@ export class StellarMisadventuresItem extends Item {
       }
       const useOptions = await Dialogs.GetGadgetUseOptions(dialogOptions);
       if (useOptions.cancelled) return;
-      // Set gadget tier
-      cardData.gadgetTier = useOptions.gadgetTier;
-      cardData.data.properties.unshift("Tier " + useOptions.gadgetTier)
+
+      
       // Expend gadget points if needed
       if (useOptions.expend) {
         const cost = tierCosts[useOptions.gadgetTier]
@@ -277,7 +267,44 @@ export class StellarMisadventuresItem extends Item {
           this.actor.update({"system.gadgetry.points.value": points - cost})
         }
       }
+      tier = useOptions.gadgetTier;
+      // upcast by creating a copy of this item at a higher tier
+      if (tier !== this.system.gadgetTier) {
+        item = item.clone({"system.gadgetTier": tier}, {keepId: true});
+        item.prepareData();
+        item.prepareFinalAttributes();
+      }
     }
+
+    item.displayCard();
+  }
+
+  async displayCard() {
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+    const rollMode = game.settings.get('core', 'rollMode');
+   
+    const cardData = {
+      actor: this.actor,
+      tokenId: this.actor.token?.uuid || null,
+      item: this,
+      data: await this.getChatData(),
+      labels: this.labels,
+      hasAttack: this.hasAttack,
+      isHealing: this.isHealing,
+      hasDamage: this.hasDamage,
+      isGadget: this.type === "gadget",
+      hasSave: this.hasSave,
+      //hasAreaTarget: this.hasAreaTarget,
+      //isTool: this.type === "tool",
+      hasAmmo: !!(this.system.ammoMax > 0),
+      hasAbilityiCheck: this.hasAbilityCheck
+    }
+    
+    // Add to properties labels
+    if (this.type == "gadget") {
+      cardData.data.properties.unshift(`Tier ${this.system.gadgetTier}`)
+    }
+
     const chatData = {
       user: game.user.id,
       content: await renderTemplate("systems/stellarmisadventures/templates/item/parts/item-card.hbs", cardData),
@@ -285,15 +312,11 @@ export class StellarMisadventuresItem extends Item {
       speaker: speaker,
       flags: {"core.canPopOut": true}
     };
-
-    // Merge in the flags from options argument
-    //chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
+  
+    ChatMessage.applyRollMode(chatData, rollMode)
     
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"))
-    
-    ChatMessage.create(chatData);
+    return ChatMessage.create(chatData);
   }
-
   /* -------------------------------------------- */
   /*  Item Rolls - Attack, Damage, Saves, Checks  */
   /* -------------------------------------------- */
@@ -330,6 +353,7 @@ export class StellarMisadventuresItem extends Item {
       const label = `[${this.isHealing ? "Healing" : "Damage"}] ${this.name}`;
       // Retrieve roll data.
       const rollData = this.getRollData();
+      var damageDice = event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula
 
       let mods = [];
       if (systemData.weaponType && systemData.ability) {
@@ -339,8 +363,18 @@ export class StellarMisadventuresItem extends Item {
       if (["weapon"].includes(this.type) && systemData.properties["dama"]) {
         mods.push("-1");
       }
+      
+      // upcast
+      if (this.type === "gadget" && event.tier > systemData.gadgetTier) {
+        // crappy simple way
+        const upcast = event.tier - systemData.gadgetTier;
+        for (let i = 0; i < upcast; i++) {
+          damageDice += `+ ${systemData.damageScaling}`;            
+        }
+      }
+
       const damageRoll = {
-        dice: event.damageAlternate ? systemData.damageAlternate : systemData.damageFormula,
+        dice: damageDice,
         modifiers: mods,
         rollData,
         critical: !!(event.event?.altKey),
@@ -390,6 +424,7 @@ export class StellarMisadventuresItem extends Item {
     }
     this.update({"system.ammoLoaded": systemData.ammoMax});
   }
+
   /**
    * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function.
