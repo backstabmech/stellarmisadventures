@@ -19,22 +19,22 @@
 {{#if system.attackType}}
 <section class="resource">
     {{!-- Choose ability --}}
+    {{#unless system.gadgetTier}}
     <div class="resource flexrow">
         <label class="resource-label">Ability</label>
         <select name="system.ability">
             {{selectOptions config.abilities selected=system.ability blank="None" localize=true }}
         </select>
     </div>
-
     <div class="resource flexrow">
         <label class="resource-label">Proficient</label>
         <input type="checkbox" name="system.proficient"  {{checked system.proficient}}/>        
     </div>
-
     <div class="resource flexrow">
         <label class="resource-label">Item Attack Bonus</label>
         <input class="resource-small" type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-dtype="Number"/>
     </div>
+    {{/unless}}
 
 </section>
 {{/if}}
