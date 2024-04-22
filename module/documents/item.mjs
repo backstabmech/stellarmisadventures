@@ -357,11 +357,11 @@ export class StellarMisadventuresItem extends Item {
       
       // upcast
       if (this.type === "gadget" && event.tier > systemData.gadgetTier) {
-        // crappy simple way
         const upcast = event.tier - systemData.gadgetTier;
         for (let i = 0; i < upcast; i++) {
           damageDice += `+ ${systemData.damageScaling}`;            
         }
+        damageDice = simplifyRollFormula(damageDice);
       }
 
       const damageRoll = {
