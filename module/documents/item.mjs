@@ -488,27 +488,36 @@ export class StellarMisadventuresItem extends Item {
     const ab = this.system.attackBonus;
     if (ab) {
       parts.push(ab);
-      // Put a + at the start front if there is no operator 
+      // Put a + at the start front if there is no + or - 
       this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
     }
     
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
-    // Ability score modifier
-    parts.push(`@${[this.system.ability]}`);
-    // Add proficiency bonus if an explicit proficiency flag is present or for non-weapon features
-    if (!["weapon"].includes(this.type) || this.system.proficient) {
-      parts.push("@prof");
+    if (this.type == "gadget") {
+      // Gadgets use gadget attack only
+      parts.push(`${this.actor.system.gadgetry.attack}`);
+    } else {
+      // Append modifiers
+      // Ability score modifier
+      if (this.system.ability) {
+        parts.push(`@${[this.system.ability]}`);
+      }
+      // Add proficiency bonus if an explicit proficiency flag is present
+      if (this.system.proficient) {
+        parts.push("@prof");
+      }
+      // Accurate property
+      if (["weapon"].includes(this.type) && this.system.properties["accu"]) {
+        parts.push("2");
+      }
+      // Damaged property
+      if (["weapon"].includes(this.type) && this.system.properties["dama"]) {
+        parts.push("-1");
+      }      
     }
-    // Accurate property
-    if (["weapon"].includes(this.type) && this.system.properties["accu"]) {
-      parts.push("2");
-    }
-    // Damaged property
-    if (["weapon"].includes(this.type) && this.system.properties["dama"]) {
-      parts.push("-1");
-    }
+
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
     const formula = simplifyRollFormula(roll.formula) || "0";
