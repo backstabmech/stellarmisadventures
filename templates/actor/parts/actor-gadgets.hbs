@@ -6,8 +6,10 @@
   <label>Save DC</label>
   <input type="text" name="system.gadgetry.dc" value={{system.gadgetry.dc}} {{#if isCharacter}}disabled{{/if}} data-dtype="Number"/>
   
-  <label>Attack Bonus</label>
+  <label for="system.gadgetry.attack">Attack Bonus</label>
   <input type="text" name="system.gadgetry.attack" value={{system.gadgetry.attack}} {{#if isCharacter}}disabled{{/if}} data-dtype="Number"/>
+  <label for="system.gadgetry.maxTier">Max Tier</label>
+  <input type="text" name="system.gadgetry.maxTier" value={{system.gadgetry.maxTier}} data-dtype="Number"/>
 
   <label for="system.gadgetry.points.value" class="resource-label">Gadget Points</label>
   <input type="text" name="system.gadgetry.points.value" value={{system.gadgetry.points.value}} data-dtype="Number"/>

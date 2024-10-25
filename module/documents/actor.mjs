@@ -64,6 +64,13 @@ export class StellarMisadventuresActor extends Actor {
       save.mod = save.value + save.abl;
     }
     systemData.init.mod = systemData.init.value + systemData.abilities.dex.mod;
+    
+    if (isNaN(systemData.gadgetry.maxTier)) {
+      systemData.gadgetry.maxTier = 0;
+    }
+    else {
+      systemData.gadgetry.maxTier = Math.max(Math.min(systemData.gadgetry.maxTier, 5), 0) ?? 0;
+    }
   }
 
   /**

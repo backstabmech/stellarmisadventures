@@ -229,10 +229,10 @@ export class StellarMisadventuresItem extends Item {
     if (this.type === 'gadget') {
       let tier = null;
       const tierCosts = CONFIG.STELLARMISADVENTURES.gadgetTierCosts;
-      // It would be great if the max was defined by the actor
       // Figure out what tiers are available
+      let maximumTier = item.isOwned ? item.actor.system.gadgetry.maxTier : 5;
       let availableTiers = [];
-      for (let i = this.system.gadgetTier; i < 6; i++) {
+      for (let i = this.system.gadgetTier; i <= maximumTier; i++) {
         availableTiers.push({
           tier: i,
           cost: tierCosts[i],

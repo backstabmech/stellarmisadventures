@@ -179,6 +179,7 @@
         "gadgetry": {
           "ability": null,
           "dc": 8,
+          "maxTier": 0,
           "points": {
             "value": 0,
             "max": 0
