@@ -370,6 +370,7 @@ export class StellarMisadventuresItem extends Item {
         rollData,
         critical: !!(event.event?.altKey),
         criticalBonusDamage: systemData.critical.damage,
+        showDialog: !(event.event?.shiftKey),
         flavor: label
       };
       return Dice.damageRoll(damageRoll);

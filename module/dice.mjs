@@ -69,14 +69,38 @@ export async function damageRoll({
   rollData = null,
   critical = false, 
   criticalBonusDamage = null,
+  showDialog = true,
   flavor = "",
 } = {}) {
+  
+  let bonus = null;
+  if (showDialog) {
+    console.log("Creating Dialog...");
+    
+    const checkOptions = await GetDamageRollOptions();
+    // Stop if dialog is closed
+    if (checkOptions.cancelled) return;
+    // Proccess bonus modifiers
+    if (checkOptions.modifiers) {
+      const r = new Roll(checkOptions.modifiers, rollData);
+      // Add a plus if needed
+      if ( !(r.terms[0] instanceof OperatorTerm) ){
+        bonus = "+"; 
+      } else {
+        bonus = "";
+      }
+      bonus += r.formula;
+    }
+    critical = checkOptions.critical;
+  }
+
   // Build formula
   let rollFormula = dice;
-  
+  // TODO: Add sit modifiers from dialog, if any
   for (let i = 0; i < modifiers.length; i++) {
     rollFormula += ` + ${modifiers[i]}`;
   }
+  if (bonus) rollFormula += bonus;
 
   // Roll
   let roll = new Roll(rollFormula, rollData);
@@ -189,5 +213,37 @@ function _onD20DialogSubmit(form, advantageMode) {
   return {
     modifiers: form.modifiers.value,
     advantage: advantageMode
+  }
+}
+
+async function GetDamageRollOptions(checkType) {
+  const template = "systems/stellarmisadventures/templates/apps/ability-check-dialog.hbs";
+  const html = await renderTemplate(template, {})
+  
+  return new Promise(resolve => {
+    const data = {
+      title: checkType,
+      content: html,
+      buttons: {
+        critical: {
+          label: "Critical",
+          callback: html => resolve(_onDamageDialogSubmit(html[0].querySelector("form"), true))
+        },
+        normal: {
+          label: "Normal",
+          callback: html => resolve(_onDamageDialogSubmit(html[0].querySelector("form"), false))
+        }
+      },
+      default: "normal",
+      close: () => resolve({cancelled: true})
+    };
+    new Dialog(data, null).render(true)
+  });
+}
+
+function _onDamageDialogSubmit(form, isCritical) {
+  return {
+    modifiers: form.modifiers.value,
+    critical: isCritical
   }
 }
