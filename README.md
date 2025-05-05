@@ -2,6 +2,7 @@
 
 ![Foundry v10](https://img.shields.io/badge/foundry-v10-green)
 
+This game system for Foundry Virtual Tabletop provides character sheet and game system support for Stellar Misadvenures, including support for Actors, Items, and dice rolls.
 
 ## Sheet Layout
 
